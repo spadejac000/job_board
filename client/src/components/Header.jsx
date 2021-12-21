@@ -2,7 +2,7 @@ import {Navbar, Container, Nav, NavDropdown, Form, FormControl, Button} from 're
 
 function Header() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="primary" variant="dark" expand="lg" className="mb-5">
       <Container fluid>
         <Navbar.Brand href="/">Job Board</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />

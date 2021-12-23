@@ -2,7 +2,7 @@ const router = require('express').Router()
 const pool = require('../../db')
 const bcrypt = require('bcrypt')
 const jwtGenerator = require('../../utils/jwtGenerator')
-const validInfo = require('../../middleware/validInfo')
+const validInfo = require('../../middleware/vaildInfo')
 const authorization = require('../../middleware/authorization')
 
 // register
@@ -12,7 +12,7 @@ router.post('/register', validInfo, async (req, res) => {
     const {firstName, lastName, email, password} = req.body
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [email])
 
-    if(users.rows.length !== 0) {
+    if(user.rows.length !== 0) {
       return res.status(401).send("User already exists")
     }
 
@@ -56,7 +56,7 @@ router.post("/login", validInfo, async (req, res) => {
 
 router.get('/', authorization, async (req, res) => {
   try {
-    const user = await pool.query("SELECT user_name FROM users WHERE user_id = $1", [req.user])
+    const user = await pool.query("SELECT user_first_name FROM users WHERE user_id = $1", [req.user])
     res.json(user.rows[0])
   } catch (error) {
     console.error(error.message)

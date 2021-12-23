@@ -1,4 +1,4 @@
-const Pool = require('db').Pool
+const Pool = require('pg').Pool
 
 const pool = new Pool({
   user: "jacobspade",

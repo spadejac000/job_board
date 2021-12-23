@@ -1,0 +1,13 @@
+.register-form-container {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+.register-form {
+  width: 30%;
+}
+
+.register-form-title {
+  margin-bottom: 0px;
+}

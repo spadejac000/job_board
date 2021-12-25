@@ -1,0 +1,4 @@
+.selected-job-card {
+  position: sticky;
+  top: 3rem;
+}

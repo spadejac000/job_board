@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL} from '../constance/jobConstants'
+import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL} from '../constants/jobConstants'
 
 export const selectJob = (data) => async (dispatch) => {
   try {

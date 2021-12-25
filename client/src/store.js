@@ -1,10 +1,12 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {selectedJobReducer} from './reducers/jobReducers';
+import {selectedJobReducer} from './reducers/jobReducer';
+import {userReducer} from './reducers/userReducer';
 
 const reducer = combineReducers({
-  selectedJob: selectedJobReducer
+  selectedJob: selectedJobReducer,
+  user: userReducer
 })
 
 const initialState = {}

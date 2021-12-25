@@ -2,12 +2,12 @@ import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectJob} from '../actions/jobActions'
 import {Card} from 'react-bootstrap'
+import '../css/selected-job.css'
 
 const SelectedJob = () => {
   const dispatch = useDispatch()
 
   const selectedJob = useSelector((state) => state.selectedJob)
-  console.log('here is state: ', selectedJob)
 
   useEffect(() => {
     dispatch(selectJob())
@@ -16,7 +16,7 @@ const SelectedJob = () => {
   return (
     <>
       {selectedJob === null ? (null): (
-        <Card className="m-5 p-5" style={{position: 'sticky', top: '3rem'}}>
+        <Card className="m-5 p-5 selected-job-card">
           <h2>{selectedJob.title}</h2>
           <h6>{selectedJob.company}</h6>
           <h6>{selectedJob.pay}</h6>

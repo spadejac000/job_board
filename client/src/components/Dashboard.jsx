@@ -1,38 +1,15 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import JobsData from '../data/JobsData';
 import Filters from './Filters';
 import { Container, Row, Col } from 'react-bootstrap';
 import Jobs from './Jobs'
-import {FaUser} from 'react-icons/fa'
-import {Button} from 'react-bootstrap'
 import {toast} from 'react-toastify'
-import {useDispatch, useSelector} from 'react-redux'
-import {selectJob} from '../actions/jobActions'
 import SelectedJob from './SelectedJob'
+import Paginate from './Paginate'
 
 const Dashboard = ({setAuth}) => {
-  // const dispatch = useDispatch()
 
   const [jobs, setJobs] = useState(JobsData)
-  const [name, setName] = useState('')
-
-  async function getName() {
-    try {
-      const response = await fetch('/api/users', {
-        method: "GET",
-        headers: {token: localStorage.token}
-      })
-      const parseResponse = await response.json();
-      setName(parseResponse.user_first_name)
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
-
-  useEffect(() => {
-    getName()
-    // dispatch(selectJob())
-  }, [])
 
   const logout = (e) => {
     e.preventDefault()
@@ -43,8 +20,6 @@ const Dashboard = ({setAuth}) => {
 
   return (
     <>
-      {name}
-      <Button onClick={e => logout(e)}><FaUser/> Logout</Button>
       <Filters/>
       <hr/>
       <Container>
@@ -56,6 +31,7 @@ const Dashboard = ({setAuth}) => {
             <SelectedJob/>
           </Col>
         </Row>
+        <Paginate/>
       </Container>
     </>
   )

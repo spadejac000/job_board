@@ -1,0 +1,16 @@
+.search-row {
+  display: flex;
+}
+
+.search-row > * {
+  margin-right: 1rem;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filter-row > * {
+  margin: 0rem 1rem 1rem 0rem;
+}

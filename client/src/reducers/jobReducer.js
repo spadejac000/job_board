@@ -1,4 +1,4 @@
-import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL} from '../constance/jobConstants'
+import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL} from '../constants/jobConstants'
 
 export const selectedJobReducer = (state = null, action) => {
   switch (action.type) {

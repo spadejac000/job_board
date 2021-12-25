@@ -6,8 +6,12 @@ import Jobs from './Jobs'
 import {FaUser} from 'react-icons/fa'
 import {Button} from 'react-bootstrap'
 import {toast} from 'react-toastify'
+import {useDispatch, useSelector} from 'react-redux'
+import {selectJob} from '../actions/jobActions'
+import SelectedJob from './SelectedJob'
 
 const Dashboard = ({setAuth}) => {
+  // const dispatch = useDispatch()
 
   const [jobs, setJobs] = useState(JobsData)
   const [name, setName] = useState('')
@@ -27,6 +31,7 @@ const Dashboard = ({setAuth}) => {
 
   useEffect(() => {
     getName()
+    // dispatch(selectJob())
   }, [])
 
   const logout = (e) => {
@@ -48,7 +53,7 @@ const Dashboard = ({setAuth}) => {
             <Jobs jobs={jobs}/>
           </Col>
           <Col>
-          
+            <SelectedJob/>
           </Col>
         </Row>
       </Container>

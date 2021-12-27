@@ -3,7 +3,7 @@ import {Pagination} from 'react-bootstrap'
 
 const Paginate = () => {
   return (
-    <Pagination className="mb-5" style={{justifyContent: 'center'}}>
+    <Pagination className="mb-5 mt-5" style={{justifyContent: 'center'}}>
       <Pagination.First />
       <Pagination.Prev />
       <Pagination.Item>{1}</Pagination.Item>

@@ -7,6 +7,7 @@ import {toast} from 'react-toastify'
 import SelectedJob from './SelectedJob'
 import Paginate from './Paginate'
 import '../css/dashboard.css'
+import MessagesBox from './MessagesBox';
 
 const Dashboard = ({setAuth}) => {
 
@@ -26,7 +27,7 @@ const Dashboard = ({setAuth}) => {
       <Container>
         <Row>
           <Col>
-            <div>
+            <div className='sort-jobs-container m-3'>
               <p>Sort by: relavence - date</p>
               <p>Page 1 of 67 jobs</p>
             </div>
@@ -38,6 +39,7 @@ const Dashboard = ({setAuth}) => {
         </Row>
         <Paginate/>
       </Container>
+      <MessagesBox/>
     </>
   )
 }

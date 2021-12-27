@@ -1,0 +1,17 @@
+.messages-box {
+  position: fixed;
+  bottom: 0;
+  right: 2%;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  max-width: 20rem;
+}
+
+.messages-accordion-body-container {
+  padding: 0px;
+}
+
+.#root > div > div.messages-box.accordion > div {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}

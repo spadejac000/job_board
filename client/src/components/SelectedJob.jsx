@@ -17,7 +17,7 @@ const SelectedJob = () => {
   return (
     <>
       {selectedJob === null ? (null): (
-        <Card className="m-5 selected-job-card">
+        <Card className="m-3 selected-job-card">
           <Card.Header>
             <Row>
               <Col>

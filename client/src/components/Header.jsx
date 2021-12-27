@@ -4,7 +4,8 @@ import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'
 import {toast } from 'react-toastify';
-import {FaUser} from 'react-icons/fa'
+import {FaUser, FaComment} from 'react-icons/fa'
+import {Link} from 'react-router-dom'
 
 const Header = ({isAuthenticated, setAuth}) => {
 
@@ -33,7 +34,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
       <Navbar bg="dark" variant="dark" expand="lg" className="mb-5">
         <Container>
-          <Navbar.Brand href="/">Job Board</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -41,7 +42,8 @@ const Header = ({isAuthenticated, setAuth}) => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="/post-job">Post Job</Nav.Link>
+              <Nav.Link as={Link} to="/messages"><FaComment/></Nav.Link>
+              <Nav.Link as={Link} to="/post-job">Post Job</Nav.Link>
               <Button variant="primary" onClick={e => logout(e)}><FaUser/> Logout</Button>
             </Nav>
             <div className="navbar-user-name ms-3">

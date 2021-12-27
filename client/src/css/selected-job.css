@@ -2,3 +2,19 @@
   position: sticky;
   top: 3rem;
 }
+
+.exit-selected-job-col {
+  display: flex;
+  justify-content: end;
+}
+
+.exit-selected-job-col > div {
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

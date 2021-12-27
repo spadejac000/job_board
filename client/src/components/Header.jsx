@@ -41,6 +41,7 @@ const Header = ({isAuthenticated, setAuth}) => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
+              <Nav.Link href="/post-job">Post Job</Nav.Link>
               <Button variant="primary" onClick={e => logout(e)}><FaUser/> Logout</Button>
             </Nav>
             <div className="navbar-user-name ms-3">

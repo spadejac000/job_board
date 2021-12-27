@@ -3,6 +3,19 @@
   display: block!important;
 }
 
-/* .salary-badge {
-  
-} */
+.save-ban-col {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+}
+
+.save-ban-col > div {
+  border: 1px solid black;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}

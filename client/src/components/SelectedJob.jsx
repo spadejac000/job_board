@@ -1,8 +1,9 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectJob} from '../actions/jobActions'
-import {Card} from 'react-bootstrap'
+import {Card, Button, Row, Col} from 'react-bootstrap'
 import '../css/selected-job.css'
+import {FaTimes} from 'react-icons/fa'
 
 const SelectedJob = () => {
   const dispatch = useDispatch()
@@ -16,11 +17,25 @@ const SelectedJob = () => {
   return (
     <>
       {selectedJob === null ? (null): (
-        <Card className="m-5 p-5 selected-job-card">
-          <h2>{selectedJob.title}</h2>
-          <h6>{selectedJob.company}</h6>
-          <h6>{selectedJob.pay}</h6>
-          <p>{selectedJob.description}</p>
+        <Card className="m-5 selected-job-card">
+          <Card.Header>
+            <Row>
+              <Col>
+                <h2>{selectedJob.title}</h2>
+                <h6>{selectedJob.company}</h6>
+                <h6>{selectedJob.pay}</h6>
+                <Button>Apply</Button>
+              </Col>
+              <Col className="exit-selected-job-col">
+                <div>
+                  <FaTimes/>
+                </div>
+              </Col>
+            </Row>
+          </Card.Header>
+          <Card.Body className="p-5">
+            <p>{selectedJob.description}</p>
+          </Card.Body>
         </Card>
         
       )}

@@ -1,0 +1,8 @@
+.post-job-form-container {
+  display: flex;
+  align-items: center;
+}
+
+.post-job-form-title {
+  margin-bottom: 0px;
+}

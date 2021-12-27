@@ -1,0 +1,19 @@
+/* .messages-left-card {
+  
+} */
+
+.messages-icon-select-message {
+  width: 5rem;
+  height: 5rem;
+}
+
+.messages-right-big-card-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.messages-right-big-card {
+  padding: 3rem;
+}

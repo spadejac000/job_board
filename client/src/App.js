@@ -9,6 +9,7 @@ import Register from './components/Register'
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PostJob from './components/PostJob';
+import Messages from './components/Messages';
 
 const App = () => {
 
@@ -48,6 +49,7 @@ const App = () => {
           <Route exact path="/register" element={!isAuthenticated ? <Register setAuth={setAuth}/> : <Navigate to="/login"/>}/>
           <Route exact path="/" element={isAuthenticated ? <Dashboard setAuth={setAuth}/> : <Navigate to="/login"/>}/>
           <Route exact path="/post-job" element={<PostJob/>}/>
+          <Route exact path="/messages" element={<Messages/>}/>
         </Routes>
         <Footer/>
       </Router>

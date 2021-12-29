@@ -27,7 +27,7 @@ const SelectedJob = () => {
                 <Button>Apply</Button>
               </Col>
               <Col className="exit-selected-job-col">
-                <div>
+                <div onClick={() => dispatch(selectJob(null))}>
                   <FaTimes/>
                 </div>
               </Col>

@@ -22,8 +22,6 @@ const Dashboard = ({setAuth}) => {
     state.getJobs
   )
 
-  console.log('here are the jobs: ', jobs)
-
   const logout = (e) => {
     e.preventDefault()
     localStorage.removeItem('token')

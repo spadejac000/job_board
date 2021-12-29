@@ -6,7 +6,7 @@ import {FaHeart, FaBan} from 'react-icons/fa'
 
 
 const Job = ({job}) => {
-  const {title, company, location, pay, postDuration} = job
+  const {title, company, city, pay, postDuration} = job
   const dispatch = useDispatch()
   return (
     <Card className="p-4 m-3 job-card" onClick={()=> dispatch(selectJob(job))}>
@@ -14,7 +14,7 @@ const Job = ({job}) => {
         <Col md={10}>
           <h2>{title}</h2>
           <h6>{company}</h6>
-          <h6>{location}</h6>
+          <h6>{city}</h6>
           <Badge className="salary-badge" bg="primary">{pay}</Badge>
           <p>{postDuration}</p>
         </Col>

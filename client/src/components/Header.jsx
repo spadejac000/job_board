@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import {Navbar, Container, Nav, Button} from 'react-bootstrap';
+import {Navbar, Container, Nav, Button, NavDropdown} from 'react-bootstrap';
 import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'
@@ -18,8 +18,6 @@ const Header = ({isAuthenticated, setAuth}) => {
   const user = useSelector(state => 
     state.user.user.user_first_name
   )
-
-  console.log('user: ', user)
 
   const logout = (e) => {
     e.preventDefault()
@@ -43,7 +41,10 @@ const Header = ({isAuthenticated, setAuth}) => {
               navbarScroll
             >
               <Nav.Link as={Link} to="/messages"><FaComment/></Nav.Link>
-              <Nav.Link as={Link} to="/post-job">Post Job</Nav.Link>
+              <NavDropdown title="Manage Jobs" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/post-job">Post Job</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/jobs-created">View Jobs</NavDropdown.Item>
+              </NavDropdown>
               <Button variant="primary" onClick={e => logout(e)}><FaUser/> Logout</Button>
             </Nav>
             <div className="navbar-user-name ms-3">

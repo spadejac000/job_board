@@ -22,7 +22,6 @@ router.post('/register', validInfo, async (req, res) => {
 
     let newUser = await pool.query("INSERT INTO users (user_first_name, user_last_name, user_email, user_password) VALUES ($1, $2, $3, $4) RETURNING *", [firstName, lastName, email, bcryptPassword]);
 
-    // newUser.save();
     const token = jwtGenerator(newUser.rows[0].user_id, )
     res.json({token})
     

@@ -1,5 +1,4 @@
-import {useState} from 'react'
-import JobsData from '../data/JobsData';
+import {useState, useEffect} from 'react'
 import Filters from './Filters';
 import { Container, Row, Col } from 'react-bootstrap';
 import Jobs from './Jobs'
@@ -8,10 +7,22 @@ import SelectedJob from './SelectedJob'
 import Paginate from './Paginate'
 import '../css/dashboard.css'
 import MessagesBox from './MessagesBox';
+import {useDispatch, useSelector} from 'react-redux'
+import {getJobs} from '../actions/jobActions'
 
 const Dashboard = ({setAuth}) => {
 
-  const [jobs, setJobs] = useState(JobsData)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getJobs())
+  }, [dispatch])
+
+  const jobs = useSelector(state => 
+    state.getJobs
+  )
+
+  console.log('here are the jobs: ', jobs)
 
   const logout = (e) => {
     e.preventDefault()

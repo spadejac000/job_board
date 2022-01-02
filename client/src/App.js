@@ -10,6 +10,10 @@ import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PostJob from './components/PostJob';
 import Messages from './components/Messages';
+import Settings from './components/Settings';
+import styled, {ThemeProvider} from 'styled-components'
+import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
+import {useDispatch, useSelector} from 'react-redux'
 
 const App = () => {
 
@@ -21,9 +25,12 @@ const App = () => {
     setIsAuthenticated(boolean)
   }
 
+  const theme = useSelector(state => 
+    state.theme
+  )
+
   const isAuth = async () => {
     try {
-      
       const response = await fetch('/api/users/is-verify', {
         method: "GET",
         headers: {token: localStorage.token}
@@ -38,10 +45,13 @@ const App = () => {
 
   useEffect(() => {
     isAuth()
-  })
+  }, [])
+
+  
 
   return (
-    <div className="App">
+    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyles/>
       <Router>
         <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
         <Routes>
@@ -50,10 +60,11 @@ const App = () => {
           <Route exact path="/" element={isAuthenticated ? <Dashboard setAuth={setAuth}/> : <Navigate to="/login"/>}/>
           <Route exact path="/post-job" element={<PostJob/>}/>
           <Route exact path="/messages" element={<Messages/>}/>
+          <Route exact path="/settings" element={<Settings/>}/>
         </Routes>
         <Footer/>
       </Router>
-    </div>
+    </ThemeProvider>
   );
 }
 

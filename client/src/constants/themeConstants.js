@@ -1,0 +1,3 @@
+export const THEME_REQUEST = 'THEME_REQUEST'
+export const THEME_SUCCESS = 'THEME_SUCCESS'
+export const THEME_FAIL = 'THEME_FAIL'

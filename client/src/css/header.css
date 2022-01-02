@@ -1,7 +1,43 @@
-.navbar-search-form {
-  max-width: 400px;
+.navbar-message-icon-container {
+  border-right: 1px solid #ffffff8c;
+  padding-right: 1rem;
 }
 
-/* .navbar-search-input {
-  border-color: white;
-} */
+.nav-system {
+  align-items: center;
+}
+
+
+.navigation-bar-icon-container {
+  background: #ffffff1a;
+  border-radius: 50%;
+  padding: .75rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-navigation-bar-icon-container {
+  background: #e4e6eb;
+  border-radius: 50%;
+  padding: .75rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: .5rem;
+}
+
+.nav-dropdown-item-link-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-item-left-grouping {
+  display: flex;
+  align-items: center;
+}

@@ -4,8 +4,9 @@ import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'
 import {toast } from 'react-toastify';
-import {FaUser, FaComment} from 'react-icons/fa'
+import {FaUser, FaComment, FaCog, FaChevronRight} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
+import {LinkContainer} from 'react-router-bootstrap'
 
 const Header = ({isAuthenticated, setAuth}) => {
 
@@ -36,16 +37,49 @@ const Header = ({isAuthenticated, setAuth}) => {
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
-              className="ms-auto my-2 my-lg-0"
+              className="ms-auto my-2 my-lg-0 nav-system"
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link as={Link} to="/messages"><FaComment/></Nav.Link>
+              <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link>
               <NavDropdown title="Manage Jobs" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/post-job">Post Job</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/jobs-created">View Jobs</NavDropdown.Item>
               </NavDropdown>
-              <Button variant="primary" onClick={e => logout(e)}><FaUser/> Logout</Button>
+
+              <Nav.Link className="navigation-bar-link">
+                <div className="navigation-bar-icon-container">
+                  <NavDropdown id="basic-nav-dropdown" alignRight>
+                    <NavDropdown.Item>
+                      <LinkContainer className="nav-dropdown-item-link-container" to="/settings">
+                        <div>
+                          <div className="dropdown-item-left-grouping">
+                            <div className="dropdown-navigation-bar-icon-container">
+                              <FaCog />
+                            </div>
+                            Settings
+                          </div>
+                          <FaChevronRight />
+                        </div>
+                      </LinkContainer>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={e => logout(e)}>
+                      <LinkContainer className="nav-dropdown-item-link-container" to="/">
+                        <div>
+                          <div className="dropdown-item-left-grouping">
+                            <div className="dropdown-navigation-bar-icon-container">
+                              <FaUser />
+                            </div>
+                            Sign Out
+                          </div>
+                          <FaChevronRight/>
+                        </div>
+                      </LinkContainer>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </div>
+              </Nav.Link>
+
             </Nav>
             <div className="navbar-user-name ms-3">
               <span style={{color: 'white'}} className="welcome-title">Welcome, {user}</span>

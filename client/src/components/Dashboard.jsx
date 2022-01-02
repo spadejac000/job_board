@@ -10,7 +10,7 @@ import MessagesBox from './MessagesBox';
 import {useDispatch, useSelector} from 'react-redux'
 import {getJobs} from '../actions/jobActions'
 
-const Dashboard = ({setAuth}) => {
+const Dashboard = () => {
 
   const dispatch = useDispatch();
 
@@ -21,13 +21,6 @@ const Dashboard = ({setAuth}) => {
   const jobs = useSelector(state => 
     state.getJobs
   )
-
-  const logout = (e) => {
-    e.preventDefault()
-    localStorage.removeItem('token')
-    setAuth(false)
-    toast.success("Logged out successfully!")
-  }
 
   return (
     <>

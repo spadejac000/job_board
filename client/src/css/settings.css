@@ -5,8 +5,10 @@ html {
 }
 
 .theme-mode-container {
-  display: flex;
-  align-items: center;
+	flex-direction: row;
+	max-width: 25%;
+	padding: 1rem;
+	margin: 3rem 0 3rem 0;
 }
 
 .theme-mode-title {
@@ -25,7 +27,7 @@ html {
 	width: 52px;
 	height: 27px;
 	background: grey;
-	float: right;
+	/* float: right; */
 	border-radius: 100px;
   position: relative;
   margin-bottom: 0px;
@@ -54,4 +56,9 @@ html {
 
 .theme-label:active:after {
 	width: 45px;
+}
+
+.toggle-container {
+	display: flex;
+	align-items: center;
 }

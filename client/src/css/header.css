@@ -12,6 +12,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 1rem;
 }
 
 .dropdown-navigation-bar-icon-container {
@@ -37,10 +38,14 @@
   align-items: center;
 }
 
-.navbar-jobs-link > div > div > .dropdown-toggle::after {
+.navbar-jobs-link > .dropdown-toggle::after {
   display: none;
 }
 
 #jobs-nav-dropdown {
   display: flex;
+}
+
+#navbarScroll > div > a {
+  padding: 0px;
 }

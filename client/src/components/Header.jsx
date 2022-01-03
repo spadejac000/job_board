@@ -16,7 +16,7 @@ const Header = ({isAuthenticated, setAuth}) => {
     dispatch(printUser())
   }, [dispatch, isAuthenticated])
 
-  const user = useSelector(state => 
+  let user = useSelector(state => 
     state.user.user.user_first_name
   )
 
@@ -41,78 +41,70 @@ const Header = ({isAuthenticated, setAuth}) => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
+              <div className="navbar-user-name ms-3">
+                <span style={{color: 'white'}} className="welcome-title">{user}</span>
+              </div>
               <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container navigation-bar-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link>
 
-              <Nav.Link className="navigation-bar-link navbar-jobs-link">
-                <div className="navigation-bar-icon-container">
-                  <NavDropdown title={<FaBriefcase/>} id="jobs-nav-dropdown" alignRight>
-                    <NavDropdown.Item>
-                      <LinkContainer className="nav-dropdown-item-link-container" to="/post-job">
-                        <div>
-                          <div className="dropdown-item-left-grouping">
-                            <div className="dropdown-navigation-bar-icon-container">
-                              <FaThumbtack />
-                            </div>
-                            Post Job
+                <NavDropdown className="navigation-bar-icon-container navbar-jobs-link" title={<FaBriefcase/>} id="jobs-nav-dropdown" align="end">
+                  <NavDropdown.Item>
+                    <LinkContainer className="nav-dropdown-item-link-container" to="/post-job">
+                      <div>
+                        <div className="dropdown-item-left-grouping">
+                          <div className="dropdown-navigation-bar-icon-container">
+                            <FaThumbtack />
                           </div>
-                          <FaChevronRight />
+                          Post Job
                         </div>
-                      </LinkContainer>
-                    </NavDropdown.Item>
-                    <NavDropdown.Item>
-                      <LinkContainer className="nav-dropdown-item-link-container" to="/jobs-created">
-                        <div>
-                          <div className="dropdown-item-left-grouping">
-                            <div className="dropdown-navigation-bar-icon-container">
-                              <FaList />
-                            </div>
-                            View Jobs
+                        <FaChevronRight />
+                      </div>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <LinkContainer className="nav-dropdown-item-link-container" to="/jobs-created">
+                      <div>
+                        <div className="dropdown-item-left-grouping">
+                          <div className="dropdown-navigation-bar-icon-container">
+                            <FaList />
                           </div>
-                          <FaChevronRight/>
+                          View Jobs
                         </div>
-                      </LinkContainer>
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </div>
-              </Nav.Link>
+                        <FaChevronRight/>
+                      </div>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                </NavDropdown>
 
-              <Nav.Link className="navigation-bar-link">
-                <div className="navigation-bar-icon-container">
-                  <NavDropdown id="basic-nav-dropdown" alignRight>
-                    <NavDropdown.Item>
-                      <LinkContainer className="nav-dropdown-item-link-container" to="/settings">
-                        <div>
-                          <div className="dropdown-item-left-grouping">
-                            <div className="dropdown-navigation-bar-icon-container">
-                              <FaCog />
-                            </div>
-                            Settings
+                <NavDropdown className="navigation-bar-icon-container" id="basic-nav-dropdown" align="end">
+                  <NavDropdown.Item>
+                    <LinkContainer className="nav-dropdown-item-link-container" to="/settings">
+                      <div>
+                        <div className="dropdown-item-left-grouping">
+                          <div className="dropdown-navigation-bar-icon-container">
+                            <FaCog />
                           </div>
-                          <FaChevronRight />
+                          Settings
                         </div>
-                      </LinkContainer>
-                    </NavDropdown.Item>
-                    <NavDropdown.Item onClick={e => logout(e)}>
-                      <LinkContainer className="nav-dropdown-item-link-container" to="/">
-                        <div>
-                          <div className="dropdown-item-left-grouping">
-                            <div className="dropdown-navigation-bar-icon-container">
-                              <FaUser />
-                            </div>
-                            Sign Out
+                        <FaChevronRight />
+                      </div>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={e => logout(e)}>
+                    <LinkContainer className="nav-dropdown-item-link-container" to="/">
+                      <div>
+                        <div className="dropdown-item-left-grouping">
+                          <div className="dropdown-navigation-bar-icon-container">
+                            <FaUser />
                           </div>
-                          <FaChevronRight/>
+                          Sign Out
                         </div>
-                      </LinkContainer>
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </div>
-              </Nav.Link>
+                        <FaChevronRight/>
+                      </div>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+                </NavDropdown>
 
             </Nav>
-            <div className="navbar-user-name ms-3">
-              <span style={{color: 'white'}} className="welcome-title">Welcome, {user}</span>
-            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>

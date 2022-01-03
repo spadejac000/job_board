@@ -10,7 +10,7 @@ export const darkTheme = {
   body: '#343A40', 
   color: 'white',
   cardBGColor: 'rgb(36, 39, 41)',
-  listGroupItemBGColor: '#343A40',
+  listGroupItemBGColor: 'rgb(36, 39, 41)',
   listGroupItemColor: 'white',
   accordionItemBGColor: 'rgb(36, 39, 41)',
   inputBGColor: 'rgb(36, 39, 41)',

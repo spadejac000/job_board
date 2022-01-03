@@ -12,6 +12,7 @@ const PostJob = () => {
 
   const [inputs, setInputs] = useState({
     jobTitle: "",
+    companyName: "",
     address: "",
     city: "",
     state: "",
@@ -23,7 +24,7 @@ const PostJob = () => {
     description: ""
   })
 
-  const {jobTitle, address, city, state, zip, jobLocation, jobType, salary, benefits, description} = inputs
+  const {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, benefits, description} = inputs
 
   const onChange = (e) => {
     setInputs({...inputs, [e.target.name] : e.target.value})
@@ -32,7 +33,7 @@ const PostJob = () => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = {jobTitle, address, city, state, zip, jobLocation, jobType, salary, benefits, description}
+      const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, benefits, description}
       dispatch(postJob(body))
     } catch (error) {
       console.error(error.message)
@@ -47,6 +48,10 @@ const PostJob = () => {
         <Form.Group>
           <Form.Label>Job title</Form.Label>
           <Form.Control className="mb-3" type="text" name="jobTitle" id="job-title-post-job" placeholder="Job title" value={jobTitle} onChange={e => onChange(e)}/>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Company name</Form.Label>
+          <Form.Control className="mb-3" type="text" name="companyName" id="company-name-post-job" placeholder="Company name" value={companyName} onChange={e => onChange(e)}/>
         </Form.Group>
         <Form.Group>
           <Form.Label>Address</Form.Label>
@@ -119,7 +124,7 @@ const PostJob = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
           <Form.Label><h6>Job Description</h6></Form.Label>
-          <Form.Control as="textarea" rows={3} defaultValue={description} onChange={e => onChange(e)}/>
+          <Form.Control name="description" as="textarea" rows={3} defaultValue={description} onChange={e => onChange(e)}/>
         </Form.Group>
         <Button type="submit" className="mb-3 btn-primary btn-lg">Post Job</Button>
       </Form>

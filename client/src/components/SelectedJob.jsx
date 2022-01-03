@@ -21,9 +21,9 @@ const SelectedJob = () => {
           <Card.Header>
             <Row>
               <Col>
-                <h2>{selectedJob.title}</h2>
-                <h6>{selectedJob.company}</h6>
-                <h6>{selectedJob.pay}</h6>
+                <h2>{selectedJob.jobTitle}</h2>
+                <h6>{selectedJob.companyName}</h6>
+                <h6>{selectedJob.salary}</h6>
                 <Button>Apply</Button>
               </Col>
               <Col className="exit-selected-job-col">
@@ -34,7 +34,7 @@ const SelectedJob = () => {
             </Row>
           </Card.Header>
           <Card.Body className="p-5">
-            <p>{selectedJob.description}</p>
+            <p>{selectedJob._description}</p>
           </Card.Body>
         </Card>
         

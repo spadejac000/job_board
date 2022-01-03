@@ -9,7 +9,7 @@ router.post('/post-job', async (req, res) => {
 
     console.log('here is the req body for post job: ', req.body)
 
-    const job = await pool.query("INSERT INTO jobs(job_title, home_address, city, _state, zip, job_location, job_type, salary, benefits, _description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;", [jobTitle, address, city, state, zip, jobLocation, jobType, salary, benefits, description])
+    const job = await pool.query("INSERT INTO jobs(job_title, work_address, city, _state, zip, job_location, job_type, salary, benefits, _description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *;", [jobTitle, address, city, state, zip, jobLocation, jobType, salary, benefits, description])
 
     res.json(job.rows[0])
     

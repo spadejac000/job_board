@@ -11,7 +11,7 @@ CREATE TABLE users(
 CREATE TABLE jobs(
   job_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   job_title VARCHAR(255),
-  home_address VARCHAR(255),
+  work_address VARCHAR(255),
   city VARCHAR(255),
   _state VARCHAR(255),
   zip VARCHAR(255),
@@ -25,4 +25,4 @@ CREATE TABLE jobs(
 
 INSERT INTO users (user_first_name, user_last_name, user_email, user_password) VALUES ('henry', 'smith', 'henry@gmail.com', '123456');
 
-INSERT INTO jobs (job_title, home_address, city, _state, zip, job_location, job_type, salary, _description) VALUES ('Web Developer', '1234 5th street ne', 'Seattle', 'washington', '12345', 'remote', 'full-time', '$100,000 a year', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nesciunt mollitia possimus perferendis nisi. Nobis aperiam eius blanditiis ipsum amet beatae optio cumque labore voluptas, hic placeat tenetur rerum quia.');
+INSERT INTO jobs (job_title, work_address, city, _state, zip, job_location, job_type, salary, _description) VALUES ('Web Developer', '1234 5th street ne', 'Seattle', 'washington', '12345', 'remote', 'full-time', '$100,000 a year', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nesciunt mollitia possimus perferendis nisi. Nobis aperiam eius blanditiis ipsum amet beatae optio cumque labore voluptas, hic placeat tenetur rerum quia.');

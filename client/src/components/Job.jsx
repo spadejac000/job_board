@@ -6,18 +6,18 @@ import {FaHeart, FaBan} from 'react-icons/fa'
 
 
 const Job = ({job}) => {
-  console.log('here is the job')
-  const {title, company, city, pay, postDuration} = job
+  console.log('here is the job: ', job)
+  const {benefits, city, home_address, job_location, job_title, job_type, salary, zip, _description, _state} = job
   const dispatch = useDispatch()
   return (
     <Card className="p-4 m-3 job-card" onClick={()=> dispatch(selectJob(job))}>
       <Row>
         <Col md={10}>
-          <h2>{title}</h2>
-          <h6>{company}</h6>
-          <h6>{city}</h6>
-          <Badge className="salary-badge" bg="primary">{pay}</Badge>
-          <p>{postDuration}</p>
+          <h2>{job_title}</h2>
+          <h6>Company Name</h6>
+          <h6>{home_address} {city}, {_state}, {zip}</h6>
+          <Badge className="salary-badge" bg="primary">{salary}</Badge>
+          <p>Post Duration</p>
         </Col>
         <Col md={2} className="save-ban-col">
           <div>

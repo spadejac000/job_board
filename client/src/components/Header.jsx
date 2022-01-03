@@ -4,7 +4,7 @@ import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'
 import {toast } from 'react-toastify';
-import {FaUser, FaComment, FaCog, FaChevronRight} from 'react-icons/fa'
+import {FaUser, FaComment, FaCog, FaChevronRight, FaBriefcase, FaThumbtack, FaList} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap'
 
@@ -41,11 +41,40 @@ const Header = ({isAuthenticated, setAuth}) => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link>
-              <NavDropdown title="Manage Jobs" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/post-job">Post Job</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/jobs-created">View Jobs</NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container navigation-bar-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link>
+
+              <Nav.Link className="navigation-bar-link navbar-jobs-link">
+                <div className="navigation-bar-icon-container">
+                  <NavDropdown title={<FaBriefcase/>} id="jobs-nav-dropdown" alignRight>
+                    <NavDropdown.Item>
+                      <LinkContainer className="nav-dropdown-item-link-container" to="/post-job">
+                        <div>
+                          <div className="dropdown-item-left-grouping">
+                            <div className="dropdown-navigation-bar-icon-container">
+                              <FaThumbtack />
+                            </div>
+                            Post Job
+                          </div>
+                          <FaChevronRight />
+                        </div>
+                      </LinkContainer>
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>
+                      <LinkContainer className="nav-dropdown-item-link-container" to="/jobs-created">
+                        <div>
+                          <div className="dropdown-item-left-grouping">
+                            <div className="dropdown-navigation-bar-icon-container">
+                              <FaList />
+                            </div>
+                            View Jobs
+                          </div>
+                          <FaChevronRight/>
+                        </div>
+                      </LinkContainer>
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </div>
+              </Nav.Link>
 
               <Nav.Link className="navigation-bar-link">
                 <div className="navigation-bar-icon-container">

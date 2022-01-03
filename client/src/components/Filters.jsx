@@ -26,7 +26,7 @@ const Filters = () => {
           />
           <InputGroup.Text><FaMapPin/></InputGroup.Text>
         </Form>
-        <Button variant="outline-dark">Search</Button>
+        <Button variant="primary">Search</Button>
       </div>
 
       <div className="filter-row">

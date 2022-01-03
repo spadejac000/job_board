@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 
 const MessagesBox = () => {
   return (
-    <Accordion defaultActiveKey="0" className="messages-box">
+    <Accordion className="messages-box">
       <Accordion.Item eventKey="0">
         <Accordion.Header className="messages-box-header"><h5 className="messages-box-title"><FaComments/> Messages</h5></Accordion.Header>
         <Accordion.Body className="messages-accordion-body-container">

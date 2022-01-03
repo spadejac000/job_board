@@ -29,7 +29,7 @@ const Dashboard = () => {
       <Container>
         <Row>
           <Col>
-            <div className='sort-jobs-container m-3'>
+            <div className='sort-jobs-container'>
               <p>Sort by: relavence - date</p>
               <p>Page 1 of 67 jobs</p>
             </div>

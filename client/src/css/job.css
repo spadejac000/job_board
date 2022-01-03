@@ -1,6 +1,7 @@
 .job-card {
   cursor: pointer;
   display: block!important;
+  margin: 2rem 2rem 2rem 0;
 }
 
 .save-ban-col {

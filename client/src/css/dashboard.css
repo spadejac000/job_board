@@ -1,4 +1,9 @@
 .sort-jobs-container {
   display: flex;
   justify-content: space-between;
+  margin-right: 2rem;
+}
+
+.sort-jobs-container > p {
+  margin-bottom: 0px;
 }

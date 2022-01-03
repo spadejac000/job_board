@@ -10,7 +10,7 @@ const Job = ({job}) => {
   const {benefits, city, home_address, job_location, job_title, job_type, salary, zip, _description, _state} = job
   const dispatch = useDispatch()
   return (
-    <Card className="p-4 m-3 job-card" onClick={()=> dispatch(selectJob(job))}>
+    <Card className="p-4 job-card" onClick={()=> dispatch(selectJob(job))}>
       <Row>
         <Col md={10}>
           <h2>{job_title}</h2>

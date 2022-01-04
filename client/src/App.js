@@ -36,16 +36,19 @@ const App = () => {
         headers: {token: localStorage.token}
       })
       const parseResponse = await response.json()
+      console.log('here is the response: ', parseResponse)
       parseResponse === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
+      console.log('here is authentication state: ', isAuthenticated)
 
     } catch (error) {
+      console.log('what the hell')
       console.error(error.message)
     }
   }
 
   useEffect(() => {
     isAuth()
-  }, [])
+  }, [isAuthenticated])
 
   
 
@@ -57,10 +60,10 @@ const App = () => {
         <Routes>
           <Route exact path="/login" element={!isAuthenticated ? <Login setAuth={setAuth}/> : <Navigate to="/"/>}/>
           <Route exact path="/register" element={!isAuthenticated ? <Register setAuth={setAuth}/> : <Navigate to="/login"/>}/>
-          <Route exact path="/" element={isAuthenticated ? <Dashboard setAuth={setAuth}/> : <Navigate to="/login"/>}/>
-          <Route exact path="/post-job" element={<PostJob/>}/>
-          <Route exact path="/messages" element={<Messages/>}/>
-          <Route exact path="/settings" element={<Settings/>}/>
+          <Route exact path="/" element={<Dashboard/>}/>
+          <Route exact path="/post-job" element={isAuthenticated ? <PostJob/> : <Navigate to="/login"/>}/>
+          <Route exact path="/messages" element={isAuthenticated ? <Messages/> : <Navigate to="/login"/>}/>
+          <Route exact path="/settings" element={isAuthenticated ? <Settings/> : <Navigate to="/login"/>}/>
         </Routes>
         <Footer/>
       </Router>

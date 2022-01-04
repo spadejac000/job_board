@@ -31,7 +31,7 @@ const Dashboard = () => {
           <Col>
             <div className='sort-jobs-container'>
               <p>Sort by: relavence - date</p>
-              <p>Page 1 of 67 jobs</p>
+              <p>Page 1 of {jobs === null ? 0 : jobs.length} jobs</p>
             </div>
             <Jobs jobs={jobs}/>
           </Col>

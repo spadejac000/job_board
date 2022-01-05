@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getUserJobs} from '../actions/jobActions'
-import {Card, Container, Badge} from 'react-bootstrap'
+import {Card, Container, Badge, Button, Col, Row} from 'react-bootstrap'
+import {FaEdit, FaTimes} from 'react-icons/fa'
+import '../css/user-jobs.css'
 
 const UserJobs = () => {
 
@@ -34,6 +36,10 @@ const UserJobs = () => {
           <div><p>Job Location</p><Badge>{job.job_location}</Badge></div>
 
           <p>{job._description}</p>
+          <div className="user-job-actions-container">
+            <Button variant="warning"><FaEdit/> Edit</Button>
+            <Button variant="danger"><FaTimes/> Delete</Button>
+          </div>
         </Card>
       ))}
     </Container>

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getUserJobs} from '../actions/jobActions'
+import {Card, Container, Badge} from 'react-bootstrap'
 
 const UserJobs = () => {
 
@@ -14,18 +15,28 @@ const UserJobs = () => {
     state.user.userID
   )
 
-  console.log('user id in user jobs component: ', userID)
-
   useEffect(() => {
     dispatch(getUserJobs(userID))
   }, [dispatch])
 
-  console.log('here is the user jobs: ', userJobs)
+  // const {city, company_name, job_location, job_title, job_type, salary, work_address, zip, _description, _state} = userJobs
 
   return (
-    <div>
+    <Container>
       <h2>Your Jobs</h2>
-    </div>
+      {userJobs.map((job) => (
+        <Card className="mt-5 mb-5 p-5">
+          <h3>{job.job_title}</h3>
+          <h4>{job.company_name}</h4>
+          <h6>{job.work_address} {job.city} {job._state} {job.zip}</h6>
+          <div><p>Salary </p><Badge>{job.salary}</Badge></div>
+          <div><p>Job Type </p><Badge>{job.job_type}</Badge></div>
+          <div><p>Job Location</p><Badge>{job.job_location}</Badge></div>
+
+          <p>{job._description}</p>
+        </Card>
+      ))}
+    </Container>
   )
 }
 

@@ -16,9 +16,13 @@ const Header = ({isAuthenticated, setAuth}) => {
     dispatch(printUser())
   }, [dispatch, isAuthenticated])
 
-  let user = useSelector(state => 
-    state.user.user.user_first_name
-  )
+  let user = useSelector((state) => {
+    if(state.user.userName) {
+      return state.user.userName.user_first_name
+    } else {
+      return null
+    }
+  })
 
   const logout = (e) => {
     e.preventDefault()

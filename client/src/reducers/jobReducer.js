@@ -1,4 +1,4 @@
-import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL, POST_JOB_REQUEST, POST_JOB_SUCCESS, POST_JOB_FAIL, GET_JOBS_REQUEST, GET_JOBS_SUCCESS, GET_JOBS_FAIL} from '../constants/jobConstants'
+import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL, POST_JOB_REQUEST, POST_JOB_SUCCESS, POST_JOB_FAIL, GET_JOBS_REQUEST, GET_JOBS_SUCCESS, GET_JOBS_FAIL, GET_USER_JOBS_REQUEST, GET_USER_JOBS_SUCCESS, GET_USER_JOBS_FAIL} from '../constants/jobConstants'
 
 export const selectedJobReducer = (state = null, action) => {
   switch (action.type) {
@@ -45,6 +45,23 @@ export const getJobsReducer = (state = null, action) => {
         return action.payload
       }
     case GET_JOBS_FAIL:
+      return action.payload
+    default:
+      return state
+  }
+}
+
+export const getUserJobsReducer = (state = null, action) => {
+  switch (action.type) {
+    case GET_USER_JOBS_REQUEST:
+      return state
+    case GET_USER_JOBS_SUCCESS:
+      if(action.payload === undefined) {
+        return null
+      } else {
+        return action.payload
+      }
+    case GET_USER_JOBS_FAIL:
       return action.payload
     default:
       return state

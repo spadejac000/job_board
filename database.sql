@@ -20,7 +20,17 @@ CREATE TABLE jobs(
   salary VARCHAR(255),
   benefits VARCHAR(255),
   _description VARCHAR(10000),
-  user_id uuid REFERENCES users(user_id), UNIQUE(user_id)
+  user_id uuid REFERENCES users(user_id)
+);
+
+CREATE TABLE benefits(
+  benefits_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  health_insurance VARCHAR(255),
+  paid_time_off VARCHAR(255),
+  dental_insurance VARCHAR(255),
+  four_zero_one_k VARCHAR(255),
+  vision_insurance VARCHAR(255),
+  job_id uuid REFERENCES jobs(job_id), UNIQUE(job_id)
 );
 
 INSERT INTO users (user_first_name, user_last_name, user_email, user_password) VALUES ('henry', 'smith', 'henry@gmail.com', '123456');

@@ -5,10 +5,29 @@ import {toast} from 'react-toastify'
 import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {postJob} from '../actions/jobActions'
+import {printUser} from '../actions/userActions'
 
 const PostJob = () => {
 
   const dispatch = useDispatch();
+
+  let userID = useSelector((state) =>
+    state.user.userID
+  )
+
+  const [benefits, setBenefits] = useState({
+    healthInsurance: false,
+    paidTimeOff: false,
+    dentalInsurance: false,
+    four01K: false,
+    visionInsurance: false
+  })
+
+  const [dropdowns, setDropdowns] = useState({
+    state: null,
+    jobLocation: null, 
+    jobType: null
+  })
 
   const [inputs, setInputs] = useState({
     jobTitle: "",
@@ -20,26 +39,32 @@ const PostJob = () => {
     jobLocation: "",
     jobType: "",
     salary: "",
-    benefits: {
-      healthInsurance: "",
-      paidTimeOff: "",
-      dentalInsurance: "",
-      four01K: "",
-      visionInsurance: ""
-    },
     description: ""
   })
 
-  const {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, benefits, description} = inputs
+  const {state, jobLocation, jobType} = dropdowns
+
+  const {healthInsurance, paidTimeOff, dentalInsurance, four01K,
+    visionInsurance} = benefits
+
+  const {jobTitle, companyName, address, city, zip, salary, description} = inputs
 
   const onChange = (e) => {
     setInputs({...inputs, [e.target.name] : e.target.value})
   }
 
+  const onChangeBenefits = (e) => {
+    setBenefits({...benefits, [e.target.name]: e.target.checked})
+  }
+
+  const onChangeDropdowns = (e) => {
+    setDropdowns({...dropdowns, [e.target.name] : e.target.value})
+  }
+
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, benefits, description}
+      const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, userID}
       dispatch(postJob(body))
     } catch (error) {
       console.error(error.message)
@@ -70,7 +95,8 @@ const PostJob = () => {
           </Form.Group>
           <Form.Group as={Col}>
             <Form.Label>State</Form.Label>
-            <Form.Select onChange={e => onChange(e)} className="mb-3" value={state}>
+            <Form.Select name="state" onChange={e => onChangeDropdowns(e)} className="mb-3" value={state}>
+              <option>Choose state</option>
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
               <option value="AZ">Arizona</option>
@@ -131,7 +157,8 @@ const PostJob = () => {
         </Row>
         <Form.Group>
           <Form.Label>Where the job is performed</Form.Label>
-          <Form.Select onChange={e => onChange(e)} className="mb-3" value={jobLocation}>
+          <Form.Select name="jobLocation" onChange={e => onChangeDropdowns(e)} className="mb-3" value={jobLocation}>
+            <option>Choose job location</option>
             <option>Remote</option>
             <option>In office</option>
             <option>Hybrid</option>
@@ -139,7 +166,8 @@ const PostJob = () => {
         </Form.Group>
         <Form.Group>
           <Form.Label>Job type</Form.Label>
-          <Form.Select onChange={e => onChange(e)} className="mb-3" defaultValue={jobType}>
+          <Form.Select name="jobType" onChange={e => onChangeDropdowns(e)} className="mb-3" defaultValue={jobType}>
+            <option>Choose job type</option>
             <option>Full-time</option>
             <option>Part-time</option>
             <option>Temporary</option>
@@ -157,37 +185,42 @@ const PostJob = () => {
           <Form.Check 
             inline
             type="checkbox"
-            label={`Health insurance`}
-            onChange={e => onChange(e)}
-            value={benefits.healthInsurance}
+            label="Health insurance"
+            onChange={e => onChangeBenefits(e)}
+            value="Health insurance"
+            name="healthInsurance"
           />
           <Form.Check
             inline
             type='checkbox'
-            label={`Paid time off`}
-            onChange={e => onChange(e)}
-            value={benefits.paidTimeOff}
+            label="Paid time off"
+            onChange={e => onChangeBenefits(e)}
+            value="Paid time off"
+            name="paidTimeOff"
           />
           <Form.Check
             inline
             type='checkbox'
-            label={`Dental Insurance`}
-            onChange={e => onChange(e)}
-            value={benefits.dentalInsurance}
+            label="Dental insurance"
+            onChange={e => onChangeBenefits(e)}
+            value="Dental insurance"
+            name="dentalInsurance"
           />
           <Form.Check
             inline
             type='checkbox'
-            label={`401(k)`}
-            onChange={e => onChange(e)}
-            value={benefits.four01K}
+            label="401(k)"
+            onChange={e => onChangeBenefits(e)}
+            value="401(k)"
+            name="four01K"
           />
           <Form.Check
             inline
             type='checkbox'
-            label={`Vision Insurance`}
-            onChange={e => onChange(e)}
-            value={benefits.visionInsurance}
+            label="Vision insurance"
+            onChange={e => onChangeBenefits(e)}
+            value="Vision insurance"
+            name="visionInsurance"
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">

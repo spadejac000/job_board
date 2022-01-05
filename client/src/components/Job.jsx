@@ -6,7 +6,6 @@ import {FaHeart, FaBan} from 'react-icons/fa'
 
 
 const Job = ({job}) => {
-  console.log('here is the job: ', job)
   const {benefits, city, work_address, job_location, job_title, job_type, salary, zip, _description, _state} = job
   const dispatch = useDispatch()
   return (

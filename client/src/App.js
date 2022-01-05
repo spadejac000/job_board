@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import PostJob from './components/PostJob';
 import Messages from './components/Messages';
 import Settings from './components/Settings';
+import UserJobs from './components/UserJobs';
 import styled, {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
 import {useDispatch, useSelector} from 'react-redux'
@@ -36,12 +37,9 @@ const App = () => {
         headers: {token: localStorage.token}
       })
       const parseResponse = await response.json()
-      console.log('here is the response: ', parseResponse)
       parseResponse === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
-      console.log('here is authentication state: ', isAuthenticated)
 
     } catch (error) {
-      console.log('what the hell')
       console.error(error.message)
     }
   }
@@ -62,6 +60,7 @@ const App = () => {
           <Route exact path="/register" element={!isAuthenticated ? <Register setAuth={setAuth}/> : <Navigate to="/login"/>}/>
           <Route exact path="/" element={<Dashboard/>}/>
           <Route exact path="/post-job" element={isAuthenticated ? <PostJob/> : <Navigate to="/login"/>}/>
+          <Route exact path="/jobs-created" element={isAuthenticated ? <UserJobs/> : <Navigate to="/login"/>}/>
           <Route exact path="/messages" element={isAuthenticated ? <Messages/> : <Navigate to="/login"/>}/>
           <Route exact path="/settings" element={isAuthenticated ? <Settings/> : <Navigate to="/login"/>}/>
         </Routes>

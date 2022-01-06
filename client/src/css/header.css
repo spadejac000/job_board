@@ -36,6 +36,7 @@
 .dropdown-item-left-grouping {
   display: flex;
   align-items: center;
+  margin-right: 1rem;
 }
 
 .navbar-jobs-link > .dropdown-toggle::after {

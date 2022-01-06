@@ -4,7 +4,7 @@ import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'
 import {toast } from 'react-toastify';
-import {FaUser, FaComment, FaCog, FaChevronRight, FaBriefcase, FaThumbtack, FaList} from 'react-icons/fa'
+import {FaUser, FaComment, FaCog, FaChevronRight, FaBriefcase, FaThumbtack, FaList, FaHeart} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap'
 
@@ -80,6 +80,21 @@ const Header = ({isAuthenticated, setAuth}) => {
                 </NavDropdown>
 
                 <NavDropdown className="navigation-bar-icon-container" id="basic-nav-dropdown" align="end">
+
+                  <NavDropdown.Item>
+                    <LinkContainer className="nav-dropdown-item-link-container" to="/favorite-jobs">
+                      <div>
+                        <div className="dropdown-item-left-grouping">
+                          <div className="dropdown-navigation-bar-icon-container">
+                            <FaHeart />
+                          </div>
+                          Favorite Jobs
+                        </div>
+                        <FaChevronRight />
+                      </div>
+                    </LinkContainer>
+                  </NavDropdown.Item>
+
                   <NavDropdown.Item>
                     <LinkContainer className="nav-dropdown-item-link-container" to="/settings">
                       <div>

@@ -21,13 +21,23 @@ const UserJobs = () => {
     dispatch(getUserJobs(userID))
   }, [dispatch])
 
-  // const {city, company_name, job_location, job_title, job_type, salary, work_address, zip, _description, _state} = userJobs
+  const deleteUserJob = async (id) => {
+    try {
+      const deleteUserJob = await fetch(`/api/jobs/${id}`, {
+        method: "DELETE"
+      })
+
+      userJobs.filter(job => job.job_id !== job)
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
   return (
     <Container>
       <h2>Your Jobs</h2>
       {userJobs === null ? (<h2>You have no jobs posted</h2>) : userJobs.map((job) => (
-        <Card className="mt-5 mb-5 p-5">
+        <Card key={job.job_id} className="mt-5 mb-5 p-5">
           <h1>{job.job_title}</h1>
           <h3>{job.company_name}</h3>
           <h6>
@@ -42,7 +52,7 @@ const UserJobs = () => {
           <p>{job._description}</p>
           <div className="user-job-actions-container">
             <Button variant="warning"><FaEdit/> Edit</Button>
-            <Button variant="danger"><FaTimes/> Delete</Button>
+            <Button variant="danger" onClick={() => deleteUserJob(job.job_id)}><FaTimes/> Delete</Button>
           </div>
         </Card>
       ))}

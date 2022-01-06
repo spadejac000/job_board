@@ -29,8 +29,7 @@ CREATE TABLE benefits(
   paid_time_off VARCHAR(255),
   dental_insurance VARCHAR(255),
   four_zero_one_k VARCHAR(255),
-  vision_insurance VARCHAR(255),
-  job_id uuid REFERENCES jobs(job_id), UNIQUE(job_id)
+  vision_insurance VARCHAR(255)
 );
 
 INSERT INTO users (user_first_name, user_last_name, user_email, user_password) VALUES ('henry', 'smith', 'henry@gmail.com', '123456');

@@ -26,15 +26,19 @@ const UserJobs = () => {
   return (
     <Container>
       <h2>Your Jobs</h2>
-      {userJobs.map((job) => (
+      {userJobs === null ? (<h2>You have no jobs posted</h2>) : userJobs.map((job) => (
         <Card className="mt-5 mb-5 p-5">
-          <h3>{job.job_title}</h3>
-          <h4>{job.company_name}</h4>
-          <h6>{job.work_address} {job.city} {job._state} {job.zip}</h6>
-          <div><p>Salary </p><Badge>{job.salary}</Badge></div>
-          <div><p>Job Type </p><Badge>{job.job_type}</Badge></div>
-          <div><p>Job Location</p><Badge>{job.job_location}</Badge></div>
+          <h1>{job.job_title}</h1>
+          <h3>{job.company_name}</h3>
+          <h6>
+            {job.work_address} {job.city} {job._state} {job.zip}
+          </h6>
+          <div className="user-job-salary-container"><h6>Salary: </h6><Badge>{job.salary}</Badge></div>
+          <div className="user-job-benefits-container"><h6>Benefits: </h6><Badge>None right now</Badge></div>
+          <div className="user-job-type-container"><h6>Job Type: </h6><Badge>{job.job_type}</Badge></div>
+          <div className="user-job-location-container"><h6>Job Location: </h6><Badge>{job.job_location}</Badge></div>
 
+          <h6>Job Description: </h6>
           <p>{job._description}</p>
           <div className="user-job-actions-container">
             <Button variant="warning"><FaEdit/> Edit</Button>

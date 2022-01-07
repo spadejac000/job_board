@@ -26,8 +26,8 @@ const UserJobs = () => {
       const deleteUserJob = await fetch(`/api/jobs/${id}`, {
         method: "DELETE"
       })
-
-      userJobs.filter(job => job.job_id !== job)
+      userJobs.filter(job => job.job_id !== id)
+      dispatch(getUserJobs(userID))
     } catch (error) {
       console.error(error.message)
     }

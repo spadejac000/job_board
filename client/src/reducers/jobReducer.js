@@ -73,7 +73,7 @@ export const deleteUserJobReducer = (state, action) => {
     case DELETE_USER_JOB_REQUEST:
       return state
     case DELETE_USER_JOB_SUCCESS:
-      const filteredUserJobs = state.getUserJobs.filter(job => job.job_id !== action.payload.id /* or job */)
+      const filteredUserJobs = state.getUserJobs.filter(job => job.job_id !== action.payload.id /* or id */)
       return {...state, getUserJobs: filteredUserJobs}
     case DELETE_USER_JOB_FAIL:
       return action.payload

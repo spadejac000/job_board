@@ -47,6 +47,6 @@
   display: flex;
 }
 
-#navbarScroll > div > a {
+#navbarScroll > div > a.navbar-messages-link {
   padding: 0px;
 }

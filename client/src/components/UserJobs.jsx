@@ -1,13 +1,17 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {getUserJobs} from '../actions/jobActions'
-import {Card, Container, Badge, Button, Col, Row} from 'react-bootstrap'
+import {Card, Container, Badge, Button} from 'react-bootstrap'
 import {FaEdit, FaTimes} from 'react-icons/fa'
 import '../css/user-jobs.css'
+import EditJobModal from './EditJobModal'
 
 const UserJobs = () => {
 
   const dispatch = useDispatch();
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   let userJobs = useSelector((state) =>
     state.getUserJobs
@@ -26,7 +30,7 @@ const UserJobs = () => {
       const deleteUserJob = await fetch(`/api/jobs/${id}`, {
         method: "DELETE"
       })
-      userJobs.filter(job => job.job_id !== id)
+      // userJobs.filter(job => job.job_id !== id)
       dispatch(getUserJobs(userID))
     } catch (error) {
       console.error(error.message)
@@ -35,7 +39,7 @@ const UserJobs = () => {
 
   return (
     <Container>
-      <h2>Your Jobs</h2>
+      <h2>Your Posted Jobs</h2>
       {userJobs === null ? (<h2>You have no jobs posted</h2>) : userJobs.map((job) => (
         <Card key={job.job_id} className="mt-5 mb-5 p-5">
           <h1>{job.job_title}</h1>
@@ -51,11 +55,12 @@ const UserJobs = () => {
           <h6>Job Description: </h6>
           <p>{job._description}</p>
           <div className="user-job-actions-container">
-            <Button variant="warning"><FaEdit/> Edit</Button>
+            <Button variant="warning" onClick={handleShow}><FaEdit/> Edit</Button>
             <Button variant="danger" onClick={() => deleteUserJob(job.job_id)}><FaTimes/> Delete</Button>
           </div>
         </Card>
       ))}
+      <EditJobModal show={show} handleClose={handleClose}/>
     </Container>
   )
 }

@@ -40,6 +40,14 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${props => props.theme.cardBGColor};
   }
 
+  .modal-content {
+    background-color: ${props => props.theme.cardBGColor};
+  }
+
+  .btn-close {
+    background-color: ${props => props.theme.color}
+  }
+
   .list-group-item {
     background-color: ${props => props.theme.listGroupItemBGColor};
     color: ${props => props.theme.listGroupItemColor};

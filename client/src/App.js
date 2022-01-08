@@ -15,6 +15,7 @@ import UserJobs from './components/UserJobs';
 import styled, {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
 import {useDispatch, useSelector} from 'react-redux'
+import './App.css';
 
 const App = () => {
 

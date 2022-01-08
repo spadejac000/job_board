@@ -132,7 +132,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
       <Navbar bg="dark" variant="dark" expand="lg" className="mb-5">
         <Container>
-          <Navbar.Brand href="/">Job Board</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -140,7 +140,8 @@ const Header = ({isAuthenticated, setAuth}) => {
               style={{ maxHeight: '100px' }}
               navbarScroll
             >
-              <Nav.Link href="/login">Login</Nav.Link>
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              <Nav.Link as={Link} to="/register">Register</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

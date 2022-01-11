@@ -1,19 +1,19 @@
 import React, {useState} from 'react'
 import {Modal, Button, Form, Row, Col} from 'react-bootstrap'
 
-const EditJobModal = ({show, handleClose}) => {
+const EditJobModal = ({show, handleClose, editUserJob, job}) => {
 
   const [inputs, setInputs] = useState({
-    jobTitle: "",
-    companyName: "",
-    address: "",
-    city: "",
-    state: "",
-    zip: "",
-    jobLocation: "",
-    jobType: "",
-    salary: "",
-    description: ""
+    jobTitle: job.job_title,
+    companyName: job.company_name,
+    address: job.work_address,
+    city: job.city,
+    state: job._state,
+    zip: job.zip,
+    jobLocation: job.job_location,
+    jobType: job.job_type,
+    salary: job.salary,
+    description: job._description
   })
 
   const [dropdowns, setDropdowns] = useState({
@@ -29,6 +29,8 @@ const EditJobModal = ({show, handleClose}) => {
     four01K: false,
     visionInsurance: false
   })
+
+  const {jobTitle, companyName, address, city, zip, salary, description, jobLocation, jobType, state} = inputs
 
   const onChange = (e) => {
     setInputs({...inputs, [e.target.name] : e.target.value})
@@ -61,24 +63,24 @@ const EditJobModal = ({show, handleClose}) => {
         <Form onSubmit={onSubmitForm} className="container mb-5 p-5 post-job-form">
           <Form.Group>
             <Form.Label>Job title</Form.Label>
-            <Form.Control className="mb-3" type="text" name="jobTitle" id="job-title-post-job" placeholder="Job title" value="" onChange={e => onChange(e)}/>
+            <Form.Control className="mb-3" type="text" name="jobTitle" id="job-title-post-job" placeholder="Job title" value={jobTitle} onChange={e => onChange(e)}/>
           </Form.Group>
           <Form.Group>
             <Form.Label>Company name</Form.Label>
-            <Form.Control className="mb-3" type="text" name="companyName" id="company-name-post-job" placeholder="Company name" value="" onChange={e => onChange(e)}/>
+            <Form.Control className="mb-3" type="text" name="companyName" id="company-name-post-job" placeholder="Company name" value={companyName} onChange={e => onChange(e)}/>
           </Form.Group>
           <Form.Group>
             <Form.Label>Address</Form.Label>
-            <Form.Control className="mb-3" type="text" name="address" id="address-post-job" placeholder="Address" value="" onChange={e => onChange(e)}/>
+            <Form.Control className="mb-3" type="text" name="address" id="address-post-job" placeholder="Address" value={address} onChange={e => onChange(e)}/>
           </Form.Group>
           <Row>
             <Form.Group as={Col}>
               <Form.Label>City</Form.Label>
-              <Form.Control className="mb-3" type="text" name="city" id="city-post-job" placeholder="City" value="" onChange={e => onChange(e)}/>
+              <Form.Control className="mb-3" type="text" name="city" id="city-post-job" placeholder="City" value={city} onChange={e => onChange(e)}/>
             </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>State</Form.Label>
-              <Form.Select name="state" onChange={e => onChangeDropdowns(e)} className="mb-3" value="">
+              <Form.Select name="state" onChange={e => onChangeDropdowns(e)} className="mb-3" value={state}>
                 <option>Choose state</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -135,12 +137,12 @@ const EditJobModal = ({show, handleClose}) => {
             </Form.Group>
             <Form.Group as={Col}>
               <Form.Label>Zip code</Form.Label>
-              <Form.Control className="mb-3" type="text" name="zip" id="zip-post-job" placeholder="Zip code" value="zip" onChange={e => onChange(e)}/>
+              <Form.Control className="mb-3" type="text" name="zip" id="zip-post-job" placeholder="Zip code" value={zip} onChange={e => onChange(e)}/>
             </Form.Group>
           </Row>
           <Form.Group>
             <Form.Label>Where the job is performed</Form.Label>
-            <Form.Select name="jobLocation" onChange={e => onChangeDropdowns(e)} className="mb-3" value="{jobLocation}">
+            <Form.Select name="jobLocation" onChange={e => onChangeDropdowns(e)} className="mb-3" value={jobLocation}>
               <option>Choose job location</option>
               <option>Remote</option>
               <option>In office</option>
@@ -149,7 +151,7 @@ const EditJobModal = ({show, handleClose}) => {
           </Form.Group>
           <Form.Group>
             <Form.Label>Job type</Form.Label>
-            <Form.Select name="jobType" onChange={e => onChangeDropdowns(e)} className="mb-3" defaultValue="{jobType}">
+            <Form.Select name="jobType" onChange={e => onChangeDropdowns(e)} className="mb-3" defaultValue={jobType}>
               <option>Choose job type</option>
               <option>Full-time</option>
               <option>Part-time</option>
@@ -161,7 +163,7 @@ const EditJobModal = ({show, handleClose}) => {
           </Form.Group>
           <Form.Group>
             <Form.Label>Salary</Form.Label>
-            <Form.Control className="mb-3" type="text" name="salary" id="salary-post-job" placeholder="Salary" value="{salary}" onChange={e => onChange(e)}/>
+            <Form.Control className="mb-3" type="text" name="salary" id="salary-post-job" placeholder="Salary" value={salary} onChange={e => onChange(e)}/>
           </Form.Group>
           <Form.Group style={{marginBottom: '1rem'}}>
             <h6>Benefits Offered</h6>
@@ -208,17 +210,14 @@ const EditJobModal = ({show, handleClose}) => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label><h6>Job Description</h6></Form.Label>
-            <Form.Control name="description" as="textarea" rows={3} defaultValue="{description}" onChange={e => onChange(e)}/>
+            <Form.Control name="description" as="textarea" rows={3} defaultValue={description} onChange={e => onChange(e)}/>
           </Form.Group>
-          <Button type="submit" className="mb-3 btn-primary btn-lg">Save Changes</Button>
+          <Button type="submit" className="mb-3 btn-primary btn-lg" onClick={editUserJob}>Save Changes</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
           Close
-        </Button>
-        <Button type="submit" variant="primary" onClick={handleClose}>
-          Save Changes
         </Button>
       </Modal.Footer>
     </Modal>

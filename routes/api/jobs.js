@@ -36,7 +36,6 @@ router.get('/', async (req, res) => {
 router.get('/current-user-jobs', async (req, res) => {
   try {
     let currentUserJobs = await pool.query("SELECT * FROM jobs WHERE user_id = $1;", [req.query.user_id]);
-    console.log('here are the current user jobs on the backend: ', currentUserJobs.rows)
     res.json(currentUserJobs.rows)
   } catch (error) {
     console.error(error.message)
@@ -52,6 +51,18 @@ router.delete('/:id', async (req, res) => {
     const deleteJob = await pool.query("DELETE FROM jobs WHERE job_id = $1", [id])
     const deleteBenefits = await pool.query("DELETE FROM benefits WHERE benefits_id = $1", [benefitsID.rows[0].benefits_id])
     res.json('Job was deleted')
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+router.put('/', async (req, res) => {
+  try {
+    const {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, job_id} = req.body
+
+    let updatedJob = await pool.query("UPDATE jobs SET job_title = $1, work_address = $2, city = $3, _state = $4, zip = $5, job_location = $6, job_type = $7, salary = $8, _description = $9, company_name = $10 WHERE job_id = $11;", [jobTitle, address, city, state, zip, jobLocation, jobType, salary, description, companyName, job_id])
+    res.json(updatedJob.rows)
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')

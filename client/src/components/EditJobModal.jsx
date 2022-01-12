@@ -1,25 +1,31 @@
 import React, {useState} from 'react'
 import {Modal, Button, Form, Row, Col} from 'react-bootstrap'
+import {editJob} from '../actions/jobActions'
+import {useDispatch, useSelector} from 'react-redux'
+import {getUserJobs} from '../actions/jobActions'
 
 const EditJobModal = ({show, handleClose, editUserJob, job}) => {
+
+  const dispatch = useDispatch();
+
+  let userID = useSelector((state) =>
+    state.user.userID
+  )
 
   const [inputs, setInputs] = useState({
     jobTitle: job.job_title,
     companyName: job.company_name,
     address: job.work_address,
     city: job.city,
-    state: job._state,
     zip: job.zip,
-    jobLocation: job.job_location,
-    jobType: job.job_type,
     salary: job.salary,
     description: job._description
   })
 
   const [dropdowns, setDropdowns] = useState({
-    state: null,
-    jobLocation: null, 
-    jobType: null
+    state: job._state,
+    jobLocation: job.job_location, 
+    jobType: job.job_type
   })
 
   const [benefits, setBenefits] = useState({
@@ -30,9 +36,17 @@ const EditJobModal = ({show, handleClose, editUserJob, job}) => {
     visionInsurance: false
   })
 
-  const {jobTitle, companyName, address, city, zip, salary, description, jobLocation, jobType, state} = inputs
+  const job_id = job.job_id
+
+  const {jobTitle, companyName, address, city, zip, salary, description} = inputs
+
+  const {state, jobLocation, jobType} = dropdowns
+
+  const {healthInsurance, paidTimeOff, dentalInsurance, four01K,
+    visionInsurance} = benefits
 
   const onChange = (e) => {
+    console.log('e target value: ', e.target.value)
     setInputs({...inputs, [e.target.name] : e.target.value})
   }
 
@@ -47,8 +61,9 @@ const EditJobModal = ({show, handleClose, editUserJob, job}) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      // const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, userID}
-      console.log('hello')
+      const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, job_id}
+      dispatch(editJob(body))
+      dispatch(getUserJobs(userID))
     } catch (error) {
       console.error(error.message)
     }
@@ -212,7 +227,7 @@ const EditJobModal = ({show, handleClose, editUserJob, job}) => {
             <Form.Label><h6>Job Description</h6></Form.Label>
             <Form.Control name="description" as="textarea" rows={3} defaultValue={description} onChange={e => onChange(e)}/>
           </Form.Group>
-          <Button type="submit" className="mb-3 btn-primary btn-lg" onClick={editUserJob}>Save Changes</Button>
+          <Button type="submit" className="mb-3 btn-primary btn-lg" onClick={handleClose}>Save Changes</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>

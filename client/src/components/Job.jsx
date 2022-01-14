@@ -19,7 +19,7 @@ const Job = ({job}) => {
           <h6>Company Name</h6>
           <h6>{work_address} {city}, {_state}, {zip}</h6>
           <Badge className="salary-badge" bg="primary">{salary}</Badge>
-          <p>{date_posted}</p>
+          <p>Posted {date_posted} days ago</p>
         </Col>
         <Col md={2} className="save-ban-col">
           <div>

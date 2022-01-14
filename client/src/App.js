@@ -63,7 +63,7 @@ const App = () => {
           <Route exact path="/post-job" element={isAuthenticated ? <PostJob/> : <Navigate to="/login"/>}/>
           <Route exact path="/jobs-created" element={isAuthenticated ? <UserJobs/> : <Navigate to="/login"/>}/>
           <Route exact path="/messages" element={isAuthenticated ? <Messages/> : <Navigate to="/login"/>}/>
-          <Route exact path="/settings" element={isAuthenticated ? <Settings/> : <Navigate to="/login"/>}/>
+          <Route exact path="/settings" element={isAuthenticated ? <Settings setAuth={setAuth}/> : <Navigate to="/login"/>}/>
         </Routes>
         <Footer/>
       </Router>

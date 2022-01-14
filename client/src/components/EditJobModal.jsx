@@ -46,7 +46,6 @@ const EditJobModal = ({show, handleClose, editUserJob, job}) => {
     visionInsurance} = benefits
 
   const onChange = (e) => {
-    console.log('e target value: ', e.target.value)
     setInputs({...inputs, [e.target.name] : e.target.value})
   }
 

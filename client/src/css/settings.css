@@ -6,7 +6,8 @@ html {
 
 .theme-mode-container {
 	flex-direction: row;
-	max-width: 25%;
+	justify-content: space-between;
+	max-width: 33%;
 	padding: 1rem;
 	margin: 3rem 0 3rem 0;
 }

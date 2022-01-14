@@ -27,7 +27,8 @@ export const darkTheme = {
   accordionButtonColor: 'white',
   paginationBGColor: 'rgb(36, 39, 41)',
   paginationColor: '#0d6efd',
-  paginationBorderColor: '#343a40'
+  paginationBorderColor: '#343a40',
+  webkitBoxShadow: '0 0 0px 1000px #3b3b3b inset'
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -82,6 +83,14 @@ export const GlobalStyles = createGlobalStyle`
   input:focus {
     background-color: ${props => props.theme.inputBGColor};
     color: ${props => props.theme.inputColor};
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active{
+    -webkit-box-shadow: ${props => props.theme.webkitBoxShadow};
+    -webkit-text-fill-color: ${props => props.theme.inputColor};
   }
 
   .dropdown-menu {

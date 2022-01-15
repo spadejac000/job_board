@@ -26,7 +26,6 @@ const ResetPasswordModal = ({show, handleClose}) => {
 
   const onSubmitForm = async () => {
     try {
-      console.log('hello there')
       if(newPassword !== confirmNewPassword) {
         toast.error("New passwords do not match")
       } else {
@@ -57,7 +56,7 @@ const ResetPasswordModal = ({show, handleClose}) => {
           <Form.Group>
             <Form.Control className="mb-3" type="password" name="confirmNewPassword" id="confirmNewPassword" placeholder="Confirm new password" value={confirmNewPassword} onChange={e => onChange(e)}/>
           </Form.Group>
-          <Button type='submit' color="primary" className="mb-3">Save</Button>
+          <Button type='submit' color="primary" className={`mb-3 ${currentPassword.length === 0 || newPassword.length === 0 || confirmNewPassword.length === 0 ? 'disabled' : ''}`}>Save</Button>
         </Form>
       </Modal.Body>
       <Modal.Footer>

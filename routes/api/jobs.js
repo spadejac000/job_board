@@ -57,6 +57,16 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+router.delete('/all-user-jobs/:id', async (req, res) => {
+  try {
+    const deleteAllJobs = await pool.query("DELETE FROM jobs WHERE user_id = $1", [req.params.id])
+    res.json('All of your posted jobs were deleted')
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
 router.put('/', async (req, res) => {
   try {
     const {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, job_id} = req.body

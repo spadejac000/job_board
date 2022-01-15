@@ -1,3 +1,8 @@
+.delete-all-job-btn {
+  display: flex;
+  align-items: center;
+}
+
 .user-job-actions-container > Button {
   margin-right: 1rem;
 }

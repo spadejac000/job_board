@@ -1,8 +1,7 @@
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import Filters from './Filters';
 import { Container, Row, Col } from 'react-bootstrap';
 import Jobs from './Jobs'
-import {toast} from 'react-toastify'
 import SelectedJob from './SelectedJob'
 import Paginate from './Paginate'
 import '../css/dashboard.css'

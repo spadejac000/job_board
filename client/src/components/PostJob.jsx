@@ -1,11 +1,8 @@
 import {useState} from 'react'
 import {Form, Button, Container, Row, Col} from 'react-bootstrap'
 import '../css/post-job.css'
-import {toast} from 'react-toastify'
-import axios from 'axios'
 import {useDispatch, useSelector} from 'react-redux'
 import {postJob} from '../actions/jobActions'
-import {printUser} from '../actions/userActions'
 
 const PostJob = () => {
 

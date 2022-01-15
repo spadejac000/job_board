@@ -86,4 +86,28 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+// update user password
+router.put('/:id', async (req, res) => {
+  try {
+    const {id} = req.params
+
+    const password = await pool.query("SELECT user_password FROM users WHERE user_id = $1", [id])
+    const validPassword = await bcrypt.compare(req.body.currentPassword, password.rows[0].user_password)
+    if(!validPassword) {
+      return res.status(401).json("Invalid current password")
+    }
+    // salt for new password
+    const saltRound = 10
+    const salt = await bcrypt.genSalt(saltRound)
+    const newBcryptPassword = await bcrypt.hash(req.body.newPassword, salt)
+
+    const updateUserPassword = await pool.query("UPDATE users SET user_password = $1 WHERE user_id = $2;", [newBcryptPassword, id])
+
+    res.json(updateUserPassword)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
 module.exports = router;

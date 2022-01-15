@@ -5,6 +5,7 @@ import {updateTheme} from '../actions/themeActions'
 import {Card, Button} from 'react-bootstrap'
 import {deleteAccount} from '../actions/userActions'
 import {toast} from 'react-toastify'
+import ResetPasswordModal from './ResetPasswordModal'
 
 const Settings = ({setAuth}) => {
 
@@ -20,6 +21,10 @@ const Settings = ({setAuth}) => {
     state.user.userID
   )
 
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   useEffect(() => {
     localStorage.setItem('theme', theme)
     localStorage.setItem('themeToggleChecked', themeToggleChecked)
@@ -28,10 +33,6 @@ const Settings = ({setAuth}) => {
   const themeToggler = () => {
     theme === 'light' ? dispatch(updateTheme('dark')) : dispatch(updateTheme('light'));
     themeToggleChecked === false ? setThemeToggleChecked(true) : setThemeToggleChecked(false);
-  }
-
-  const handleResetPassword = (e) => {
-    console.log(e)
   }
   
   const handleDeleteAccount = async (e) => {
@@ -61,7 +62,7 @@ const Settings = ({setAuth}) => {
       <Card className="theme-mode-container">
         <h3 className="theme-mode-title">Reset Password</h3>
         <div className="toggle-container">
-          <Button onClick={handleResetPassword}>Reset</Button>
+          <Button onClick={handleShow}>Reset</Button>
         </div>
       </Card>
 
@@ -71,6 +72,7 @@ const Settings = ({setAuth}) => {
           <Button variant="danger" onClick={handleDeleteAccount}>Delete Account</Button>
         </div>
       </Card>
+      <ResetPasswordModal show={show} handleClose={handleClose}/>
     </div>
   )
 }

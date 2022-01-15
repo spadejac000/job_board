@@ -221,8 +221,8 @@ const PostJob = () => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label><h6>Job Description</h6></Form.Label>
-          <Form.Control name="description" as="textarea" rows={3} defaultValue={description} onChange={e => onChange(e)}/>
+          <Form.Label><h6>Job Description (Max: 10000 characters)</h6></Form.Label>
+          <Form.Control placeholder="Describe your available position..." name="description" maxlength="10000" as="textarea" rows={8} defaultValue={description} onChange={e => onChange(e)}/>
         </Form.Group>
         <Button type="submit" className="mb-3 btn-primary btn-lg">Post Job</Button>
       </Form>

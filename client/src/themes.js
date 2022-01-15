@@ -28,7 +28,8 @@ export const darkTheme = {
   paginationBGColor: 'rgb(36, 39, 41)',
   paginationColor: '#0d6efd',
   paginationBorderColor: '#343a40',
-  webkitBoxShadow: '0 0 0px 1000px #3b3b3b inset'
+  webkitBoxShadow: '0 0 0px 1000px #3b3b3b inset',
+  circleBorder: '1px solid white'
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -119,6 +120,11 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${props => props.theme.paginationBGColor};
     color: ${props => props.theme.paginationColor};
     border-color: ${props => props.theme.paginationBorderColor};
+  }
+
+  .save-ban-col > div,
+  .exit-selected-job-col > div {
+    border: ${props => props.theme.circleBorder};
   }
 
 `

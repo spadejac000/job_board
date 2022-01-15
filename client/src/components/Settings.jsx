@@ -29,6 +29,10 @@ const Settings = ({setAuth}) => {
     theme === 'light' ? dispatch(updateTheme('dark')) : dispatch(updateTheme('light'));
     themeToggleChecked === false ? setThemeToggleChecked(true) : setThemeToggleChecked(false);
   }
+
+  const handleResetPassword = (e) => {
+    console.log(e)
+  }
   
   const handleDeleteAccount = async (e) => {
     e.preventDefault()
@@ -53,6 +57,14 @@ const Settings = ({setAuth}) => {
           <input className="toggle-theme-input" type="checkbox" id="switch" name="theme" checked={themeToggleChecked} onChange={() => themeToggler()}/><label className="theme-label" for="switch">Toggle</label>
         </div>
       </Card>
+      
+      <Card className="theme-mode-container">
+        <h3 className="theme-mode-title">Reset Password</h3>
+        <div className="toggle-container">
+          <Button onClick={handleResetPassword}>Reset</Button>
+        </div>
+      </Card>
+
       <Card className="theme-mode-container">
         <h3 className="theme-mode-title">Delete Account</h3>
         <div className="toggle-container">

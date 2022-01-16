@@ -12,6 +12,8 @@ import PostJob from './components/PostJob';
 import Messages from './components/Messages';
 import Settings from './components/Settings';
 import UserJobs from './components/UserJobs';
+import NotFound from './components/NotFound';
+import DynamicRoutes from './components/DynamicRoutes';
 import styled, {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
 import {useDispatch, useSelector} from 'react-redux'
@@ -64,6 +66,8 @@ const App = () => {
           <Route exact path="/jobs-created" element={isAuthenticated ? <UserJobs/> : <Navigate to="/login"/>}/>
           <Route exact path="/messages" element={isAuthenticated ? <Messages/> : <Navigate to="/login"/>}/>
           <Route exact path="/settings" element={isAuthenticated ? <Settings setAuth={setAuth}/> : <Navigate to="/login"/>}/>
+          <Route path="/dynamic/:id" element={<DynamicRoutes/>} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
         <Footer/>
       </Router>

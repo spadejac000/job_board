@@ -1,14 +1,15 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import {Container, Button} from 'react-bootstrap'
 import {FaUnlink} from 'react-icons/fa'
+import {Link} from 'react-router-dom'
 
 const NotFound = () => {
   return (
-    <div>
-      <FaUnlink/>
+    <Container>
+      <FaUnlink size={50}/>
       <h1>Page not found - status 404</h1>
-      <Button>Back to home page</Button>
-    </div>
+      <Link className="btn btn-primary" to="/">Back to home page</Link>
+    </Container>
   )
 }
 

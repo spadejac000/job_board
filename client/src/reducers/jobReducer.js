@@ -34,35 +34,27 @@ export const postJobReducer = (state = null, action) => {
   }
 }
 
-export const getJobsReducer = (state = null, action) => {
+export const getJobsReducer = (state = {jobs: []}, action) => {
   switch (action.type) {
     case GET_JOBS_REQUEST:
-      return state
+      return {loading: true, state}
     case GET_JOBS_SUCCESS:
-      if(action.payload === undefined) {
-        return null
-      } else {
-        return action.payload
-      }
+      return {loading: false, jobs: action.payload}
     case GET_JOBS_FAIL:
-      return action.payload
+      return {loading: false, error: action.payload}
     default:
       return state
   }
 }
 
-export const getUserJobsReducer = (state = null, action) => {
+export const getUserJobsReducer = (state = {userJobs: []}, action) => {
   switch (action.type) {
     case GET_USER_JOBS_REQUEST:
-      return state
+      return {loadingUserJobs: true, state}
     case GET_USER_JOBS_SUCCESS:
-      if(action.payload === undefined) {
-        return null
-      } else {
-        return action.payload
-      }
+      return {loadingUserJobs: false, userJobs: action.payload}
     case GET_USER_JOBS_FAIL:
-      return action.payload
+      return {loadingUserJobs: false, errorUserJobs: action.payload}
     default:
       return state
   }

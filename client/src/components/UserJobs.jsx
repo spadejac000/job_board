@@ -1,20 +1,25 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {getUserJobs} from '../actions/jobActions'
-import {Container, Button, Row, Col} from 'react-bootstrap'
+import {Container, Button} from 'react-bootstrap'
 import '../css/user-jobs.css'
 import {motion, AnimatePresence} from 'framer-motion'
 import UserJob from './UserJob'
 import {FaTimes} from 'react-icons/fa'
 import {deleteAllJobs} from '../actions/jobActions'
+import Loader from './Loader'
+import AlertMessage from './AlertMessage';
 
-const UserJobs = () => {
+const UserJobs = ({isAuthenticated}) => {
 
   const dispatch = useDispatch();
 
-  let userJobs = useSelector((state) =>
-    state.getUserJobs
-  )
+  // let userJobs = useSelector((state) =>
+  //     state.getUserJobs.userJobs
+  // )
+
+  const userJobsState = useSelector(state => state.getUserJobs)
+  const {loadingUserJobs, errorUserJobs, userJobs} = userJobsState
 
   let userID = useSelector((state) =>
     state.user.userID
@@ -35,13 +40,18 @@ const UserJobs = () => {
   }
 
   return (
+    isAuthenticated ? 
     <Container>
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <h2>Your Posted Jobs</h2>
         <Button className={`delete-all-job-btn ${userJobs && userJobs.length === 0 ? " disabled " : ""}`} variant="danger" onClick={handleDeleteAllJobs}><FaTimes/> Delete all jobs</Button>
       </div>
       <AnimatePresence>
-        {userJobs === null ? (<h2>You have no jobs posted</h2>) : userJobs.map((job) => (
+        {loadingUserJobs ?
+          <Loader/> :
+          errorUserJobs ?
+          <AlertMessage variant="danger">{errorUserJobs}</AlertMessage> : 
+          userJobs.map((job) => (
           <motion.div 
             key={job.job_id}
             initial={{opacity: 0}}
@@ -50,9 +60,11 @@ const UserJobs = () => {
           >
             <UserJob job={job}/>
           </motion.div>
-        ))}
+        ))
+        }
       </AnimatePresence>
     </Container>
+    : null
   )
 }
 

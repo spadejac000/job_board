@@ -6,6 +6,8 @@ import SelectedJob from './SelectedJob'
 import Paginate from './Paginate'
 import '../css/dashboard.css'
 import MessagesBox from './MessagesBox';
+import Loader from './Loader';
+import AlertMessage from './AlertMessage';
 import {useDispatch, useSelector} from 'react-redux'
 import {getJobs} from '../actions/jobActions'
 
@@ -17,9 +19,11 @@ const Dashboard = () => {
     dispatch(getJobs())
   }, [dispatch])
 
-  const jobs = useSelector(state => 
+  const jobsState = useSelector(state => 
     state.getJobs
   )
+
+  const {loading, error, jobs} = jobsState;
 
   return (
     <>
@@ -28,11 +32,21 @@ const Dashboard = () => {
       <Container>
         <Row>
           <Col>
-            <div className='sort-jobs-container'>
-              <p>Sort by: relavence - date</p>
-              <p>Page 1 of {jobs === null ? 0 : jobs.length} jobs</p>
-            </div>
-            <Jobs jobs={jobs}/>
+            {loading ? (
+              <Loader/>
+            ) : error ? <AlertMessage variant="danger">{error}</AlertMessage> : (
+              <div>
+                <div className='sort-jobs-container'>
+                  <p>Sort by: relavence - date</p>
+                  <p>Page 1 of {jobs === null ? 0 : jobs.length} jobs</p>
+                </div>
+                <Jobs jobs={jobs}/>
+              </div>
+              
+            )
+              
+            }
+            
           </Col>
           <Col>
             <SelectedJob/>

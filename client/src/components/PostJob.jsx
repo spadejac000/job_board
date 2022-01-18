@@ -4,7 +4,7 @@ import '../css/post-job.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {postJob} from '../actions/jobActions'
 
-const PostJob = () => {
+const PostJob = ({isAuthenticated}) => {
 
   const dispatch = useDispatch();
 
@@ -21,9 +21,9 @@ const PostJob = () => {
   })
 
   const [dropdowns, setDropdowns] = useState({
-    state: null,
-    jobLocation: null, 
-    jobType: null
+    state: undefined,
+    jobLocation: undefined, 
+    jobType: undefined
   })
 
   const [inputs, setInputs] = useState({
@@ -68,7 +68,7 @@ const PostJob = () => {
     }
   }
 
-  return (
+  return ( isAuthenticated ?
     <Container className="post-job-form-container">
       <Form onSubmit={onSubmitForm} className="container mb-5 p-5 post-job-form">
         <h1 className="post-job-form-title">Post Job</h1>
@@ -226,7 +226,8 @@ const PostJob = () => {
         </Form.Group>
         <Button type="submit" className="mb-3 btn-primary btn-lg">Post Job</Button>
       </Form>
-    </Container>
+    </Container> :
+    null
   )
 }
 

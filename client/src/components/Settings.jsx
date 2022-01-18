@@ -7,7 +7,7 @@ import {deleteAccount} from '../actions/userActions'
 import {toast} from 'react-toastify'
 import ResetPasswordModal from './ResetPasswordModal'
 
-const Settings = ({setAuth}) => {
+const Settings = ({setAuth, isAuthenticated}) => {
 
   const [themeToggleChecked, setThemeToggleChecked] = useState(JSON.parse(localStorage.getItem('themeToggleChecked')))
   
@@ -50,6 +50,7 @@ const Settings = ({setAuth}) => {
   }
 
   return (
+    isAuthenticated ?
     <div className="container">
       <h1>Settings</h1>
       <Card className="theme-mode-container">
@@ -74,6 +75,7 @@ const Settings = ({setAuth}) => {
       </Card>
       <ResetPasswordModal show={show} handleClose={handleClose}/>
     </div>
+    : null
   )
 }
 

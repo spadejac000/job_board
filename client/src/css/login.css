@@ -2,12 +2,17 @@
   height: 90vh;
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
 }
 
-.login-form {
-  width: 30%;
+.login-form > div > input {
+  min-width: 20rem;
 }
 
 .login-form-title {
   margin-bottom: 0px;
+}
+
+.login-briefcase {
+  width: 150%;
 }

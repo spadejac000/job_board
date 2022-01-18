@@ -3,8 +3,9 @@ import {Row, Col, Card, Container, ListGroup, Button} from 'react-bootstrap'
 import {FaComments} from 'react-icons/fa'
 import '../css/messages.css'
 
-const Messages = () => {
+const Messages = ({isAuthenticated}) => {
   return (
+    isAuthenticated ?
     <Container className="mb-5">
       <Row>
         <Col md={4}>
@@ -34,6 +35,7 @@ const Messages = () => {
         </Col>
       </Row>
     </Container>
+    : null
   )
 }
 

@@ -16,12 +16,10 @@ import NotFound from './components/NotFound';
 import DynamicRoutes from './components/DynamicRoutes';
 import {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
-import {useDispatch, useSelector} from 'react-redux'
+import {useSelector} from 'react-redux'
 import './App.css';
 
 const App = () => {
-
-  const dispatch = useDispatch();
 
   toast.configure()
 
@@ -51,9 +49,7 @@ const App = () => {
 
   useEffect(() => {
     isAuth()
-  }, [
-    isAuthenticated
-  ])
+  }, [isAuthenticated])
 
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -65,7 +61,6 @@ const App = () => {
           <Route exact path="/register" element={!isAuthenticated ? <Register setAuth={setAuth}/> : <Navigate to="/login"/>}/>
           <Route exact path="/" element={<Dashboard/>}/>
           <Route exact path="/post-job" element={<PostJob isAuthenticated={isAuthenticated}/>}/>
-          
           <Route exact path="/jobs-created" element={<UserJobs isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/messages" element={<Messages isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/settings" element={<Settings setAuth={setAuth} isAuthenticated={isAuthenticated}/>}/>

@@ -23,6 +23,12 @@ CREATE TABLE jobs(
   user_id uuid REFERENCES users(user_id)
 );
 
+CREATE TABLE favorite_jobs(
+  favorite_jobs_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id uuid REFERENCES users(user_id),
+  job_id uuid REFERENCES jobs(job_id)
+);
+
 CREATE TABLE benefits(
   benefits_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   health_insurance VARCHAR(255),
@@ -35,3 +41,7 @@ CREATE TABLE benefits(
 INSERT INTO users (user_first_name, user_last_name, user_email, user_password) VALUES ('henry', 'smith', 'henry@gmail.com', '123456');
 
 INSERT INTO jobs (job_title, work_address, city, _state, zip, job_location, job_type, salary, _description) VALUES ('Web Developer', '1234 5th street ne', 'Seattle', 'washington', '12345', 'remote', 'full-time', '$100,000 a year', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus nesciunt mollitia possimus perferendis nisi. Nobis aperiam eius blanditiis ipsum amet beatae optio cumque labore voluptas, hic placeat tenetur rerum quia.');
+
+ALTER TABLE users ADD favorite_jobs text[];
+
+INSERT INTO users VALUES ARRAY[]

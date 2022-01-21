@@ -79,4 +79,10 @@ router.put('/', async (req, res) => {
   }
 })
 
+router.post('/favorites', async (req, res) => {
+  const {jobID, userID} = req.body
+  const newFavJob = await pool.query("INSERT INTO favorite_jobs(user_id, job_id) VALUES($1, $2);", [userID, jobID])
+  res.send('works: ')
+})
+
 module.exports = router;

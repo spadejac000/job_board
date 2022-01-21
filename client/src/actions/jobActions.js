@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL, POST_JOB_REQUEST, POST_JOB_SUCCESS, POST_JOB_FAIL, GET_JOBS_REQUEST, GET_JOBS_SUCCESS, GET_JOBS_FAIL, GET_USER_JOBS_REQUEST, GET_USER_JOBS_SUCCESS, GET_USER_JOBS_FAIL, DELETE_USER_JOB_REQUEST, DELETE_USER_JOB_SUCCESS, DELETE_USER_JOB_FAIL, EDIT_JOB_REQUEST, EDIT_JOB_SUCCESS, EDIT_JOB_FAIL, DELETE_ALL_JOBS_REQUEST, DELETE_ALL_JOBS_SUCCESS, DELETE_ALL_JOBS_FAIL} from '../constants/jobConstants'
+import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL, POST_JOB_REQUEST, POST_JOB_SUCCESS, POST_JOB_FAIL, GET_JOBS_REQUEST, GET_JOBS_SUCCESS, GET_JOBS_FAIL, GET_USER_JOBS_REQUEST, GET_USER_JOBS_SUCCESS, GET_USER_JOBS_FAIL, DELETE_USER_JOB_REQUEST, DELETE_USER_JOB_SUCCESS, DELETE_USER_JOB_FAIL, EDIT_JOB_REQUEST, EDIT_JOB_SUCCESS, EDIT_JOB_FAIL, DELETE_ALL_JOBS_REQUEST, DELETE_ALL_JOBS_SUCCESS, DELETE_ALL_JOBS_FAIL, ADD_JOB_TO_FAVORITES_REQUEST, ADD_JOB_TO_FAVORITES_SUCCESS, ADD_JOB_TO_FAVORITES_FAIL} from '../constants/jobConstants'
 
 export const selectJob = (data) => async (dispatch) => {
   try {
@@ -128,4 +128,26 @@ export const editJob = (body) => async (dispatch) => {
     })
   }
 }
+
+export const addJobToFavorites = (jobID, userID) => async (dispatch) => {
+  try {
+    let body = {jobID, userID}
+    dispatch({type: ADD_JOB_TO_FAVORITES_REQUEST})
+
+    const favoritedJob = await axios.post(`/api/jobs/favorites`, body).then(res => res.data)
+
+    dispatch({
+      type: ADD_JOB_TO_FAVORITES_SUCCESS,
+      payload: null
+      // favoritedJob
+    })
+  } catch (error) {
+    dispatch({
+      type: ADD_JOB_TO_FAVORITES_FAIL, 
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message
+    })
+  }
+}
+
+
 

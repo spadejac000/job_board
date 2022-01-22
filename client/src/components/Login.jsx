@@ -44,21 +44,29 @@ const Login = ({setAuth}) => {
   return (
     <div className="login-form-container">
       <div className="login-brand-container">
-        <img 
-          src="https://cdn.iconscout.com/icon/free/png-256/work-3114473-2598165.png" 
-          className="login-briefcase"
-        />
+        <div>
+          <h1 className="login-brand-title">Job Board</h1>
+          <h3 className="login-brand-slogan">The number one job listing app to help you land your dream career!</h3>
+        </div>
       </div>
-      <div>
-        <Form onSubmit={onSubmitForm} className="container mb-5 card p-5 login-form shadow">
+      <div className="login-form-actual-container">
+        <Form onSubmit={onSubmitForm} className="login-form">
           <h2 className="login-form-title">Login</h2>
-          <hr/>
           <Form.Group>
+            <Form.Label>Email address</Form.Label>
             <Form.Control className="mb-3" type="email" name="email" id="exampleEmail" placeholder="Email" value={email} onChange={e => onChange(e)}/>
           </Form.Group>
           <Form.Group>
+            <Form.Label>Password</Form.Label>
             <Form.Control className="mb-3" type="password" name="password" id="examplePassword" placeholder="Password" value={password} onChange={e => onChange(e)}/>
           </Form.Group>
+          <Form.Check
+            type='checkbox'
+            label={`Remember Password`}
+            id={`disabled-default-checkbox`}
+            className="mb-3"
+          />
+
           <Button type='submit' color="primary" className="mb-3" >Login</Button>
           <div>No account yet? <Link to={'/register'}>Register</Link></div>
         </Form>

@@ -9,7 +9,7 @@ export const lightTheme = {
 export const darkTheme = {
   body: '#343A40', 
   color: 'white',
-  cardBGColor: 'rgb(36, 39, 41)',
+  cardBGColor: '#212529',
   listGroupItemBGColor: 'rgb(36, 39, 41)',
   listGroupItemColor: 'white',
   accordionItemBGColor: 'rgb(36, 39, 41)',
@@ -38,7 +38,9 @@ export const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.color};
   }
 
-  .card {
+  .card,
+  .login-form,
+  .register-form {
     background-color: ${props => props.theme.cardBGColor};
   }
 

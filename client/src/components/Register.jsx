@@ -56,15 +56,14 @@ const Register = ({setAuth}) => {
   return (
     <div className="register-form-container">
       <div className="register-brand-container">
-        <img 
-          src="https://cdn.iconscout.com/icon/free/png-256/work-3114473-2598165.png" 
-          className="register-briefcase"
-        />
+        <div>
+          <h1 className="register-brand-title">Job Board</h1>
+          <h3 className="register-brand-slogan">The number one job listing app to help you land your dream career!</h3>
+        </div>
       </div>
-      <div>
-        <Form onSubmit={onSubmitForm} className="container mb-5 card p-5 register-form shadow">
+      <div className="register-form-actual-container">
+        <Form onSubmit={onSubmitForm} className="register-form">
           <h2 className="register-form-title">Register</h2>
-          <hr/>
           <Form.Group>
             <Form.Control className="mb-3" type="text" name="firstName" id="first-name-register" placeholder="First name" value={firstName} onChange={e => onChange(e)}/>
           </Form.Group>

@@ -35,9 +35,9 @@ const Header = ({isAuthenticated, setAuth}) => {
 
     isAuthenticated ? 
 
-      <Navbar bg="dark" variant="dark" expand="lg" className="mb-5">
+      <Navbar bg="light" variant="light" expand="lg" className="">
         <Container>
-          <Navbar.Brand as={Link} to="/">Job Board</Navbar.Brand>
+          <Navbar.Brand id="navbar-brand-logo" as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -130,9 +130,9 @@ const Header = ({isAuthenticated, setAuth}) => {
 
     :
 
-      <Navbar bg="dark" variant="dark" expand="lg" className="mb-5">
+      <Navbar variant="light" expand="lg" className="">
         <Container>
-          <Navbar.Brand as={Link} to="/">Job Board</Navbar.Brand>
+          <Navbar.Brand id="navbar-brand-logo" as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav

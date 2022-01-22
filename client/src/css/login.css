@@ -1,18 +1,46 @@
 .login-form-container {
   height: 90vh;
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
 }
 
-.login-form > div > input {
-  min-width: 20rem;
+.login-brand-container {
+  flex-grow: 1;
+  flex-basis: 0;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.login-brand-title {
+  font-weight: bolder;
+  font-size: 5rem;
+  color: white;
+}
+
+.login-brand-slogan {
+  color: white;
+}
+
+.login-brand-container > div {
+  padding: 0rem 5rem 5rem 5rem;
+}
+
+.login-form-actual-container {
+  height: 100%;
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  background: white;
+}
+
+.login-form {
+  flex-grow: 1;
+  padding: 0 5rem 0 5rem;
 }
 
 .login-form-title {
-  margin-bottom: 0px;
-}
-
-.login-briefcase {
-  width: 150%;
+  margin-bottom: 3rem;
 }

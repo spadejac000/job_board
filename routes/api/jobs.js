@@ -80,9 +80,31 @@ router.put('/', async (req, res) => {
 })
 
 router.post('/favorites', async (req, res) => {
-  const {jobID, userID} = req.body
-  const newFavJob = await pool.query("INSERT INTO favorite_jobs(user_id, job_id) VALUES($1, $2);", [userID, jobID])
-  res.send('works: ')
+  try {
+    const {jobID, userID} = req.body
+    const newFavJob = await pool.query("INSERT INTO favorite_jobs(user_id, job_id) VALUES($1, $2);", [userID, jobID])
+    res.send('works')
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+router.get('/favorites', async (req, res) => {
+  try {
+    let favoriteUserJobs = await pool.query("SELECT * FROM favorite_jobs WHERE user_id = $1;", [req.query.user_id]);
+    let favorites = []
+
+    for(let i = 0; i < favoriteUserJobs.rows.length; i++) {
+      let job = await pool.query("SELECT * FROM jobs WHERE job_id = $1;", [favoriteUserJobs.rows[i].job_id])
+      favorites.push(job.rows[0])
+    }
+    
+    res.json(favorites)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
 })
 
 module.exports = router;

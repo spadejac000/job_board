@@ -1,0 +1,20 @@
+.favorite-jobs-title {
+  margin-bottom: 3rem;
+}
+
+.favorite-job-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 0 1rem 0;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.favorite-job-container ~ .favorite-job-container {
+  border-top: none;
+}
+
+.fav-job-apply-del-container > * {
+  margin-left: 1rem;
+}

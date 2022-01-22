@@ -1,5 +1,5 @@
 import {useEffect} from 'react'
-import {Navbar, Container, Nav, Button, NavDropdown} from 'react-bootstrap';
+import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'

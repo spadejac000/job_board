@@ -14,6 +14,7 @@ import Settings from './components/Settings';
 import UserJobs from './components/UserJobs';
 import NotFound from './components/NotFound';
 import DynamicRoutes from './components/DynamicRoutes';
+import FavoriteJobs from './components/FavoriteJobs';
 import {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
 import {useSelector} from 'react-redux'
@@ -64,6 +65,7 @@ const App = () => {
           <Route exact path="/jobs-created" element={<UserJobs isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/messages" element={<Messages isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/settings" element={<Settings setAuth={setAuth} isAuthenticated={isAuthenticated}/>}/>
+          <Route exact path="/favorite-jobs" element={<FavoriteJobs isAuthenticated={isAuthenticated}/>}/>
           <Route path="/dynamic/:id" element={<DynamicRoutes/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>

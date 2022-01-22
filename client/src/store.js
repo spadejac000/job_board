@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {selectedJobReducer, getJobsReducer, getUserJobsReducer, editJobReducer, deleteAllJobsReducer} from './reducers/jobReducer';
+import {selectedJobReducer, getJobsReducer, getUserJobsReducer, editJobReducer, deleteAllJobsReducer, getFavoriteJobsReducer} from './reducers/jobReducer';
 import {userReducer, authenticateReducer} from './reducers/userReducer';
 import {themeReducer} from './reducers/themeReducer';
 import { persistStore, persistReducer } from 'redux-persist'
@@ -11,6 +11,7 @@ const rootReducer = combineReducers({
   selectedJob: selectedJobReducer,
   getJobs: getJobsReducer,
   getUserJobs: getUserJobsReducer,
+  getFavoriteJobs: getFavoriteJobsReducer,
   editJob: editJobReducer,
   deleteAllJobs: deleteAllJobsReducer,
   user: userReducer,

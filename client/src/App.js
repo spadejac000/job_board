@@ -2,7 +2,8 @@ import {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
+import {useLocation} from 'react-router'
 import Dashboard from './components/Dashboard'
 import Login from './components/Login'
 import Register from './components/Register'
@@ -18,9 +19,12 @@ import FavoriteJobs from './components/FavoriteJobs';
 import {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
 import {useSelector} from 'react-redux'
-import './App.css';
+import './App.css'
+
 
 const App = () => {
+
+  const location = useLocation()
 
   toast.configure()
 
@@ -53,9 +57,9 @@ const App = () => {
   }, [isAuthenticated])
 
   return (
-    <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-      <GlobalStyles/>
-      <Router>
+    <div className={location.pathname === '/' ? "" : isAuthenticated ? "" : 'app-root'}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <GlobalStyles/>
         <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
         <Routes>
           <Route exact path="/login" element={!isAuthenticated ? <Login setAuth={setAuth}/> : <Navigate to="/"/>}/>
@@ -70,8 +74,8 @@ const App = () => {
           <Route path="*" element={<NotFound/>} />
         </Routes>
         <Footer/>
-      </Router>
-    </ThemeProvider>
+      </ThemeProvider>
+    </div>
   );
 }
 

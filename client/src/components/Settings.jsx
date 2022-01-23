@@ -51,7 +51,7 @@ const Settings = ({setAuth, isAuthenticated}) => {
 
   return (
     isAuthenticated ?
-    <div className="container">
+    <div className="container settings-page">
       <h1>Settings</h1>
       <Card className="theme-mode-container">
         <h3 className="theme-mode-title">Light / Dark Mode</h3>

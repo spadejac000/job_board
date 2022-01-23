@@ -5,11 +5,12 @@ export const lightTheme = {
   color: 'black',
   cardBGColor: 'white',
   loginRegisterBackgroundColor: 'white',
-  navbarBrandLogoColor: 'white'
+  navbarBrandLogoColor: 'white',
+  loggedInNavBorder: '1px solid #e9ecef'
 }
 
 export const darkTheme = {
-  body: '#343A40', 
+  body: '#343A40',
   color: 'white',
   cardBGColor: '#212529',
   listGroupItemBGColor: 'rgb(36, 39, 41)',
@@ -34,7 +35,10 @@ export const darkTheme = {
   circleBorder: '1px solid white',
   loginRegisterBackgroundColor: '#343A40',
   navbarBrandLogoColor: 'white',
-  linksColor: 'white'
+  linksColor: 'white',
+  loggedInNavBGColor: '#343A40',
+  loggedInNavBorder: '1px solid #ffffff1a',
+  dashNavBrandLogoColor: 'white'
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -139,12 +143,21 @@ export const GlobalStyles = createGlobalStyle`
     background: ${props => props.theme.loginRegisterBackgroundColor};
   }
 
-  #navbar-brand-logo {
-    color: ${props => props.theme.navbarBrandLogoColor};
+  .navbar-brand-logo {
+    color: ${props => props.theme.navbarBrandLogoColor}!important;
+  }
+
+  .dashboard-nav-brand-logo {
+    color: ${props => props.theme.dashNavBrandLogoColor}!important;
   }
 
   #nav-bar-links {
-    color: ${props => props.theme.linksColor}
+    color: ${props => props.theme.linksColor};
+  }
+
+  .logged-in-navbar {
+    border-bottom: ${props => props.theme.loggedInNavBorder};
+    background: ${props => props.theme.loggedInNavBGColor};
   }
 
 `

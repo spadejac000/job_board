@@ -4,13 +4,20 @@ html {
 
 body {
   height: 100%;
-  background-image: url('https://images.unsplash.com/photo-1579547621113-e4bb2a19bdd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGFic3RyYWN0JTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60');
-  background-repeat: no-repeat;
-  background-size: 50%;
 }
 
 #root {
+  height: 100%;
+}
+
+#root > div {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+}
+
+.app-root {
+  background-image: url('https://images.unsplash.com/photo-1579547621113-e4bb2a19bdd6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGFic3RyYWN0JTIwYmFja2dyb3VuZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60');
+  background-repeat: no-repeat;
+  background-size: 50%;
 }

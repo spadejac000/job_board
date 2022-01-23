@@ -38,7 +38,8 @@ export const darkTheme = {
   linksColor: 'white',
   loggedInNavBGColor: '#343A40',
   loggedInNavBorder: '1px solid #ffffff1a',
-  dashNavBrandLogoColor: 'white'
+  dashNavBrandLogoColor: 'white',
+  loggedInNavColor: 'white!important'
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -155,9 +156,16 @@ export const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.linksColor};
   }
 
-  .logged-in-navbar {
+  .logged-in-navbar,
+  .logged-out-dash-nav {
     border-bottom: ${props => props.theme.loggedInNavBorder};
     background: ${props => props.theme.loggedInNavBGColor};
+  }
+
+  .logged-in-nav-brand-logo,
+  .navigation-bar-icon-container,
+  a {
+    color: ${props => props.theme.loggedInNavColor};
   }
 
 `

@@ -39,7 +39,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
       <Navbar expand="lg" className="logged-in-navbar mb-5">
         <Container>
-          <Navbar.Brand as={Link} to="/">Job Board</Navbar.Brand>
+          <Navbar.Brand className="logged-in-nav-brand-logo" as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -131,7 +131,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
     :
 
-      <Navbar expand="lg" className={location.pathname === '/' ?'mb-5' : ''}>
+      <Navbar expand="lg" className={location.pathname === '/' ?'mb-5 logged-out-dash-nav' : ''}>
         <Container>
           <Navbar.Brand className={location.pathname === '/' ? 'dashboard-nav-brand-logo' : 'navbar-brand-logo'} as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />

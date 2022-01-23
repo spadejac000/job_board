@@ -3,7 +3,9 @@ import {createGlobalStyle} from 'styled-components'
 export const lightTheme = {
   body: 'white',
   color: 'black',
-  cardBGColor: 'white'
+  cardBGColor: 'white',
+  loginRegisterBackgroundColor: 'white',
+  navbarBrandLogoColor: 'white'
 }
 
 export const darkTheme = {
@@ -29,7 +31,10 @@ export const darkTheme = {
   paginationColor: '#0d6efd',
   paginationBorderColor: '#343a40',
   webkitBoxShadow: '0 0 0px 1000px #3b3b3b inset',
-  circleBorder: '1px solid white'
+  circleBorder: '1px solid white',
+  loginRegisterBackgroundColor: '#343A40',
+  navbarBrandLogoColor: 'white',
+  linksColor: 'white'
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -38,9 +43,7 @@ export const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.color};
   }
 
-  .card,
-  .login-form,
-  .register-form {
+  .card {
     background-color: ${props => props.theme.cardBGColor};
   }
 
@@ -127,6 +130,21 @@ export const GlobalStyles = createGlobalStyle`
   .save-ban-col > div,
   .exit-selected-job-col > div {
     border: ${props => props.theme.circleBorder};
+  }
+
+  .login-form-actual-container,
+  .register-form-actual-container,
+  .login-form,
+  .register-form {
+    background: ${props => props.theme.loginRegisterBackgroundColor};
+  }
+
+  #navbar-brand-logo {
+    color: ${props => props.theme.navbarBrandLogoColor};
+  }
+
+  #nav-bar-links {
+    color: ${props => props.theme.linksColor}
   }
 
 `

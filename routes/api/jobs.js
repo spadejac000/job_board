@@ -24,14 +24,14 @@ router.post('/post-job', async (req, res) => {
 // GET all jobs
 router.get('/', async (req, res) => {
   try {
-    const pageSize = 1;
+    const pageSize = 2;
     const page = Number(req.query.pageNumber) || 1
 
     console.log('request query: ', req.query)
 
     const keyword = Object.keys(req.query)[0] !== 'pageNumber' ?
       Object.keys(req.query)[0]
-    : {}
+    : ''
 
     console.log('here is the keyword on the backend: ', Object.keys(req.query)[0])
 

@@ -41,6 +41,8 @@ export const getJobs = (keyword = '', pageNumber = '') => async (dispatch) => {
 
     let data = await axios.get(`/api/jobs?${keyword.trim()}&pageNumber=${pageNumber}`).then(res => res.data)
 
+    console.log('data: ', data)
+
     dispatch({
       type: GET_JOBS_SUCCESS,
       payload: data

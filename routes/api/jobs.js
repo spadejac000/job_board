@@ -37,8 +37,9 @@ router.get('/', async (req, res) => {
 
     let theJobs = await pool.query('SELECT * FROM jobs');
     let totalJobs = theJobs.rows.length
-    const count = await (await pool.query('SELECT * FROM jobs WHERE job_title = $1;', [keyword])).rows.length
-    const jobs = await (await pool.query('SELECT * FROM jobs WHERE job_title = $1 LIMIT $2 OFFSET $3;', [keyword, pageSize, (pageSize * (page - 1))])).rows
+    const count = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2;', [`%${keyword}%`, `%${keyword}%`])).rows.length
+    const jobs = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2 LIMIT $3 OFFSET $4;', [`%${keyword}%`, `%${keyword}%`, pageSize, (pageSize * (page - 1))])).rows
+    console.log('jobs in backend:: ', jobs.length, count)
     res.json({jobs, page, pages: Math.ceil(count / pageSize), totalJobs, count})
   } catch (error) {
     console.error(error.message)

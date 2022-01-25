@@ -24,8 +24,19 @@ router.post('/post-job', async (req, res) => {
 // GET all jobs
 router.get('/', async (req, res) => {
   try {
-    let jobs = await pool.query('SELECT * FROM jobs');
-    res.json(jobs.rows)
+    const pageSize = 2;
+    const page = Number(req.query.pageNumber) || 1
+
+    const keyword = ''
+    // Object.keys(req.query)[0] !== 'pageNumber' ?
+    //   'hello'
+    // : {}
+
+    let theJobs = await pool.query('SELECT * FROM jobs');
+    let totalJobs = theJobs.rows.length
+    const count = await (await pool.query('SELECT * FROM jobs WHERE job_title = $1;', [keyword])).rows.length
+    const jobs = await (await pool.query('SELECT * FROM jobs WHERE job_title = $1 LIMIT $2 OFFSET $3;', [keyword, pageSize, (pageSize * (page - 1))])).rows
+    res.json({jobs, page, pages: Math.ceil(count / pageSize), totalJobs, count})
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')

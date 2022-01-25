@@ -1,21 +1,14 @@
 import {Form, FormControl, Button, Container, InputGroup, Dropdown} from 'react-bootstrap';
 import '../css/filters.css'
 import {FaSearch, FaMapPin} from 'react-icons/fa'
+import './WhatSearch'
+import WhatSearch from './WhatSearch';
 
 const Filters = () => {
   return (
     <Container>
       <div className="search-row mb-5">
-        <Form className="d-flex input-group navbar-search-form">
-          <InputGroup.Text>What</InputGroup.Text>
-          <FormControl
-            type="search"
-            placeholder="Search"
-            className="navbar-search-input"
-            aria-label="Search"
-          />
-          <InputGroup.Text><FaSearch/></InputGroup.Text>
-        </Form>
+        <WhatSearch/>
         <Form className="d-flex input-group navbar-search-form">
           <InputGroup.Text>Where</InputGroup.Text>
           <FormControl

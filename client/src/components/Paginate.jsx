@@ -1,24 +1,23 @@
-// import React from 'react'
+import React from 'react'
 import {Pagination} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+import '../css/paginate.css'
 
-const Paginate = () => {
-  return (
-    <Pagination className="mb-5 mt-5" style={{justifyContent: 'center'}}>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
-
-      <Pagination.Item>{10}</Pagination.Item>
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-      <Pagination.Item>{14}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item>
-      <Pagination.Next />
-      <Pagination.Last />
+const Paginate = ({pages, page, keyword = ''}) => {
+  console.log('pages: ', pages)
+  return pages > 1 && (
+    <Pagination
+      className="pagination-bar flex-wrap"
+    >
+      {[...Array(pages).keys()].map(x => (
+        <Link
+          className="pagination-link"
+          key={x + 1} 
+          to={keyword ? `/search/${keyword}/page/${x+1}` : `/page/${x+1}`}
+        >
+          <div className="pagination-box" active={x+1 === page}>{x+1}</div>
+        </Link>
+      ))}
     </Pagination>
   )
 }

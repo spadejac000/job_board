@@ -39,7 +39,14 @@ export const getJobsReducer = (state = {jobs: []}, action) => {
     case GET_JOBS_REQUEST:
       return {loading: true, state}
     case GET_JOBS_SUCCESS:
-      return {loading: false, jobs: action.payload}
+      return {
+        loading: false, 
+        jobs: action.payload, 
+        pages: action.payload.pages,
+        page: action.payload.page,
+        totalJobs: action.payload.totalJobs,
+        count: action.payload.count,
+      }
     case GET_JOBS_FAIL:
       return {loading: false, error: action.payload}
     default:

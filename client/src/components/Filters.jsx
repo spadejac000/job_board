@@ -22,23 +22,23 @@ const Filters = () => {
   return (
     <Container>
       <div className="mb-5">
-        <Form onSubmit={submitHandler} className="search-row d-flex input-group navbar-search-form">
-          <div className="d-flex">
+        <Form onSubmit={submitHandler} className="search-row d-flex navbar-search-form">
+          <div className="d-flex input-group">
             <InputGroup.Text>What</InputGroup.Text>
             <FormControl
             type="search"
-            placeholder="Search"
+            placeholder="Search company name or job title..."
             className="navbar-search-input"
             aria-label="Search"
             onChange={event => {setkeyword(event.target.value)}}
             />
             <InputGroup.Text><FaSearch/></InputGroup.Text>
           </div>
-          <div className="d-flex">
+          <div className="d-flex input-group">
             <InputGroup.Text>Where</InputGroup.Text>
             <FormControl
             type="search"
-            placeholder="Search"
+            placeholder="Search by location..."
             className="navbar-search-input"
             aria-label="Search"
             />

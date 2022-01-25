@@ -30,8 +30,10 @@ router.get('/', async (req, res) => {
     console.log('request query: ', req.query)
 
     const keyword = Object.keys(req.query)[0] !== 'pageNumber' ?
-      'hello'
+      Object.keys(req.query)[0]
     : {}
+
+    console.log('here is the keyword on the backend: ', Object.keys(req.query)[0])
 
     let theJobs = await pool.query('SELECT * FROM jobs');
     let totalJobs = theJobs.rows.length

@@ -157,8 +157,6 @@ export const getFavoriteJobs = (user_id) => async (dispatch) => {
       user_id: user_id
     }}).then(res => res.data)
 
-    console.log('data in action: ', data)
-
     dispatch({
       type: GET_FAVORITE_JOBS_SUCCESS,
       payload: data

@@ -1,9 +1,14 @@
 .search-row {
   display: flex;
+  
 }
 
 .search-row > * {
   margin-right: 1rem;
+}
+
+.search-row > div {
+  flex-grow: 1;
 }
 
 .filter-row {

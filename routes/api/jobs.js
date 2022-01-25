@@ -24,13 +24,14 @@ router.post('/post-job', async (req, res) => {
 // GET all jobs
 router.get('/', async (req, res) => {
   try {
-    const pageSize = 2;
+    const pageSize = 1;
     const page = Number(req.query.pageNumber) || 1
 
-    const keyword = ''
-    // Object.keys(req.query)[0] !== 'pageNumber' ?
-    //   'hello'
-    // : {}
+    console.log('request query: ', req.query)
+
+    const keyword = Object.keys(req.query)[0] !== 'pageNumber' ?
+      'hello'
+    : {}
 
     let theJobs = await pool.query('SELECT * FROM jobs');
     let totalJobs = theJobs.rows.length

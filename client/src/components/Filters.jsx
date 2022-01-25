@@ -1,25 +1,53 @@
+import {useState} from 'react'
 import {Form, FormControl, Button, Container, InputGroup, Dropdown} from 'react-bootstrap';
 import '../css/filters.css'
 import {FaSearch, FaMapPin} from 'react-icons/fa'
-import './WhatSearch'
-import WhatSearch from './WhatSearch';
+import { useNavigate } from 'react-router-dom';
 
 const Filters = () => {
+
+  let navigate = useNavigate()
+
+  const [keyword, setkeyword] = useState('')
+
+  const submitHandler = (e) => {
+    e.preventDefault()
+    if(keyword.trim()) {
+      navigate(`/search/${keyword}`)
+    } else {
+      navigate('/')
+    }
+  }
+
   return (
     <Container>
-      <div className="search-row mb-5">
-        <WhatSearch/>
-        <Form className="d-flex input-group navbar-search-form">
-          <InputGroup.Text>Where</InputGroup.Text>
-          <FormControl
+      <div className="mb-5">
+        <Form onSubmit={submitHandler} className="search-row d-flex input-group navbar-search-form">
+          <div className="d-flex">
+            <InputGroup.Text>What</InputGroup.Text>
+            <FormControl
             type="search"
             placeholder="Search"
             className="navbar-search-input"
             aria-label="Search"
-          />
-          <InputGroup.Text><FaMapPin/></InputGroup.Text>
+            onChange={event => {setkeyword(event.target.value)}}
+            />
+            <InputGroup.Text><FaSearch/></InputGroup.Text>
+          </div>
+          <div className="d-flex">
+            <InputGroup.Text>Where</InputGroup.Text>
+            <FormControl
+            type="search"
+            placeholder="Search"
+            className="navbar-search-input"
+            aria-label="Search"
+            />
+            <InputGroup.Text><FaMapPin/></InputGroup.Text>
+          </div>
+          <div>
+            <Button type="submit" variant="primary">Search</Button>
+          </div>
         </Form>
-        <Button variant="primary">Search</Button>
       </div>
 
       <div className="filter-row">

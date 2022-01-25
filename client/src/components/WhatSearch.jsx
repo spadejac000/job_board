@@ -19,16 +19,17 @@ const WhatSearch = () => {
   }
 
   return (
-    <Form onSubmit={submitHandler} className="d-flex input-group navbar-search-form">
+    <div onSubmit={submitHandler} className="d-flex input-group navbar-search-form">
       <InputGroup.Text>What</InputGroup.Text>
       <FormControl
         type="search"
         placeholder="Search"
         className="navbar-search-input"
         aria-label="Search"
+        onChange={event => {setkeyword(event.target.value)}}
       />
       <InputGroup.Text><FaSearch/></InputGroup.Text>
-    </Form>
+    </div>
   )
 }
 

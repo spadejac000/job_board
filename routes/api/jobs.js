@@ -33,8 +33,6 @@ router.get('/', async (req, res) => {
       Object.keys(req.query)[0]
     : ''
 
-    console.log('here is the keyword on the backend: ', Object.keys(req.query)[0])
-
     let theJobs = await pool.query('SELECT * FROM jobs');
     let totalJobs = theJobs.rows.length
     const count = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2;', [`%${keyword}%`, `%${keyword}%`])).rows.length

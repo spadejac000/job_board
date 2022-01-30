@@ -1,10 +1,14 @@
 import {useState} from 'react'
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button, InputGroup} from 'react-bootstrap'
 import {Link} from 'react-router-dom';
 import '../css/register.css';
 import {toast} from 'react-toastify'
+import {FaEye, FaEyeSlash} from 'react-icons/fa'
 
 const Register = ({setAuth}) => {
+
+  const [passwordType, setPasswordType] = useState('password')
+  const [showPassword, setShowPassword] = useState(false)
 
   const [inputs, setInputs] = useState({
     firstName: "",
@@ -53,6 +57,11 @@ const Register = ({setAuth}) => {
     }
   }
 
+  const handlePasswordVisibility = () => {
+    passwordType === 'password' ? setPasswordType('text') : setPasswordType('password')
+    showPassword === false ? setShowPassword(true) : setShowPassword(false)
+  }
+
   return (
     <div className="register-form-container">
       <div className="register-brand-container">
@@ -73,12 +82,24 @@ const Register = ({setAuth}) => {
           <Form.Group>
             <Form.Control className="mb-3" type="email" name="email" id="email-register" placeholder="Email" value={email} onChange={e => onChange(e)} />
           </Form.Group>
-          <Form.Group>
-            <Form.Control className="mb-3" type="password" name="password" id="password-register" placeholder="Password" value={password} onChange={e => onChange(e)}/>
-          </Form.Group>
-          <Form.Group>
-            <Form.Control className="mb-3" type="password" name="confirmPassword" id="confirm-password-register" placeholder="Confirm password" value={confirmPassword} onChange={e => onChange(e)}/>
-          </Form.Group>
+          <InputGroup>
+            <Form.Control className="mb-3" type={passwordType} name="password" id="password-register" placeholder="Password" value={password} onChange={e => onChange(e)}/>
+            <InputGroup.Text 
+              onClick={handlePasswordVisibility} 
+              className="mb-3 register-password-eye-box"
+            >
+              {showPassword === false ? <FaEye/> : <FaEyeSlash/>}
+            </InputGroup.Text>
+          </InputGroup>
+          <InputGroup>
+            <Form.Control className="mb-3" type={passwordType} name="confirmPassword" id="confirm-password-register" placeholder="Confirm password" value={confirmPassword} onChange={e => onChange(e)}/>
+            <InputGroup.Text 
+              onClick={handlePasswordVisibility} 
+              className="mb-3 register-password-eye-box"
+            >
+              {showPassword === false ? <FaEye/> : <FaEyeSlash/>}
+            </InputGroup.Text>
+          </InputGroup>
           <Button type="submit" className="mb-3 btn-primary">Register</Button>
           <div>Have an account? <Link to={'/login'}>Login</Link></div>
         </Form>

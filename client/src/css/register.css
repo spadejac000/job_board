@@ -44,3 +44,8 @@
 .register-form-title {
   margin-bottom: 3rem;
 }
+
+.register-password-eye-box {
+  margin-left: 0px;
+  cursor: pointer;
+}

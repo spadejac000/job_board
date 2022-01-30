@@ -43,3 +43,8 @@
 .login-form-title {
   margin-bottom: 3rem;
 }
+
+.login-password-eye-box {
+  margin-left: 0px;
+  cursor: pointer;
+}

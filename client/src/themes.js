@@ -17,9 +17,9 @@ export const darkTheme = {
   listGroupItemColor: 'white',
   accordionItemBGColor: 'rgb(36, 39, 41)',
   inputBGColor: '#ffffff1a!important',
-  inputGroupTextBGColor: 'rgb(36, 39, 41)',
+  inputGroupTextBGColor: '#ffffff1a',
   inputGroupTextColor: 'white',
-  inputGroupTextBorder: 'rgb(36, 39, 41)',
+  inputGroupTextBorder: 'none',
   inputColor: 'white!important',
   inputBorder: '#ffffff1a!important',
   dropdownMenuBGColor: 'rgb(36, 39, 41)',
@@ -82,7 +82,7 @@ export const GlobalStyles = createGlobalStyle`
   .input-group-text {
     background-color: ${props => props.theme.inputGroupTextBGColor};
     color: ${props => props.theme.inputGroupTextColor};
-    border-color: ${props => props.theme.inputGroupTextBorder};
+    border: ${props => props.theme.inputGroupTextBorder};
   }
 
   input, select, textarea {

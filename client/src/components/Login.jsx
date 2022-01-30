@@ -1,8 +1,9 @@
 import {useState} from 'react'
-import {Form, Button} from 'react-bootstrap'
+import {Form, Button, InputGroup} from 'react-bootstrap'
 import '../css/login.css';
 import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify'
+import {FaEye, FaEyeSlash} from 'react-icons/fa'
 
 const Login = ({setAuth}) => {
 
@@ -10,6 +11,9 @@ const Login = ({setAuth}) => {
     email: "",
     password: ""
   })
+
+  const [passwordType, setPasswordType] = useState('password')
+  const [showPassword, setShowPassword] = useState(false)
 
   const {email, password} = inputs
 
@@ -41,6 +45,11 @@ const Login = ({setAuth}) => {
     }
   }
 
+  const handlePasswordVisibility = () => {
+    passwordType === 'password' ? setPasswordType('text') : setPasswordType('password')
+    showPassword === false ? setShowPassword(true) : setShowPassword(false)
+  }
+
   return (
     <div className="login-form-container">
       <div className="login-brand-container">
@@ -56,10 +65,16 @@ const Login = ({setAuth}) => {
             <Form.Label>Email address</Form.Label>
             <Form.Control className="mb-3" type="email" name="email" id="exampleEmail" placeholder="Email" value={email} onChange={e => onChange(e)}/>
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <Form.Control className="mb-3" type="password" name="password" id="examplePassword" placeholder="Password" value={password} onChange={e => onChange(e)}/>
-          </Form.Group>
+          <Form.Label>Password</Form.Label>
+          <InputGroup>
+            <Form.Control className="mb-3" type={passwordType} name="password" id="" placeholder="Password" value={password} onChange={e => onChange(e)}/>
+            <InputGroup.Text 
+              onClick={handlePasswordVisibility} 
+              className="mb-3 login-password-eye-box"
+            >
+              {showPassword === false ? <FaEye/> : <FaEyeSlash/>}
+            </InputGroup.Text>
+          </InputGroup>
           <Form.Check
             type='checkbox'
             label={`Remember Password`}

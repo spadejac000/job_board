@@ -27,7 +27,7 @@ const Dashboard = () => {
     state.getJobs
   )
 
-  const {loading, error, jobs, page, pages, totalJobs, count} = jobsState;
+  const {loading, error, jobs, page, pages, count} = jobsState;
 
   return (
     <>

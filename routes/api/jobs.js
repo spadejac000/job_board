@@ -21,7 +21,7 @@ router.post('/post-job', async (req, res) => {
   }
 })
 
-// GET all jobs
+// GET paginated jobs
 router.get('/', async (req, res) => {
   try {
     const pageSize = 2;

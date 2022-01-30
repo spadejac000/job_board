@@ -11,6 +11,10 @@ const Job = ({job}) => {
   const dispatch = useDispatch()
 
   let today = new Date();
+  let datePosted = new Date(date_posted.replace(' ', 'T'));
+  let timeDiff = today.getTime() - datePosted.getTime()
+  let timeDivider = 1000 * 60 * 60 * 24;
+  let datePostedInDays = Math.floor(timeDiff / timeDivider)
 
   let userID = useSelector((state) =>
     state.user.userID
@@ -29,7 +33,7 @@ const Job = ({job}) => {
           <h6>Company Name</h6>
           <h6>{work_address} {city}, {_state}, {zip}</h6>
           <Badge className="salary-badge" bg="primary">{salary}</Badge>
-          <p>Posted {date_posted} days ago</p>
+          <p>Posted {datePostedInDays === 0 ? 'today' : datePostedInDays === 1 ? 'yesterday' : `${datePostedInDays} days ago`}</p>
         </Col>
         <Col md={2} className="save-ban-col">
           <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>

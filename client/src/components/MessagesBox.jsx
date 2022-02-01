@@ -4,8 +4,9 @@ import {FaComments} from 'react-icons/fa'
 import {Accordion, ListGroup} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
-const MessagesBox = () => {
-  return (
+const MessagesBox = ({isAuthenticated}) => {
+
+  return (isAuthenticated ? (
     <Accordion className="messages-box">
       <Accordion.Item eventKey="0">
         <Accordion.Header className="messages-box-header"><h5 className="messages-box-title"><FaComments/> Messages</h5></Accordion.Header>
@@ -20,6 +21,7 @@ const MessagesBox = () => {
       </Accordion.Item>
     </Accordion>
   )
+  : null)
 }
 
 export default MessagesBox

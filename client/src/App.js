@@ -65,7 +65,7 @@ const App = () => {
         <Routes>
           <Route exact path="/login" element={!isAuthenticated ? <Login setAuth={setAuth}/> : <Navigate to="/"/>}/>
           <Route exact path="/register" element={!isAuthenticated ? <Register setAuth={setAuth}/> : <Navigate to="/login"/>}/>
-          <Route exact path="/" element={<Dashboard/>}/>
+          <Route exact path="/" element={<Dashboard  isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/post-job" element={<PostJob isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/jobs-created" element={<UserJobs isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/messages" element={<Messages isAuthenticated={isAuthenticated}/>}/>

@@ -12,7 +12,8 @@ import {useDispatch, useSelector} from 'react-redux'
 import {getJobs} from '../actions/jobActions'
 import {useParams} from 'react-router-dom'
 
-const Dashboard = () => {
+const Dashboard = ({isAuthenticated}) => {
+  console.log('is: ', isAuthenticated)
 
   const dispatch = useDispatch();
   const params = useParams()
@@ -55,7 +56,7 @@ const Dashboard = () => {
         </Row>
         <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''}/>
       </Container>
-      <MessagesBox/>
+      <MessagesBox isAuthenticated={isAuthenticated}/>
     </>
   )
 }

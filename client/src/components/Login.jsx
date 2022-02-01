@@ -7,9 +7,10 @@ import {FaEye, FaEyeSlash} from 'react-icons/fa'
 
 const Login = ({setAuth}) => {
 
+  const [rememberUser, setRememberUser] = useState(localStorage.getItem('rememberUser') === 'true' ? true : false)
   const [inputs, setInputs] = useState({
-    email: "",
-    password: ""
+    email: localStorage.getItem('email'),
+    password: localStorage.getItem('password')
   })
 
   const [passwordType, setPasswordType] = useState('password')
@@ -19,6 +20,20 @@ const Login = ({setAuth}) => {
 
   const onChange = (e) => {
     setInputs({...inputs, [e.target.name]: e.target.value})
+  }
+
+  const onChangeRememberUser = async (e) => {
+    localStorage.setItem('rememberUser', e.target.checked)
+    setRememberUser(e.target.checked)
+    await setRememberUser(!rememberUser)
+    if(!rememberUser) {
+      setInputs({...inputs, [e.target.name]: localStorage.getItem(e.target.name)})
+      localStorage.setItem('email', email)
+      localStorage.setItem('password', password)
+    } else {
+      localStorage.setItem('email', '')
+      localStorage.setItem('password', '')
+    }
   }
 
   const onSubmitForm = async (e) => {
@@ -34,7 +49,6 @@ const Login = ({setAuth}) => {
       if(parseResponse.token) {
         localStorage.setItem("token", parseResponse.token)
         setAuth(true)
-        toast.success("Logged in successfully!")
       } else {
         setAuth(false)
         toast.error(parseResponse)
@@ -76,13 +90,17 @@ const Login = ({setAuth}) => {
             </InputGroup.Text>
           </InputGroup>
           <Form.Check
+            checked={!!rememberUser}
             type='checkbox'
-            label={`Remember Password`}
-            id={`disabled-default-checkbox`}
+            label={`Remember Me`}
             className="mb-3"
+            onChange={e => onChangeRememberUser(e)}
           />
 
           <Button type='submit' color="primary" className="mb-3" >Login</Button>
+          <div className="mb-3">
+            <Link to='/forgot-password'>Forgot password?</Link>
+          </div> 
           <div>No account yet? <Link to={'/register'}>Register</Link></div>
         </Form>
       </div>

@@ -18,3 +18,7 @@
 .fav-job-apply-del-container > * {
   margin-left: 1rem;
 }
+
+.del-fav-job-btn {
+  cursor: pointer;
+}

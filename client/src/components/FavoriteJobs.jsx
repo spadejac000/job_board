@@ -6,6 +6,7 @@ import AlertMessage from './AlertMessage';
 import {Container, Button} from 'react-bootstrap'
 import {FaTimes} from 'react-icons/fa'
 import '../css/favorite-jobs.css'
+import {deleteFavoriteJob} from '../actions/jobActions'
 
 const FavoriteJobs = ({isAuthenticated}) => {
 
@@ -22,6 +23,12 @@ const FavoriteJobs = ({isAuthenticated}) => {
   const favoriteJobsState = useSelector(state => state.getFavoriteJobs)
 
   const {loadingFavoriteJobs, errorFavoriteJobs, favoriteJobs} = favoriteJobsState;
+
+  const handleDeleteFavoriteJob = (e, jobID) => {
+    e.preventDefault();
+    dispatch(deleteFavoriteJob(userID, jobID))
+    dispatch(getFavoriteJobs(userID))
+  }
 
   return (
     isAuthenticated ?
@@ -41,7 +48,7 @@ const FavoriteJobs = ({isAuthenticated}) => {
             </div>
             <div className="fav-job-apply-del-container">
               <Button>Apply</Button>
-              <FaTimes size={25}/>
+              <FaTimes className="del-fav-job-btn" onClick={(e) => handleDeleteFavoriteJob(e, favoriteJob.job_id)} size={25}/>
             </div>
           </div>
       ))}

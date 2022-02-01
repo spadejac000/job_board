@@ -3,7 +3,6 @@ import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'
-import {toast } from 'react-toastify';
 import {FaUser, FaComment, FaCog, FaChevronRight, FaBriefcase, FaThumbtack, FaList, FaHeart} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap'
@@ -30,7 +29,6 @@ const Header = ({isAuthenticated, setAuth}) => {
     e.preventDefault()
     localStorage.removeItem('token')
     setAuth(false)
-    toast.success("Logged out successfully!")
   }
 
   return (

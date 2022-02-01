@@ -16,6 +16,7 @@ import UserJobs from './components/UserJobs';
 import NotFound from './components/NotFound';
 import DynamicRoutes from './components/DynamicRoutes';
 import FavoriteJobs from './components/FavoriteJobs';
+import ForgotPassword from './components/ForgotPassword';
 import {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
 import {useSelector} from 'react-redux'
@@ -57,7 +58,7 @@ const App = () => {
   }, [isAuthenticated])
 
   return (
-    <div className={location.pathname === '/' ? "" : isAuthenticated ? "" : 'app-root'}>
+    <div className={location.pathname === '/login' ? "app-root" : location.pathname === '/register' ? 'app-root' : ""}>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles/>
         <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>
@@ -68,6 +69,7 @@ const App = () => {
           <Route exact path="/post-job" element={<PostJob isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/jobs-created" element={<UserJobs isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/messages" element={<Messages isAuthenticated={isAuthenticated}/>}/>
+          <Route exact path="/forgot-password" element={<ForgotPassword isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/settings" element={<Settings setAuth={setAuth} isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/favorite-jobs" element={<FavoriteJobs isAuthenticated={isAuthenticated}/>}/>
           <Route path="/search/:keyword" element={<Dashboard/>}/>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL, POST_JOB_REQUEST, POST_JOB_SUCCESS, POST_JOB_FAIL, GET_JOBS_REQUEST, GET_JOBS_SUCCESS, GET_JOBS_FAIL, GET_USER_JOBS_REQUEST, GET_USER_JOBS_SUCCESS, GET_USER_JOBS_FAIL, DELETE_USER_JOB_REQUEST, DELETE_USER_JOB_SUCCESS, DELETE_USER_JOB_FAIL, EDIT_JOB_REQUEST, EDIT_JOB_SUCCESS, EDIT_JOB_FAIL, DELETE_ALL_JOBS_REQUEST, DELETE_ALL_JOBS_SUCCESS, DELETE_ALL_JOBS_FAIL, ADD_JOB_TO_FAVORITES_REQUEST, ADD_JOB_TO_FAVORITES_SUCCESS, ADD_JOB_TO_FAVORITES_FAIL, GET_FAVORITE_JOBS_REQUEST, GET_FAVORITE_JOBS_SUCCESS, GET_FAVORITE_JOBS_FAIL} from '../constants/jobConstants'
+import {SELECTED_JOB_REQUEST, SELECTED_JOB_SUCCESS, SELECTED_JOB_FAIL, POST_JOB_REQUEST, POST_JOB_SUCCESS, POST_JOB_FAIL, GET_JOBS_REQUEST, GET_JOBS_SUCCESS, GET_JOBS_FAIL, GET_USER_JOBS_REQUEST, GET_USER_JOBS_SUCCESS, GET_USER_JOBS_FAIL, DELETE_USER_JOB_REQUEST, DELETE_USER_JOB_SUCCESS, DELETE_USER_JOB_FAIL, EDIT_JOB_REQUEST, EDIT_JOB_SUCCESS, EDIT_JOB_FAIL, DELETE_ALL_JOBS_REQUEST, DELETE_ALL_JOBS_SUCCESS, DELETE_ALL_JOBS_FAIL, ADD_JOB_TO_FAVORITES_REQUEST, ADD_JOB_TO_FAVORITES_SUCCESS, ADD_JOB_TO_FAVORITES_FAIL, GET_FAVORITE_JOBS_REQUEST, GET_FAVORITE_JOBS_SUCCESS, GET_FAVORITE_JOBS_FAIL, DELETE_FAVORITE_JOB_REQUEST, DELETE_FAVORITE_JOB_SUCCESS, DELETE_FAVORITE_JOB_FAIL} from '../constants/jobConstants'
 
 export const selectJob = (data) => async (dispatch) => {
   try {
@@ -164,6 +164,26 @@ export const getFavoriteJobs = (user_id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_FAVORITE_JOBS_FAIL, 
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message
+    })
+  }
+}
+
+export const deleteFavoriteJob = (userID, jobID) => async (dispatch) => {
+  try {
+    dispatch({type: DELETE_FAVORITE_JOB_REQUEST})
+
+    let data = await axios.delete(`/api/jobs/favorites/${jobID}`, {params: {
+      user_id: userID
+    }}).then(res => res.data)
+
+    dispatch({
+      type: DELETE_FAVORITE_JOB_SUCCESS,
+      payload: getFavoriteJobs()
+    })
+  } catch (error) {
+    dispatch({
+      type: DELETE_FAVORITE_JOB_FAIL, 
       payload: error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }

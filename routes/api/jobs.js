@@ -24,10 +24,8 @@ router.post('/post-job', async (req, res) => {
 // GET paginated jobs
 router.get('/', async (req, res) => {
   try {
-    const pageSize = 2;
+    const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1
-
-    console.log('request query: ', req.query)
 
     const keyword = Object.keys(req.query)[0] !== 'pageNumber' ?
       Object.keys(req.query)[0]
@@ -37,7 +35,6 @@ router.get('/', async (req, res) => {
     let totalJobs = theJobs.rows.length
     const count = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2;', [`%${keyword}%`, `%${keyword}%`])).rows.length
     const jobs = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2 LIMIT $3 OFFSET $4;', [`%${keyword}%`, `%${keyword}%`, pageSize, (pageSize * (page - 1))])).rows
-    console.log('jobs in backend:: ', jobs.length, count)
     res.json({jobs, page, pages: Math.ceil(count / pageSize), totalJobs, count})
   } catch (error) {
     console.error(error.message)
@@ -95,8 +92,16 @@ router.put('/', async (req, res) => {
 router.post('/favorites', async (req, res) => {
   try {
     const {jobID, userID} = req.body
-    const newFavJob = await pool.query("INSERT INTO favorite_jobs(user_id, job_id) VALUES($1, $2);", [userID, jobID])
-    res.send('works')
+
+    // check first to see if job is already in favorites list
+    const job = await pool.query("SELECT * FROM favorite_jobs WHERE job_id = $1;", [jobID])
+    if(job.rows.length > 0) {
+      res.send('favorite job already exists')
+    } else {
+      const newFavJob = await pool.query("INSERT INTO favorite_jobs(user_id, job_id) VALUES($1, $2);", [userID, jobID])
+      res.send('works')
+    }
+    
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')
@@ -114,6 +119,18 @@ router.get('/favorites', async (req, res) => {
     }
     
     res.json(favorites)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+router.delete('/favorites/:id', async (req, res) => {
+  try {
+
+    let deletedJob = await pool.query("DELETE FROM favorite_jobs WHERE user_id = $1 AND job_id = $2;", [req.query.user_id, req.params.id])
+    
+    res.send('favorite job deleted')
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')

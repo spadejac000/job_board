@@ -14,10 +14,6 @@ const UserJobs = ({isAuthenticated}) => {
 
   const dispatch = useDispatch();
 
-  // let userJobs = useSelector((state) =>
-  //     state.getUserJobs.userJobs
-  // )
-
   const userJobsState = useSelector(state => state.getUserJobs)
   const {loadingUserJobs, errorUserJobs, userJobs} = userJobsState
 

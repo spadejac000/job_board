@@ -77,6 +77,8 @@ router.get("/is-verify", authorization, async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const {id} = req.params
+    const userJobsDeleted = await pool.quert("DELETE FROM jobs WHERE user_id = $1", [id])
+    const userFavJobsDeleted = await pool.quert("DELETE FROM favorite_jobs WHERE user_id = $1", [id])
     const userDeleted = await pool.query("DELETE FROM users WHERE user_id = $1;", [id])
     // make sure all jobs associated with deleted user are deleted as well
     res.json(userDeleted)

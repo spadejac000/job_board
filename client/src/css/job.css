@@ -24,4 +24,9 @@
 .ban-card-content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.ban-card-content h5 {
+  margin-bottom: 0px;
 }

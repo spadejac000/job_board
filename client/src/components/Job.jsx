@@ -5,6 +5,7 @@ import {selectJob} from '../actions/jobActions'
 import '../css/job.css'
 import {FaHeart, FaBan} from 'react-icons/fa'
 import {addJobToFavorites} from '../actions/jobActions'
+import {motion, AnimatePresence} from 'framer-motion'
 
 
 const Job = ({job}) => {
@@ -36,12 +37,21 @@ const Job = ({job}) => {
 
   return (
     viewBanCard ?
+    <AnimatePresence>
+      <motion.div 
+        key={job_id}
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+      >
     <Card className="p-4 job-card">
       <div className="ban-card-content">
         <h5>Job Removed</h5>
         <Button onClick={() => setViewBanCard(false)}>Undo</Button>
       </div>
     </Card>
+    </motion.div>
+    </AnimatePresence>
     :
     <Card className="p-4 job-card" onClick={()=> dispatch(selectJob(job))}>
       <Row>
@@ -61,7 +71,6 @@ const Job = ({job}) => {
           </div>
         </Col>
       </Row>
-      
     </Card>
   )
 }

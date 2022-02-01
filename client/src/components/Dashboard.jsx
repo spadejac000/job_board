@@ -13,7 +13,6 @@ import {getJobs} from '../actions/jobActions'
 import {useParams} from 'react-router-dom'
 
 const Dashboard = ({isAuthenticated}) => {
-  console.log('is: ', isAuthenticated)
 
   const dispatch = useDispatch();
   const params = useParams()
@@ -45,7 +44,7 @@ const Dashboard = ({isAuthenticated}) => {
                   <p>Sort by: relavence - date</p>
                   <p>Page {page} of {jobs.jobs === null ? 0 : count} jobs</p>
                 </div>
-                <Jobs jobs={jobs}/>
+                <Jobs jobs={jobs} isAuthenticated={isAuthenticated}/>
               </div>
               )
             }

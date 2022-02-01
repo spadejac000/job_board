@@ -1,15 +1,18 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {Badge, Card, Row, Col, Button} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectJob} from '../actions/jobActions'
 import '../css/job.css'
-import {FaHeart, FaBan} from 'react-icons/fa'
+import {FaHeart, FaBan, FaTimes, FaArrowRight} from 'react-icons/fa'
 import {addJobToFavorites} from '../actions/jobActions'
 import {motion, AnimatePresence} from 'framer-motion'
+import {Link} from 'react-router-dom'
 
 
-const Job = ({job}) => {
+const Job = ({job, isAuthenticated}) => {
 
+  const [heartRed, setHeartRed] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
   const [viewBanCard, setViewBanCard] = useState(false)
   const {benefits, city, work_address, job_location, job_title, job_type, salary, zip, _description, _state, date_posted, job_id} = job
   const dispatch = useDispatch()
@@ -28,11 +31,28 @@ const Job = ({job}) => {
     e.preventDefault()
     e.stopPropagation();
     dispatch(addJobToFavorites(jobID, userID))
+    if(isAuthenticated) {
+      // heartRed ? 
+      // setHeartRed(false) : 
+      // setHeartRed(true)
+      console.log('hey charlie')
+      dispatch(addJobToFavorites(jobID, userID))
+    } else {
+      console.log('hello there pim')
+      setShowSignIn(true)
+    }
+    
   }
 
   const handleBanJob = (e) => {
     e.stopPropagation();
     setViewBanCard(true)
+  }
+
+  const handleExitShowSignIn = (e) => {
+    e.preventDefault()
+    e.stopPropagation();
+    setShowSignIn(false)
   }
 
   return (
@@ -64,13 +84,28 @@ const Job = ({job}) => {
         </Col>
         <Col md={2} className="save-ban-col">
           <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>
-            <FaHeart/>
+            <FaHeart className={heartRed ? 'heart-job-red' : ''}/>
           </div>
           <div onClick={(e) => handleBanJob(e)}>
             <FaBan/>
           </div>
         </Col>
       </Row>
+      <>
+        {showSignIn ? 
+          <Card className="sign-in-pop-up" onClick={(e) => e.stopPropagation()}>
+            <div className="exit-sign-in-pop-up" onClick={(e) => handleExitShowSignIn(e)}>
+              <FaTimes/>
+            </div>
+            
+            <h5>Sign In to add job to favorites</h5>
+            <Button>Sign In <FaArrowRight /></Button>
+            <p>
+              No account yet? <Link to='/register'>Create account</Link>
+            </p>
+          </Card>
+        : null}
+      </>
     </Card>
   )
 }

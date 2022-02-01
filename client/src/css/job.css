@@ -2,6 +2,7 @@
   cursor: pointer;
   display: block!important;
   margin: 1rem 1rem 1rem 0;
+  position: relative;
 }
 
 .save-ban-col {
@@ -29,4 +30,19 @@
 
 .ban-card-content h5 {
   margin-bottom: 0px;
+}
+
+.heart-job-red {
+  color: red;
+}
+
+.sign-in-pop-up {
+  position: absolute;
+  top: 30%;
+  right: -20%;
+  padding: .5rem 1rem;
+}
+
+.exit-sign-in-pop-up {
+  text-align: end;
 }

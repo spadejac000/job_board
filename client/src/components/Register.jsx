@@ -24,12 +24,6 @@ const Register = ({setAuth}) => {
     setInputs({...inputs, [e.target.name] : e.target.value})
   }
 
-  const checkPasswordValidation = (e) => {
-    if(password === e.target.value) {
-      console.log('hello it works')
-    }
-  }
-
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {

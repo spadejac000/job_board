@@ -20,3 +20,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.ban-card-content {
+  display: flex;
+  justify-content: space-between;
+}

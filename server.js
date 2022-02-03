@@ -2,10 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const users = require('./routes/api/users')
 const jobs = require('./routes/api/jobs')
+const fileUpload = require('express-fileupload')
 
 const app = express();
 
 app.use(bodyParser.json())
+app.use(fileUpload())
 
 const port = process.env.PORT || 5000
 

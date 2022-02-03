@@ -136,6 +136,8 @@ export const addJobToFavorites = (jobID, userID) => async (dispatch) => {
 
     const favoritedJob = await axios.post(`/api/jobs/favorites`, body).then(res => res.data)
 
+    console.log('favorite job: ', favoritedJob)
+
     dispatch({
       type: ADD_JOB_TO_FAVORITES_SUCCESS,
       payload: null

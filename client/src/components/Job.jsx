@@ -4,17 +4,19 @@ import {useDispatch, useSelector} from 'react-redux'
 import {selectJob} from '../actions/jobActions'
 import '../css/job.css'
 import {FaHeart, FaBan, FaTimes, FaArrowRight} from 'react-icons/fa'
-import {addJobToFavorites} from '../actions/jobActions'
+import {addJobToFavorites, deleteFavoriteJob} from '../actions/jobActions'
 import {motion, AnimatePresence} from 'framer-motion'
 import {Link} from 'react-router-dom'
 
 
 const Job = ({job, isAuthenticated}) => {
 
-  const [heartRed, setHeartRed] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [viewBanCard, setViewBanCard] = useState(false)
   const {benefits, city, work_address, job_location, job_title, job_type, salary, zip, _description, _state, date_posted, job_id} = job
+
+  const [heartRed, setHeartRed] = useState(localStorage.getItem(`heart-red-${job_id}`));
+
   const dispatch = useDispatch()
 
   let today = new Date();
@@ -30,18 +32,24 @@ const Job = ({job, isAuthenticated}) => {
   const handleAddJobToFavorites = (e, jobID) => {
     e.preventDefault()
     e.stopPropagation();
-    dispatch(addJobToFavorites(jobID, userID))
     if(isAuthenticated) {
-      // heartRed ? 
-      // setHeartRed(false) : 
-      // setHeartRed(true)
-      console.log('hey charlie')
-      dispatch(addJobToFavorites(jobID, userID))
+      console.log('what is heartRed: ', heartRed)
+      if(heartRed === 'true') {
+        console.log('red heart true: ', heartRed)
+        localStorage.setItem(`heart-red-${job_id}`, false)
+        setHeartRed(localStorage.getItem(`heart-red-${job_id}`))
+        dispatch(deleteFavoriteJob(userID, jobID))
+      } else if(heartRed === 'false') {
+        console.log('red heart false: ', heartRed)
+        localStorage.setItem(`heart-red-${job_id}`, true)
+        setHeartRed(localStorage.getItem(`heart-red-${job_id}`))
+        dispatch(addJobToFavorites(jobID, userID))
+      } else {
+        console.log('wtf: ', typeof heartRed)
+      }
     } else {
-      console.log('hello there pim')
       setShowSignIn(true)
     }
-    
   }
 
   const handleBanJob = (e) => {
@@ -84,7 +92,7 @@ const Job = ({job, isAuthenticated}) => {
         </Col>
         <Col md={2} className="save-ban-col">
           <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>
-            <FaHeart className={heartRed ? 'heart-job-red' : ''}/>
+            <FaHeart className={heartRed === 'true' ? 'heart-job-red' : ''}/>
           </div>
           <div onClick={(e) => handleBanJob(e)}>
             <FaBan/>

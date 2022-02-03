@@ -138,13 +138,13 @@ router.delete('/favorites/:id', async (req, res) => {
 })
 
 // job applications end point
-router.post('/upload', (req, res) => {
+router.post('/upload-resume', (req, res) => {
   if(req.files === null) {
     return res.status(400).json({msg: 'No file uploaded'})
   }
 
   const file = req.files.file
-  file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+  file.mv(`/Users/jacobspade/code/job_board/client/public/uploads/${file.name}`, err => {
     if(err) {
       console.error(err);
       return res.status(500).send(err)

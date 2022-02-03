@@ -13,7 +13,6 @@ const SelectedJob = () => {
 
   useEffect(() => {
     dispatch(selectJob())
-    console.log('hello: ', selectedJob)
   }, [dispatch])
 
   const [show, setShow] = useState(false);
@@ -52,7 +51,7 @@ const SelectedJob = () => {
           <Modal.Body>
             <h5>{selectedJob ? selectedJob.job_title : null}</h5>
             <hr/>
-            <Form>
+            {/* <Form>
               <Form.Label>Name</Form.Label>
               <InputGroup className="mb-3">
                 <FormControl
@@ -78,7 +77,8 @@ const SelectedJob = () => {
                 />
               </InputGroup>
               <ResumeUpload/>
-            </Form>
+            </Form> */}
+            <ResumeUpload/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

@@ -6,6 +6,8 @@ import '../css/selected-job.css'
 import {FaTimes} from 'react-icons/fa'
 import ResumeUpload from './ResumeUpload'
 import CoverLetterUpload from './CoverLetterUpload'
+import axios from 'axios'
+import Progress from './Progress'
 
 const SelectedJob = () => {
   const dispatch = useDispatch()
@@ -20,6 +22,41 @@ const SelectedJob = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [alertMessageShow, setAlertMessageShow] = useState(false)
+
+  const [coverLetter, setCoverLetter] = useState('')
+  const [coverLetterName, setCoverLetterName] = useState('')
+  const [message, setMessage] = useState('')
+  const [resume, setResume] = useState('')
+  const [resumeName, setResumeName] = useState('')
+  const [uploadPercentage, setUploadPercentage] = useState(0)
+
+  const onSubmitApplication = async (e) => {
+    e.preventDefault();
+    setAlertMessageShow(true)
+    const resumeData = new FormData();
+    const coverLetterData = new FormData();
+    resumeData.append('file', resume)
+    coverLetterData.append('file', coverLetter)
+    try {
+      const response = await axios.post('/api/jobs/upload-application', resumeData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress: progressEvent => {
+          setUploadPercentage(parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)))
+          // clear percentage
+          setTimeout(() => setUploadPercentage(0), 10000)
+        }
+      })
+      setMessage('Application Complete')
+    } catch (error) {
+      if(error.response.status === 500) {
+        setMessage('There was a problem with the server')
+      } else {
+        setMessage(error.response.data.msg)
+      }
+    }
+  }
 
   return (
     <>
@@ -53,7 +90,7 @@ const SelectedJob = () => {
           <Modal.Body>
             <h5>{selectedJob ? selectedJob.job_title : null}</h5>
             <hr/>
-            <Form>
+            <Form onSubmit={onSubmitApplication}>
               <Form.Label>Name</Form.Label>
               <InputGroup className="mb-3">
                 <FormControl
@@ -78,8 +115,9 @@ const SelectedJob = () => {
                   placeholder="Location"
                 />
               </InputGroup>
-              <ResumeUpload alertMessageShow={alertMessageShow}/>
-              <CoverLetterUpload alertMessageShow={alertMessageShow}/>
+              <ResumeUpload message={message} alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}/>
+              <CoverLetterUpload message={message} alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}/>
+              <Progress percentage={uploadPercentage}/>
               <Button variant="primary" type="submit">
               Submit
             </Button>

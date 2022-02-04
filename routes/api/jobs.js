@@ -137,35 +137,21 @@ router.delete('/favorites/:id', async (req, res) => {
   }
 })
 
-// job resume end point
-router.post('/upload-resume', (req, res) => {
+// job application end point
+router.post('/upload-application', (req, res) => {
+  console.log('req riles: ', req.files)
   if(req.files === null) {
-    return res.status(400).json({msg: 'No file uploaded'})
+    return res.status(400).json({msg: 'Upload resume and cover letter'})
   }
 
-  const file = req.files.file
-  file.mv(`/Users/jacobspade/code/job_board/client/public/uploads/${file.name}`, err => {
+  const resume = req.files.resume
+  const coverLetter = req.files.coverLetter
+  resume.mv(`/Users/jacobspade/code/job_board/client/public/uploads/${resume.name}`, err => {
     if(err) {
       console.error(err);
       return res.status(500).send(err)
     }
-    res.json({fileName: file.name, filePath: `/uploads/${file.name}`});
-  })
-})
-
-// job cover letter end point
-router.post('/upload-cover-letter', (req, res) => {
-  if(req.files === null) {
-    return res.status(400).json({msg: 'No file uploaded'})
-  }
-
-  const file = req.files.file
-  file.mv(`/Users/jacobspade/code/job_board/client/public/uploads/${file.name}`, err => {
-    if(err) {
-      console.error(err);
-      return res.status(500).send(err)
-    }
-    res.json({fileName: file.name, filePath: `/uploads/${file.name}`});
+    res.json({fileName: resume.name, filePath: `/uploads/${resume.name}`});
   })
 })
 

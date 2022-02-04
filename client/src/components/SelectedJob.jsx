@@ -25,20 +25,19 @@ const SelectedJob = () => {
 
   const [coverLetter, setCoverLetter] = useState('')
   const [coverLetterName, setCoverLetterName] = useState('')
-  const [message, setMessage] = useState('')
   const [resume, setResume] = useState('')
   const [resumeName, setResumeName] = useState('')
+  const [message, setMessage] = useState('')
   const [uploadPercentage, setUploadPercentage] = useState(0)
 
   const onSubmitApplication = async (e) => {
     e.preventDefault();
     setAlertMessageShow(true)
-    const resumeData = new FormData();
-    const coverLetterData = new FormData();
-    resumeData.append('file', resume)
-    coverLetterData.append('file', coverLetter)
+    const applicationData = new FormData();
+    applicationData.append('resume', resume)
+    applicationData.append('coverLetter', coverLetter)
     try {
-      const response = await axios.post('/api/jobs/upload-application', resumeData, {
+      const response = await axios.post('/api/jobs/upload-application', applicationData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -56,6 +55,16 @@ const SelectedJob = () => {
         setMessage(error.response.data.msg)
       }
     }
+  }
+
+  const handleUploadResume = (e) => {
+    setResume(e.target.files[0])
+    setResumeName(e.target.files[0].name)
+  }
+
+  const handleUploadCoverLetter = (e) => {
+    setCoverLetter(e.target.files[0])
+    setCoverLetterName(e.target.files[0].name)
   }
 
   return (
@@ -115,8 +124,16 @@ const SelectedJob = () => {
                   placeholder="Location"
                 />
               </InputGroup>
-              <ResumeUpload message={message} alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}/>
-              <CoverLetterUpload message={message} alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}/>
+              <ResumeUpload 
+                message={message} 
+                alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
+                handleUploadResume={handleUploadResume}
+              />
+              <CoverLetterUpload 
+                message={message} 
+                alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
+                handleUploadCoverLetter={handleUploadCoverLetter}
+              />
               <Progress percentage={uploadPercentage}/>
               <Button variant="primary" type="submit">
               Submit

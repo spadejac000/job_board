@@ -5,27 +5,27 @@ import axios from 'axios'
 import AlertMessage from './AlertMessage'
 import Progress from './Progress'
 
-const ResumeUpload = () => {
+const CoverLetterUpload = () => {
 
-  const [resume, setResume] = useState('')
-  const [resumeName, setResumeName] = useState('')
-  const [uploadedResume, setUploadedResume] = useState({})
+  const [coverLetter, setCoverLetter] = useState('')
+  const [coverLetterName, setCoverLetterName] = useState('')
+  const [uploadedCoverLetter, setUploadedCoverLetter] = useState({})
   const [message, setMessage] = useState('')
   const [alertMessageShow, setAlertMessageShow] = useState(false)
   const [uploadPercentage, setUploadPercentage] = useState(0)
 
-  const handleUploadResume = (e) => {
-    setResume(e.target.files[0])
-    setResumeName(e.target.files[0].name)
+  const handleUploadCoverLetter = (e) => {
+    setCoverLetter(e.target.files[0])
+    setCoverLetterName(e.target.files[0].name)
   }
 
-  const onSubmitResume = async (e) => {
+  const onSubmitCoverLetter = async (e) => {
     e.preventDefault();
     setAlertMessageShow(true)
-    const resumeData = new FormData();
-    resumeData.append('file', resume)
+    const coverLetterData = new FormData();
+    coverLetterData.append('file', coverLetter)
     try {
-      const response = await axios.post('/api/jobs/upload-resume', resumeData, {
+      const response = await axios.post('/api/jobs/upload-cover-letter', coverLetterData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -36,7 +36,7 @@ const ResumeUpload = () => {
         }
       })
       const {fileName, filePath} = response.data
-      setUploadedResume(fileName, filePath)
+      setUploadedCoverLetter(fileName, filePath)
       setMessage('Application Complete')
     } catch (error) {
       if(error.response.status === 500) {
@@ -50,16 +50,16 @@ const ResumeUpload = () => {
   return (
     <>
       {message ? <AlertMessage alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow} variant="info">{message}</AlertMessage> : null}
-      <Form onSubmit={onSubmitResume} className="mb-3">
+      <Form onSubmit={onSubmitCoverLetter} className="mb-3">
         <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label><FaUpload/> Upload resume</Form.Label>
-          <Form.Control type="file" onChange={handleUploadResume}/>
+          <Form.Label><FaUpload/> Upload cover letter</Form.Label>
+          <Form.Control type="file" onChange={handleUploadCoverLetter}/>
         </Form.Group>
         <Progress percentage={uploadPercentage}/>
-        <Button type="submit">Upload resume</Button>
+        <Button type="submit">Upload cover letter</Button>
       </Form>
     </>
   )
 }
 
-export default ResumeUpload
+export default CoverLetterUpload

@@ -5,6 +5,7 @@ import {Card, Button, Row, Col, Modal, Form, InputGroup, FormControl} from 'reac
 import '../css/selected-job.css'
 import {FaTimes} from 'react-icons/fa'
 import ResumeUpload from './ResumeUpload'
+import CoverLetterUpload from './CoverLetterUpload'
 
 const SelectedJob = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const SelectedJob = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [alertMessageShow, setAlertMessageShow] = useState(false)
 
   return (
     <>
@@ -51,7 +53,7 @@ const SelectedJob = () => {
           <Modal.Body>
             <h5>{selectedJob ? selectedJob.job_title : null}</h5>
             <hr/>
-            {/* <Form>
+            <Form>
               <Form.Label>Name</Form.Label>
               <InputGroup className="mb-3">
                 <FormControl
@@ -76,17 +78,19 @@ const SelectedJob = () => {
                   placeholder="Location"
                 />
               </InputGroup>
-              <ResumeUpload/>
-            </Form> */}
-            <ResumeUpload/>
+              <ResumeUpload alertMessageShow={alertMessageShow}/>
+              <CoverLetterUpload alertMessageShow={alertMessageShow}/>
+              <Button variant="primary" type="submit">
+              Submit
+            </Button>
+            </Form>
+            
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Submit
-            </Button>
+            
           </Modal.Footer>
         </Modal>
 

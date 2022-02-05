@@ -138,21 +138,24 @@ router.delete('/favorites/:id', async (req, res) => {
 })
 
 // job application end point
-router.post('/upload-application', (req, res) => {
-  console.log('req riles: ', req.files)
-  if(req.files === null) {
-    return res.status(400).json({msg: 'Upload resume and cover letter'})
-  }
-
-  const resume = req.files.resume
-  const coverLetter = req.files.coverLetter
-  resume.mv(`/Users/jacobspade/code/job_board/client/public/uploads/${resume.name}`, err => {
-    if(err) {
-      console.error(err);
-      return res.status(500).send(err)
+router.post('/upload-application', async (req, res) => {
+  try {
+    if(req.files === null) {
+      return res.status(400).json({msg: 'Upload resume and cover letter'})
     }
-    res.json({fileName: resume.name, filePath: `/uploads/${resume.name}`});
-  })
+  
+    const {name, email, phone, location, jobID, userID} = req.body
+    console.log('job job hob: ', jobID, userID)
+  
+    const application = await pool.query("INSERT INTO applications (applicant_name, applicant_email, applicant_phone, applicant_location, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;", [name, email, phone, location, jobID, userID])
+  
+    const resume = req.files.resume
+    const coverLetter = req.files.coverLetter
+    res.send('Application Completed')
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
 })
 
 module.exports = router;

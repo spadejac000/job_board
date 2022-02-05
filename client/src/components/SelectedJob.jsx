@@ -8,10 +8,14 @@ import ResumeUpload from './ResumeUpload'
 import CoverLetterUpload from './CoverLetterUpload'
 import axios from 'axios'
 import Progress from './Progress'
+import AlertMessage from './AlertMessage'
 
 const SelectedJob = () => {
   const dispatch = useDispatch()
 
+  let userID = useSelector((state) =>
+    state.user.userID
+  )
   const selectedJob = useSelector((state) => state.selectedJob)
 
   useEffect(() => {
@@ -22,20 +26,38 @@ const SelectedJob = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [alertMessageShow, setAlertMessageShow] = useState(false)
-
   const [coverLetter, setCoverLetter] = useState('')
-  const [coverLetterName, setCoverLetterName] = useState('')
   const [resume, setResume] = useState('')
-  const [resumeName, setResumeName] = useState('')
   const [message, setMessage] = useState('')
   const [uploadPercentage, setUploadPercentage] = useState(0)
+  const [inputs, setInputs] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    location: ""
+  })
 
-  const onSubmitApplication = async (e) => {
+  const {name, email, phone, location} = inputs
+
+  const onChange = (e) => {
+    setInputs({...inputs, [e.target.name] : e.target.value})
+  }
+
+  const onSubmitApplication = async (e, jobID) => {
     e.preventDefault();
     setAlertMessageShow(true)
     const applicationData = new FormData();
     applicationData.append('resume', resume)
     applicationData.append('coverLetter', coverLetter)
+    applicationData.append('name', name)
+    applicationData.append('email', email)
+    applicationData.append('phone', phone)
+    applicationData.append('userID', userID)
+    applicationData.append('jobID', jobID)
+
+    for(let key of applicationData.keys()) {
+      console.log(key, applicationData.get(key))
+    }
     try {
       const response = await axios.post('/api/jobs/upload-application', applicationData, {
         headers: {
@@ -59,12 +81,10 @@ const SelectedJob = () => {
 
   const handleUploadResume = (e) => {
     setResume(e.target.files[0])
-    setResumeName(e.target.files[0].name)
   }
 
   const handleUploadCoverLetter = (e) => {
     setCoverLetter(e.target.files[0])
-    setCoverLetterName(e.target.files[0].name)
   }
 
   return (
@@ -99,29 +119,42 @@ const SelectedJob = () => {
           <Modal.Body>
             <h5>{selectedJob ? selectedJob.job_title : null}</h5>
             <hr/>
-            <Form onSubmit={onSubmitApplication}>
+            {message ? <AlertMessage alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow} variant="info">{message}</AlertMessage> : null}
+            <Form onSubmit={(e) => onSubmitApplication(e, selectedJob.job_id)}>
               <Form.Label>Name</Form.Label>
               <InputGroup className="mb-3">
                 <FormControl
                   placeholder="Name"
+                  name="name"
+                  value={name} 
+                  onChange={e => onChange(e)}
                 />
               </InputGroup>
               <Form.Label>Email</Form.Label>
               <InputGroup className="mb-3">
                 <FormControl
                   placeholder="Email"
+                  name="email"
+                  value={email} 
+                  onChange={e => onChange(e)}
                 />
               </InputGroup>
               <Form.Label>Phone number</Form.Label>
               <InputGroup className="mb-3">
                 <FormControl
                   placeholder="Phone number"
+                  name="phone"
+                  value={phone} 
+                  onChange={e => onChange(e)}
                 />
               </InputGroup>
               <Form.Label>Location</Form.Label>
               <InputGroup className="mb-3">
                 <FormControl
                   placeholder="Location"
+                  name="location"
+                  value={location} 
+                  onChange={e => onChange(e)}
                 />
               </InputGroup>
               <ResumeUpload 
@@ -139,16 +172,13 @@ const SelectedJob = () => {
               Submit
             </Button>
             </Form>
-            
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            
           </Modal.Footer>
         </Modal>
-
     </>
   )
 }

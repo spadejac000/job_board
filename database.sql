@@ -29,6 +29,16 @@ CREATE TABLE favorite_jobs(
   job_id uuid REFERENCES jobs(job_id)
 );
 
+CREATE TABLE applications(
+  application_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id uuid REFERENCES users(user_id),
+  job_id uuid REFERENCES jobs(job_id),
+  applicant_name VARCHAR(255),
+  applicant_email VARCHAR(255),
+  applicant_phone VARCHAR(255),
+  applicant_location VARCHAR(255)
+);
+
 CREATE TABLE benefits(
   benefits_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   health_insurance VARCHAR(255),

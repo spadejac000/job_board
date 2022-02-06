@@ -6,7 +6,7 @@ import {printUser} from '../actions/userActions'
 import {FaUser, FaComment, FaCog, FaChevronRight, FaBriefcase, FaThumbtack, FaList, FaHeart} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap'
-import {useLocation} from 'react-router'
+import {useLocation} from 'react-router-dom'
 
 const Header = ({isAuthenticated, setAuth}) => {
 

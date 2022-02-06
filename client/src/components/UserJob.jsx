@@ -4,6 +4,7 @@ import {FaEdit, FaTimes} from 'react-icons/fa'
 import {useDispatch, useSelector} from 'react-redux'
 import EditJobModal from './EditJobModal'
 import {getUserJobs} from '../actions/jobActions'
+import {Link} from 'react-router-dom'
 
 const UserJob = ({job}) => {
 
@@ -55,6 +56,7 @@ const UserJob = ({job}) => {
         <h6>Job Description: </h6>
         <p>{job._description}</p>
         <div className="user-job-actions-container">
+          <Link to={`/applicants/${job.job_id}`} className="btn btn-primary">View Applicants</Link>
           <Button variant="warning" onClick={handleShow}><FaEdit onClick={() => editUserJob(job.job_id)}/> Edit</Button>
           <Button variant="danger" onClick={() => deleteUserJob(job.job_id)}><FaTimes/> Delete</Button>
         </div>

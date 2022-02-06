@@ -3,7 +3,7 @@
   align-items: center;
 }
 
-.user-job-actions-container > Button {
+.user-job-actions-container > * {
   margin-right: 1rem;
 }
 

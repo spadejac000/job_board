@@ -158,4 +158,18 @@ router.post('/upload-application', async (req, res) => {
   }
 })
 
+// get applicants of selected job
+router.get('/applicants', async (req, res) => {
+  try {
+    let applicantsList = await pool.query("SELECT * FROM applications WHERE job_id = $1;", [req.query.jobID]);
+
+    console.log('applicants list: ', applicantsList.rows)
+    
+    res.json(applicantsList.rows)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
 module.exports = router;

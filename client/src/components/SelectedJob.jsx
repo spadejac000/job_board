@@ -128,6 +128,7 @@ const SelectedJob = () => {
                   name="name"
                   value={name} 
                   onChange={e => onChange(e)}
+                  required
                 />
               </InputGroup>
               <Form.Label>Email</Form.Label>
@@ -137,6 +138,7 @@ const SelectedJob = () => {
                   name="email"
                   value={email} 
                   onChange={e => onChange(e)}
+                  required
                 />
               </InputGroup>
               <Form.Label>Phone number</Form.Label>
@@ -146,6 +148,7 @@ const SelectedJob = () => {
                   name="phone"
                   value={phone} 
                   onChange={e => onChange(e)}
+                  required
                 />
               </InputGroup>
               <Form.Label>Location</Form.Label>
@@ -155,6 +158,7 @@ const SelectedJob = () => {
                   name="location"
                   value={location} 
                   onChange={e => onChange(e)}
+                  required
                 />
               </InputGroup>
               <ResumeUpload 

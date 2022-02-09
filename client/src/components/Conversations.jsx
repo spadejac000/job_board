@@ -5,11 +5,16 @@ import {useConversations} from '../contexts/ConversationsProvider'
 
 const Conversations = () => {
 
-  const {conversations } = useConversations()
+  const {conversations, selectConversationIndex } = useConversations()
   return (
     <ListGroup className="border-end overflow-auto flex-grow-1 conversations-content" variant="flush">
       {conversations.map((conversation, index) => (
-        <ListGroup.Item key={index}>
+        <ListGroup.Item 
+          key={index}
+          action
+          active={conversation.selected}
+          onClick={() => selectConversationIndex(index)}
+        >
           {conversation.recipients.map(recipient => recipient.name).join(', ')}
         </ListGroup.Item>
       ))}

@@ -5,7 +5,6 @@ import {useContacts} from '../contexts/ContactsProvider'
 
 const Contacts = () => {
   const {contacts} = useContacts()
-  console.log('contacts: ', contacts)
   return (
     <ListGroup className="border-end overflow-auto flex-grow-1 contacts-content" variant="flush">
       {contacts.map(contact => (

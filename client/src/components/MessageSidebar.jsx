@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import {Tabs, Tab, Button} from 'react-bootstrap'
+import {Tabs, Tab, Button, Modal} from 'react-bootstrap'
 import Conversations from './Conversations'
 import Contacts from './Contacts'
+import NewConversationModal from './NewConversationModal'
+import NewContactModal from './NewContactModal'
 
 const MessageSidebar = () => {
   
@@ -9,14 +11,20 @@ const MessageSidebar = () => {
   const CONTACTS_KEY = 'contacts'
   const [activeKey, setActiveKey] = useState(CONVERSATIONS_KEY)
   const conversationsOpen = activeKey === CONVERSATIONS_KEY
+  const [modalOpen, setModalOpen] = useState(false)
 
   let id = '12345'
 
   const handleTabSelect = (key) => {
-    if (key === CONVERSATIONS_KEY)
+    if (key === CONVERSATIONS_KEY) {
       setActiveKey(CONVERSATIONS_KEY)
-    else if (key === CONTACTS_KEY)
+    } else if (key === CONTACTS_KEY) {
       setActiveKey(CONTACTS_KEY)
+    }
+  }
+
+  const closeModal = () => {
+    setModalOpen(false)
   }
 
   return (
@@ -32,7 +40,14 @@ const MessageSidebar = () => {
       <div className="p-2 border-top border-end small">
         Your Id: <span className="text-muted">{id}</span>
       </div>
-      <Button>New {conversationsOpen ? 'Conversation' : 'Contact'}</Button>
+      <Button onClick={() => setModalOpen(true)}>New {conversationsOpen ? 'Conversation' : 'Contact'}</Button>
+
+      <Modal show={modalOpen} onHide={closeModal}>
+        {
+          conversationsOpen ? 
+          <NewConversationModal closeModal={closeModal}/> : <NewContactModal closeModal={closeModal}/>
+        }
+      </Modal>
     </>
   )
 }

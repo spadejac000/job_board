@@ -1,5 +1,6 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect, useCallback} from 'react'
 import {useContacts} from './ContactsProvider'
+import {useSocket} from './SocketProvider'
 
 const ConversationsContext = React.createContext()
 
@@ -8,9 +9,10 @@ export const useConversations = () => {
 }
 
 export const ConversationsProvider = ({id, children}) => {
-  const [conversations, setConversations] = useState([])
+  const [conversations, setConversations] = useState([{recipients: ['123', '456'], messages: ['what is up home slice']}])
   const [selectedConversationIndex, setSelectedConversationIndex] = useState(0)
   const {contacts} = useContacts()
+  const socket = useSocket()
 
   const createConversation = (recipients) => {
     setConversations(previousConversations => {
@@ -18,7 +20,7 @@ export const ConversationsProvider = ({id, children}) => {
     })
   }
 
-  const addMessageToConversation = ({recipients, text, sender}) => {
+  const addMessageToConversation = useCallback(({recipients, text, sender}) => {
     setConversations(previousConversations => {
       let madeChange = false
       const newMessage = {sender, text}
@@ -39,9 +41,16 @@ export const ConversationsProvider = ({id, children}) => {
         return [...previousConversations, {recipients, messages: [newMessage]}]
       }
     })
-  }
+  }, [setConversations])
+
+  useEffect(() => {
+    if (socket == null) return
+    socket.on('recieve-message', addMessageToConversation)
+    return () => socket.off('recieve-message')
+  }, [socket, addMessageToConversation])
 
   const sendMessage = (recipients, text) => {
+    socket.emit('send-message', {recipients, text})
     addMessageToConversation({recipients, text, sender: id})
   }
 
@@ -53,7 +62,7 @@ export const ConversationsProvider = ({id, children}) => {
       const name = (contact && contact.name) || recipient
       return {id: recipient, name}
     })
-    const messages = conversations.messages !== undefined ? conversations.messages.map(message => {
+    const messages = conversation.messages.map(message => {
       const contact = contacts.find(contact => {
         return contact.id === message.sender
       })
@@ -61,7 +70,6 @@ export const ConversationsProvider = ({id, children}) => {
       const fromMe = id === message.sender
       return {...message, senderName: name, fromMe}
     })
-    : null
     const selected = index === selectedConversationIndex
     return {...conversation, messages, recipients, selected}
   })

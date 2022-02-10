@@ -17,3 +17,7 @@
 .messages-right-big-card {
   padding: 3rem;
 }
+
+.message-conversation-col {
+  align-self: flex-end
+}

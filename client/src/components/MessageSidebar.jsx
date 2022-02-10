@@ -4,6 +4,7 @@ import Conversations from './Conversations'
 import Contacts from './Contacts'
 import NewConversationModal from './NewConversationModal'
 import NewContactModal from './NewContactModal'
+import '../css/message-sidebar.css'
 
 const MessageSidebar = () => {
   
@@ -29,7 +30,7 @@ const MessageSidebar = () => {
 
   return (
     <>
-      <Tabs className="justify-content-center" defaultActiveKey={CONVERSATIONS_KEY} onSelect={handleTabSelect}>
+      <Tabs className="message-sidebar-tabs justify-content-center" defaultActiveKey={CONVERSATIONS_KEY} onSelect={handleTabSelect}>
         <Tab eventKey={CONVERSATIONS_KEY} title="Conversations">
           <Conversations/>
         </Tab>
@@ -37,10 +38,10 @@ const MessageSidebar = () => {
           <Contacts/>
         </Tab>
       </Tabs>
-      <div className="p-2 border-top border-end small">
-        Your Id: <span className="text-muted">{id}</span>
+      <div className="message-sidebar-btn-div small d-grid">
+        <Button className="rounded-0" onClick={() => setModalOpen(true)}>New {conversationsOpen ? 'Conversation' : 'Contact'}</Button>
       </div>
-      <Button onClick={() => setModalOpen(true)}>New {conversationsOpen ? 'Conversation' : 'Contact'}</Button>
+      
 
       <Modal show={modalOpen} onHide={closeModal}>
         {

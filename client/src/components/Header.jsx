@@ -35,7 +35,10 @@ const Header = ({isAuthenticated, setAuth}) => {
 
     isAuthenticated ? 
 
-      <Navbar expand="lg" className="logged-in-navbar mb-5">
+      <Navbar 
+        expand="lg" 
+        className={`logged-in-navbar ${location.pathname !== '/messages' ? 'mb-5' : ''}`}
+      >
         <Container>
           <Navbar.Brand className="logged-in-nav-brand-logo" as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />

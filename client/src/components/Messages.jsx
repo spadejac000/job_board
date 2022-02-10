@@ -16,7 +16,7 @@ const Messages = ({isAuthenticated}) => {
     <SocketProvider id={id}>
       <ContactsProvider>
         <ConversationsProvider id={id}>
-          <Container className="mb-5">
+          <div className="">
             <Row>
               <Col md={3} className="message-sidebar-col">
                 <MessageSidebar/>
@@ -25,7 +25,7 @@ const Messages = ({isAuthenticated}) => {
                 <OpenConversation/>
               </Col>
             </Row>
-          </Container>
+          </div>
         </ConversationsProvider>
       </ContactsProvider>
     </SocketProvider>

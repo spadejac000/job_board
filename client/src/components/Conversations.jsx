@@ -7,7 +7,7 @@ const Conversations = () => {
 
   const {conversations, selectConversationIndex } = useConversations()
   return (
-    <ListGroup className="border-end overflow-auto flex-grow-1 conversations-content" variant="flush">
+    <ListGroup className="message-sidebar overflow-auto flex-grow-1 conversations-content" variant="flush">
       {conversations.map((conversation, index) => (
         <ListGroup.Item 
           key={index}

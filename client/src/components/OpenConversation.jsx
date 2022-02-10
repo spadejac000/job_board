@@ -22,7 +22,7 @@ const OpenConversation = () => {
 
   return (
     <div className="d-flex flex-column flex-grow-1">
-      <div className="flex-grow-1 overflow-auto">
+      <div className="flex-grow-1 overflow-auto" style={{maxHeight: '95vh', padding: '1rem 5rem 0rem 5rem'}}>
         <div className="d-flex flex-column align-items-start justify-content-end px-3">
           {selectedConversation.messages.map((message, index) => {
             const lastMessage = selectedConversation.messages.length - 1 === index
@@ -46,7 +46,7 @@ const OpenConversation = () => {
           }
         </div>
       </div>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} style={{padding: '0rem 5rem'}}>
         <Form.Group className="m-2">
           <InputGroup>
             <Form.Control 

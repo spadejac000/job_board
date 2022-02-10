@@ -39,7 +39,12 @@ export const darkTheme = {
   loggedInNavBGColor: '#343A40',
   loggedInNavBorder: '1px solid #ffffff1a',
   dashNavBrandLogoColor: 'white',
-  loggedInNavColor: 'white!important'
+  loggedInNavColor: 'white!important',
+  messageSidebarBorder: '1px solid #ffffff1a',
+  navTabsBGColor: '#212529',
+  navTabsBorder: 'none',
+  navTabsColor: 'white',
+  navTabsBorderHover: '1px solid #212529'
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -166,6 +171,29 @@ export const GlobalStyles = createGlobalStyle`
   .navigation-bar-icon-container,
   a {
     color: ${props => props.theme.loggedInNavColor};
+  }
+
+  .message-sidebar,
+  .message-sidebar-btn-div {
+    border-right: ${props => props.theme.messageSidebarBorder};
+  }
+
+  .message-sidebar-tabs {
+    border-bottom: ${props => props.theme.messageSidebarBorder}; 
+  }
+
+  .nav-tabs .nav-link.active {
+    background: ${props => props.theme.navTabsBGColor};
+    border: ${props => props.theme.navTabsBorder};
+    color: ${props => props.theme.navTabsColor};
+  }
+
+  .nav-tabs .nav-link:hover {
+    border: ${props => props.theme.navTabsBorderHover};
+  }
+
+  .message-sidebar-tabs {
+    border-right: ${props => props.theme.messageSidebarBorder};
   }
 
 `

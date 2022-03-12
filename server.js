@@ -15,7 +15,7 @@ app.listen(port, () => {
   console.log(`server started on port ${port}`)
 })
 
-const io = require('socket.io')(8976)
+const io = require('socket.io')(8876)
 
 io.on('connection', socket => {
   const id = socket.handshake.query.id

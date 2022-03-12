@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const users = require('./routes/api/users')
 const jobs = require('./routes/api/jobs')
 const fileUpload = require('express-fileupload')
+const path = require('path')
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.listen(port, () => {
   console.log(`server started on port ${port}`)
 })
 
-const io = require('socket.io')(8876)
+const io = require('socket.io')(8976)
 
 io.on('connection', socket => {
   const id = socket.handshake.query.id
@@ -34,3 +35,13 @@ io.on('connection', socket => {
 // register and login routes
 app.use('/api/users', users)
 app.use('/api/jobs', jobs)
+
+// serve static assets if in production
+if(process.env.NODE_ENV === 'production') {
+  // set static folder
+  app.use(express.static('client/build'))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}

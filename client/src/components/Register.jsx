@@ -31,11 +31,13 @@ const Register = ({setAuth}) => {
         toast.error("Passwords do not match")
       } else {
         const body = {firstName, lastName, email, password}
+        console.log('working 1')
         const response = await fetch('/api/users/register', {
           method: "POST",
           headers: {"Content-Type": "application/json"},
           body: JSON.stringify(body)
         })
+        console.log('working 2')
         const parseResponse = await response.json()
         if(parseResponse.token) {
           localStorage.setItem("token", parseResponse.token)

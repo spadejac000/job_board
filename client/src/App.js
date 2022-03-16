@@ -47,7 +47,7 @@ const App = () => {
         headers: {token: localStorage.token}
       })
       const parseResponse = await response.json()
-      true === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
+      parseResponse === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
 
     } catch (error) {
       console.error(error.message)

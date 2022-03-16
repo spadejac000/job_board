@@ -33,19 +33,15 @@ const Job = ({job, isAuthenticated}) => {
     e.preventDefault()
     e.stopPropagation();
     if(isAuthenticated) {
-      console.log('what is heartRed: ', heartRed)
       if(heartRed === 'true') {
-        console.log('red heart true: ', heartRed)
         localStorage.setItem(`heart-red-${job_id}`, false)
         setHeartRed(localStorage.getItem(`heart-red-${job_id}`))
         dispatch(deleteFavoriteJob(userID, jobID))
       } else if(heartRed === 'false') {
-        console.log('red heart false: ', heartRed)
         localStorage.setItem(`heart-red-${job_id}`, true)
         setHeartRed(localStorage.getItem(`heart-red-${job_id}`))
         dispatch(addJobToFavorites(jobID, userID))
       } else {
-        console.log('wtf: ', typeof heartRed)
       }
     } else {
       setShowSignIn(true)

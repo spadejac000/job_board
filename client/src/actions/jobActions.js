@@ -35,11 +35,13 @@ export const postJob = (body) => async (dispatch) => {
   }
 }
 
-export const getJobs = (keyword = '', pageNumber = '') => async (dispatch) => {
+export const getJobs = (whatKeyword = '', whereKeyword = '', pageNumber = '') => async (dispatch) => {
   try {
     dispatch({type: GET_JOBS_REQUEST})
 
-    let data = await axios.get(`/api/jobs?${keyword.trim()}&pageNumber=${pageNumber}`).then(res => res.data)
+    console.log('yo here: ', whereKeyword.trim())
+
+    let data = await axios.get(`/api/jobs?whatKeyword=${whatKeyword.trim()}&whereKeyword=${whereKeyword.trim()}&pageNumber=${pageNumber}`).then(res => res.data)
 
     dispatch({
       type: GET_JOBS_SUCCESS,
@@ -135,8 +137,6 @@ export const addJobToFavorites = (jobID, userID) => async (dispatch) => {
     dispatch({type: ADD_JOB_TO_FAVORITES_REQUEST})
 
     const favoritedJob = await axios.post(`/api/jobs/favorites`, body).then(res => res.data)
-
-    console.log('favorite job: ', favoritedJob)
 
     dispatch({
       type: ADD_JOB_TO_FAVORITES_SUCCESS,

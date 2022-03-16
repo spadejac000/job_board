@@ -23,18 +23,21 @@ router.post('/post-job', async (req, res) => {
 
 // GET paginated jobs
 router.get('/', async (req, res) => {
+  console.log('jobs served')
   try {
     const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1
 
-    const keyword = Object.keys(req.query)[0] !== 'pageNumber' ?
-      Object.keys(req.query)[0]
-    : ''
+    console.log('there: ', req.query)
+
+    // const keyword = Object.keys(req.query)[0] !== 'pageNumber' ?
+    //   Object.keys(req.query)[0]
+    // : ''
 
     let theJobs = await pool.query('SELECT * FROM jobs');
     let totalJobs = theJobs.rows.length
-    const count = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2;', [`%${keyword}%`, `%${keyword}%`])).rows.length
-    const jobs = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2 LIMIT $3 OFFSET $4;', [`%${keyword}%`, `%${keyword}%`, pageSize, (pageSize * (page - 1))])).rows
+    const count = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2;', [`%${req.query.whatKeyword}%`, `%${req.query.whatKeyword}%`])).rows.length
+    const jobs = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2 LIMIT $3 OFFSET $4;', [`%${req.query.whatKeyword}%`, `%${req.query.whatKeyword}%`, pageSize, (pageSize * (page - 1))])).rows
     res.json({jobs, page, pages: Math.ceil(count / pageSize), totalJobs, count})
   } catch (error) {
     console.error(error.message)
@@ -145,7 +148,6 @@ router.post('/upload-application', async (req, res) => {
     }
   
     const {name, email, phone, location, jobID, userID} = req.body
-    console.log('job job hob: ', jobID, userID)
   
     const application = await pool.query("INSERT INTO applications (applicant_name, applicant_email, applicant_phone, applicant_location, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;", [name, email, phone, location, jobID, userID])
   
@@ -162,8 +164,6 @@ router.post('/upload-application', async (req, res) => {
 router.get('/applicants', async (req, res) => {
   try {
     let applicantsList = await pool.query("SELECT * FROM applications WHERE job_id = $1;", [req.query.jobID]);
-
-    console.log('applicants list: ', applicantsList.rows)
     
     res.json(applicantsList.rows)
   } catch (error) {

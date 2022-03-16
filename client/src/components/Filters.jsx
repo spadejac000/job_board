@@ -8,12 +8,17 @@ const Filters = () => {
 
   let navigate = useNavigate()
 
-  const [keyword, setkeyword] = useState('')
+  const [whatKeyword, setWhatKeyword] = useState('')
+  const [whereKeyword, setWhereKeyword] = useState('')
 
   const submitHandler = (e) => {
     e.preventDefault()
-    if(keyword.trim()) {
-      navigate(`/search/${keyword}`)
+    if(whatKeyword.trim() && whereKeyword.trim()) {
+      navigate(`/search/${whatKeyword}/${whereKeyword}`)
+    } else if(whatKeyword.trim()) {
+      navigate(`/search/${whatKeyword}`)
+    } else if(whereKeyword.trim()) {
+      navigate(`/search/${whereKeyword}`)
     } else {
       navigate('/')
     }
@@ -30,7 +35,7 @@ const Filters = () => {
             placeholder="Search company name or job title..."
             className="navbar-search-input"
             aria-label="Search"
-            onChange={event => {setkeyword(event.target.value)}}
+            onChange={event => {setWhatKeyword(event.target.value)}}
             />
             <InputGroup.Text><FaSearch/></InputGroup.Text>
           </div>
@@ -41,6 +46,7 @@ const Filters = () => {
             placeholder="Search by location..."
             className="navbar-search-input"
             aria-label="Search"
+            onChange={event => {setWhereKeyword(event.target.value)}}
             />
             <InputGroup.Text><FaMapPin/></InputGroup.Text>
           </div>

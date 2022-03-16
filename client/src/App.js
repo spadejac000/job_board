@@ -74,9 +74,11 @@ const App = () => {
           <Route exact path="/forgot-password" element={<ForgotPassword isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/settings" element={<Settings setAuth={setAuth} isAuthenticated={isAuthenticated}/>}/>
           <Route exact path="/favorite-jobs" element={<FavoriteJobs isAuthenticated={isAuthenticated}/>}/>
-          <Route path="/search/:keyword" element={<Dashboard/>}/>
+          <Route path="/search/:whatKeyword" element={<Dashboard/>}/>
+          <Route path="/search/:whereKeyword" element={<Dashboard/>}/>
+          <Route path="/search/:whatKeyword/:whereKeyword" element={<Dashboard/>}/>
           <Route path="/page/:pageNumber" element={<Dashboard/>}/>
-          <Route path="/search/:keyword/page/:pageNumber" element={<Dashboard/>}/>
+          <Route path="/search/:whatKeyword/:whereKeyword/page/:pageNumber" element={<Dashboard/>}/>
           <Route path="/dynamic/:id" element={<DynamicRoutes/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>

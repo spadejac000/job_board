@@ -3,7 +3,7 @@ import {Pagination} from 'react-bootstrap'
 import {useNavigate} from 'react-router-dom'
 import '../css/paginate.css'
 
-const Paginate = ({pages, page, keyword = ''}) => {
+const Paginate = ({pages, page, whatKeyword = '', whereKeyword = ''}) => {
   const navigate = useNavigate();
   return pages > 1 && (
     <Pagination
@@ -12,7 +12,7 @@ const Paginate = ({pages, page, keyword = ''}) => {
       {[...Array(pages).keys()].map(x => (
           <Pagination.Item 
             key={x}
-            onClick={() => navigate(keyword ? `/search/${keyword}/page/${x+1}` : `/page/${x+1}`)}
+            onClick={() => navigate(whatKeyword || whereKeyword ? `/search/${whatKeyword}/${whereKeyword}/page/${x+1}` : `/page/${x+1}`)}
             className="pagination-box" 
             active={x+1 === page}
           >

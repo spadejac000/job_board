@@ -16,12 +16,13 @@ const Dashboard = ({isAuthenticated}) => {
 
   const dispatch = useDispatch();
   const params = useParams()
-  const {keyword} = useParams();
+  const {whatKeyword} = useParams();
+  const {whereKeyword} = useParams();
   const pageNumber = params.pageNumber || 1;
 
   useEffect(() => {
-    dispatch(getJobs(keyword, pageNumber))
-  }, [dispatch, keyword, pageNumber])
+    dispatch(getJobs(whatKeyword, whereKeyword, pageNumber))
+  }, [dispatch, whatKeyword, whereKeyword, pageNumber])
 
   const jobsState = useSelector(state => 
     state.getJobs
@@ -53,7 +54,7 @@ const Dashboard = ({isAuthenticated}) => {
             <SelectedJob/>
           </Col>
         </Row>
-        <Paginate pages={pages} page={page} keyword={keyword ? keyword : ''}/>
+        <Paginate pages={pages} page={page} whatKeyword={whatKeyword ? whatKeyword : ''} whereKeyword={whereKeyword ? whereKeyword : ''}/>
       </Container>
       <MessagesBox isAuthenticated={isAuthenticated}/>
     </>

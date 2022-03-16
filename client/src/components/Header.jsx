@@ -14,7 +14,9 @@ const Header = ({isAuthenticated, setAuth}) => {
   const location = useLocation()
 
   useEffect(() => {
-    dispatch(printUser())
+    // if(isAuthenticated) {
+      dispatch(printUser())
+    // }
   }, [dispatch, isAuthenticated])
 
   let user = useSelector((state) => {

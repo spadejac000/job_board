@@ -6,7 +6,7 @@ const validInfo = require('../../middleware/validInfo')
 const authorization = require('../../middleware/authorization')
 
 // register
-router.post('/register', async (req, res) => {
+router.post('/register', validInfo, async (req, res) => {
   try {
 
     const {firstName, lastName, email, password} = req.body

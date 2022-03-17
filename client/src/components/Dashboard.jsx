@@ -16,9 +16,12 @@ const Dashboard = ({isAuthenticated}) => {
 
   const dispatch = useDispatch();
   const params = useParams()
+  console.log('the params: ', params)
   const {whatKeyword} = useParams();
   const {whereKeyword} = useParams();
   const pageNumber = params.pageNumber || 1;
+
+  console.log('what: ', whatKeyword, ' where: ', whereKeyword)
 
   useEffect(() => {
     dispatch(getJobs(whatKeyword, whereKeyword, pageNumber))

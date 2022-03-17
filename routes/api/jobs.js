@@ -23,22 +23,21 @@ router.post('/post-job', async (req, res) => {
 
 // GET paginated jobs
 router.get('/', async (req, res) => {
-  console.log('jobs served')
   try {
     const pageSize = 10;
     const page = Number(req.query.pageNumber) || 1
 
-    console.log('there: ', req.query)
-
-    // const keyword = Object.keys(req.query)[0] !== 'pageNumber' ?
-    //   Object.keys(req.query)[0]
-    // : ''
-
     let theJobs = await pool.query('SELECT * FROM jobs');
     let totalJobs = theJobs.rows.length
-    const count = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2;', [`%${req.query.whatKeyword}%`, `%${req.query.whatKeyword}%`])).rows.length
-    const jobs = await (await pool.query('SELECT * FROM jobs WHERE job_title ILIKE $1 OR company_name ILIKE $2 LIMIT $3 OFFSET $4;', [`%${req.query.whatKeyword}%`, `%${req.query.whatKeyword}%`, pageSize, (pageSize * (page - 1))])).rows
+
+    const count = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2);', [`%${req.query.whatKeyword}%`, `%${req.query.whereKeyword}%`])).rows.length
+
+    console.log('count: ', count)
+
+    const jobs = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2) LIMIT $3 OFFSET $4;', [`%${req.query.whatKeyword}%`, `%${req.query.whereKeyword}%`, pageSize, (pageSize * (page - 1))])).rows
+
     res.json({jobs, page, pages: Math.ceil(count / pageSize), totalJobs, count})
+
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')

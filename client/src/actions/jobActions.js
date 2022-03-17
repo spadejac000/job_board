@@ -39,7 +39,7 @@ export const getJobs = (whatKeyword = '', whereKeyword = '', pageNumber = '') =>
   try {
     dispatch({type: GET_JOBS_REQUEST})
 
-    console.log('yo here: ', whereKeyword.trim())
+    console.log('what: ', whatKeyword, 'where: ', whereKeyword)
 
     let data = await axios.get(`/api/jobs?whatKeyword=${whatKeyword.trim()}&whereKeyword=${whereKeyword.trim()}&pageNumber=${pageNumber}`).then(res => res.data)
 

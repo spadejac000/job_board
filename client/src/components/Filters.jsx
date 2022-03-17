@@ -16,9 +16,11 @@ const Filters = () => {
     if(whatKeyword.trim() && whereKeyword.trim()) {
       navigate(`/search/${whatKeyword}/${whereKeyword}`)
     } else if(whatKeyword.trim()) {
-      navigate(`/search/${whatKeyword}`)
+      console.log('uh oh')
+      navigate(`/search/what/${whatKeyword}`)
     } else if(whereKeyword.trim()) {
-      navigate(`/search/${whereKeyword}`)
+      console.log('yesssss')
+      navigate(`/search/where/${whereKeyword}`)
     } else {
       navigate('/')
     }

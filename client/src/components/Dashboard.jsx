@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import Filters from './Filters';
 import { Container, Row, Col } from 'react-bootstrap';
 import Jobs from './Jobs'
@@ -16,22 +16,29 @@ const Dashboard = ({isAuthenticated}) => {
 
   const dispatch = useDispatch();
   const params = useParams()
-  console.log('the params: ', params)
   const {whatKeyword} = useParams();
   const {whereKeyword} = useParams();
   const pageNumber = params.pageNumber || 1;
-
-  console.log('what: ', whatKeyword, ' where: ', whereKeyword)
+  const [sort, setSort] = useState('')
 
   useEffect(() => {
-    dispatch(getJobs(whatKeyword, whereKeyword, pageNumber))
-  }, [dispatch, whatKeyword, whereKeyword, pageNumber])
+    dispatch(getJobs(whatKeyword, whereKeyword, sort, pageNumber))
+  }, [dispatch, whatKeyword, whereKeyword, sort, pageNumber])
 
   const jobsState = useSelector(state => 
     state.getJobs
   )
 
   const {loading, error, jobs, page, pages, count} = jobsState;
+
+  const sortByDatePosted = (e) => {
+    e.preventDefault()
+    if(sort === '') {
+      setSort('descending')
+    }
+    sort === 'descending' ? setSort('ascending') : setSort('descending')
+    dispatch(getJobs(whatKeyword, whereKeyword, sort, pageNumber))
+  }
 
   return (
     <>
@@ -45,7 +52,7 @@ const Dashboard = ({isAuthenticated}) => {
             ) : error ? <AlertMessage variant="danger">{error}</AlertMessage> : (
               <div>
                 <div className='sort-jobs-container'>
-                  <p>Sort by: relavence - date</p>
+                  <p>Sort by: <a href="">relavence</a> - <a href="" onClick={(e) => sortByDatePosted(e)}>date</a></p>
                   <p>Page {page} of {jobs.jobs === null ? 0 : count} jobs</p>
                 </div>
                 <Jobs jobs={jobs} isAuthenticated={isAuthenticated}/>

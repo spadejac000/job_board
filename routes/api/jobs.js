@@ -32,9 +32,21 @@ router.get('/', async (req, res) => {
 
     const count = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2);', [`%${req.query.whatKeyword}%`, `%${req.query.whereKeyword}%`])).rows.length
 
-    console.log('count: ', count)
+    console.log('req query: ', req.query)
 
-    const jobs = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2) LIMIT $3 OFFSET $4;', [`%${req.query.whatKeyword}%`, `%${req.query.whereKeyword}%`, pageSize, (pageSize * (page - 1))])).rows
+    let jobs;
+
+    if(req.query.sort === "descending") {
+      console.log('hello 1')
+      jobs = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2) ORDER BY date_posted DESC LIMIT $3 OFFSET $4;', [`%${req.query.whatKeyword}%`, `%${req.query.whereKeyword}%`, pageSize, (pageSize * (page - 1))])).rows
+    } else if(req.query.sort === "ascending") {
+      console.log('hello 2')
+      jobs = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2) ORDER BY date_posted ASC LIMIT $3 OFFSET $4;', [`%${req.query.whatKeyword}%`, `%${req.query.whereKeyword}%`, pageSize, (pageSize * (page - 1))])).rows
+    } else {
+      console.log('hello 3')
+      jobs = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2) LIMIT $3 OFFSET $4;', [`%${req.query.whatKeyword}%`, `%${req.query.whereKeyword}%`, pageSize, (pageSize * (page - 1))])).rows
+    }
+    
 
     res.json({jobs, page, pages: Math.ceil(count / pageSize), totalJobs, count})
 

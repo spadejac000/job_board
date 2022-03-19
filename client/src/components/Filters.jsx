@@ -26,6 +26,10 @@ const Filters = () => {
     }
   }
 
+  const submitDropdownFilter = async (filterValue) => {
+    console.log('the value: ', filterValue)
+  }
+
   return (
     <Container>
       <div className="mb-5">
@@ -65,11 +69,18 @@ const Filters = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDropdownFilter(1)}>
+              Last 24 hours
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDropdownFilter(3)}>
+              Last 3 days
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDropdownFilter(7)}>Last 7 days</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDropdownFilter(14)}>Last 14 days</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDropdownFilter(1)}>Since your last visit</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">
             Remote
@@ -81,6 +92,7 @@ const Filters = () => {
             <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">
             Within 25 miles
@@ -92,6 +104,7 @@ const Filters = () => {
             <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">
             Salary Estimate
@@ -115,6 +128,7 @@ const Filters = () => {
             <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">
             Developer Skills
@@ -138,6 +152,7 @@ const Filters = () => {
             <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">
             Location
@@ -161,6 +176,7 @@ const Filters = () => {
             <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">
             Experience Level

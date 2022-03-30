@@ -7,3 +7,8 @@
 .sort-jobs-container > p {
   margin-bottom: 0px;
 }
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+}

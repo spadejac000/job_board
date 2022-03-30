@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import Filters from './Filters';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 import Jobs from './Jobs'
 import SelectedJob from './SelectedJob'
 import Paginate from './Paginate'
@@ -19,11 +19,13 @@ const Dashboard = ({isAuthenticated}) => {
   const {whatKeyword} = useParams();
   const {whereKeyword} = useParams();
   const pageNumber = params.pageNumber || 1;
-  const [sort, setSort] = useState('')
+  const [sort, setSort] = useState(1)
+  const [dateFilter, setDateFilter] = useState(0)
+  const [jobLocationFilter, setJobLocationFilter] = useState('')
 
   useEffect(() => {
-    dispatch(getJobs(whatKeyword, whereKeyword, sort, pageNumber))
-  }, [dispatch, whatKeyword, whereKeyword, sort, pageNumber])
+    dispatch(getJobs(whatKeyword, whereKeyword, sort, dateFilter, jobLocationFilter, pageNumber))
+  }, [dispatch, whatKeyword, whereKeyword, sort, dateFilter, jobLocationFilter, pageNumber])
 
   const jobsState = useSelector(state => 
     state.getJobs
@@ -33,16 +35,141 @@ const Dashboard = ({isAuthenticated}) => {
 
   const sortByDatePosted = (e) => {
     e.preventDefault()
-    if(sort === '') {
-      setSort('descending')
-    }
-    sort === 'descending' ? setSort('ascending') : setSort('descending')
-    dispatch(getJobs(whatKeyword, whereKeyword, sort, pageNumber))
+    sort === 2 ? setSort(1) : setSort(2)
+  }
+
+  const submitDateFilter = (filterValue) => {
+    setDateFilter(filterValue)
+  }
+
+  const submitJobLocationFilter = (filterValue) => {
+    setJobLocationFilter(filterValue)
   }
 
   return (
     <>
       <Filters/>
+
+      <Container className="filter-row">
+
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Date Posted
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={(e) => submitDateFilter(1)}>
+              Last 24 hours
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDateFilter(3)}>
+              Last 3 days
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDateFilter(7)}>Last 7 days</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDateFilter(14)}>Last 14 days</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitDateFilter(1)}>Since your last visit</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Job Location
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={(e) => submitJobLocationFilter('Remote')}>Remote</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitJobLocationFilter('In office')}>In office</Dropdown.Item>
+            <Dropdown.Item onClick={(e) => submitJobLocationFilter('Hybrid')}>Hybrid</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        
+        {/* <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Within 25 miles
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Salary Estimate
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Job Type
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Developer Skills
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Education Level
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Location
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Company
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        
+        <Dropdown>
+          <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            Experience Level
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown> */}
+
+      </Container>
+
       <hr/>
       <Container>
         <Row>

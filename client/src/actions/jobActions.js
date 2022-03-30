@@ -35,11 +35,11 @@ export const postJob = (body) => async (dispatch) => {
   }
 }
 
-export const getJobs = (whatKeyword = '', whereKeyword = '', sort, pageNumber = '') => async (dispatch) => {
+export const getJobs = (whatKeyword = '', whereKeyword = '', sort, dateFilter, jobLocationFilter, pageNumber = '') => async (dispatch) => {
   try {
     dispatch({type: GET_JOBS_REQUEST})
 
-    let data = await axios.get(`/api/jobs?whatKeyword=${whatKeyword.trim()}&whereKeyword=${whereKeyword.trim()}&sort=${sort}&pageNumber=${pageNumber}`).then(res => res.data)
+    let data = await axios.get(`/api/jobs?whatKeyword=${whatKeyword.trim()}&whereKeyword=${whereKeyword.trim()}&sort=${sort}&dateFilter=${dateFilter}&jobLocationFilter=${jobLocationFilter}&pageNumber=${pageNumber}`).then(res => res.data)
 
     dispatch({
       type: GET_JOBS_SUCCESS,

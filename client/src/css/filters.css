@@ -10,17 +10,6 @@
   flex-grow: 1;
 }
 
-.filter-row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .filter-row > * {
   margin: 0rem 1rem 1rem 0rem;
 }
-
-/* .dropdown-filter-input {
-  background: none!important;
-  padding: 0!important;
-  border: none;
-} */

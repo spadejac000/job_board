@@ -13,7 +13,7 @@ const Job = ({job, isAuthenticated}) => {
 
   const [showSignIn, setShowSignIn] = useState(false);
   const [viewBanCard, setViewBanCard] = useState(false)
-  const {benefits, city, work_address, job_location, job_title, job_type, salary, zip, _description, _state, date_posted, job_id} = job
+  const {benefits, city, work_address, job_location, job_title, job_type, salary, zip, _description, _state, date_posted, job_id, company_name, test_job} = job
 
   const [heartRed, setHeartRed] = useState(localStorage.getItem(`heart-red-${job_id}`));
 
@@ -81,10 +81,11 @@ const Job = ({job, isAuthenticated}) => {
       <Row>
         <Col md={10}>
           <h2>{job_title}</h2>
-          <h6>Company Name</h6>
+          <h6>{company_name}</h6>
           <h6>{work_address} {city}, {_state}, {zip}</h6>
           <Badge className="salary-badge" bg="primary">{salary}</Badge>
           <p>Posted {datePostedInDays === 0 ? 'today' : datePostedInDays === 1 ? 'yesterday' : `${datePostedInDays} days ago`}</p>
+          {test_job === true ? <h3><Badge>Test Job!</Badge></h3> : null}
         </Col>
         <Col md={2} className="save-ban-col">
           <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>

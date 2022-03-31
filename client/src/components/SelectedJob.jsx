@@ -107,6 +107,11 @@ const SelectedJob = () => {
             </Row>
           </Card.Header>
           <Card.Body className="p-5">
+            <h5>Job Details</h5>
+            <hr/>
+            <strong>Job Location</strong><p>{selectedJob.job_location}</p>
+            <strong>Job Type</strong><p>{selectedJob.job_type}</p>
+            <hr/>
             <p>{selectedJob._description}</p>
           </Card.Body>
         </Card>

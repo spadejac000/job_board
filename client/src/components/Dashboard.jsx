@@ -1,17 +1,17 @@
-import {useEffect, useState} from 'react'
-import Filters from './Filters';
+import {useEffect, useState, lazy, Suspense} from 'react'
 import { Container, Row, Col, Dropdown, Button } from 'react-bootstrap';
-import Jobs from './Jobs'
-import SelectedJob from './SelectedJob'
-import Paginate from './Paginate'
 import '../css/dashboard.css'
-import MessagesBox from './MessagesBox';
-import Loader from './Loader';
-import AlertMessage from './AlertMessage';
 import {useDispatch, useSelector} from 'react-redux'
 import {getJobs} from '../actions/jobActions'
 import {useParams} from 'react-router-dom'
 import {FaTimes} from 'react-icons/fa'
+import Loader from './Loader';
+import AlertMessage from './AlertMessage';
+const Filters = lazy(() => import('./Filters'))
+const SelectedJob = lazy(() => import('./SelectedJob'))
+const Paginate = lazy(() => import('./Paginate'))
+const MessagesBox = lazy(() => import('./MessagesBox'))
+const Jobs = lazy(() => import('./Jobs'))
 
 const Dashboard = ({isAuthenticated}) => {
 
@@ -62,7 +62,7 @@ const Dashboard = ({isAuthenticated}) => {
   }
 
   return (
-    <>
+    <Suspense fallback={<Loader/>}>
       <Filters/>
 
       <Container className="filter-row">
@@ -224,7 +224,7 @@ const Dashboard = ({isAuthenticated}) => {
         <Paginate pages={pages} page={page} whatKeyword={whatKeyword ? whatKeyword : ''} whereKeyword={whereKeyword ? whereKeyword : ''}/>
       </Container>
       {/* <MessagesBox isAuthenticated={isAuthenticated}/> */}
-    </>
+    </Suspense>
   )
 }
 

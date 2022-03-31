@@ -111,6 +111,7 @@ const SelectedJob = () => {
             <hr/>
             <strong>Job Location</strong><p>{selectedJob.job_location}</p>
             <strong>Job Type</strong><p>{selectedJob.job_type}</p>
+            <strong>Salary</strong><p>{selectedJob.salary}</p>
             <hr/>
             <p>{selectedJob._description}</p>
           </Card.Body>

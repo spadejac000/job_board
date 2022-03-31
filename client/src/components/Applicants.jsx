@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, Suspense} from 'react'
 import {getApplicants} from '../actions/jobActions'
 import {useDispatch, useSelector} from 'react-redux'
 import {useLocation} from 'react-router-dom'
@@ -24,19 +24,20 @@ const Applicants = () => {
   }, [dispatch])
 
   return (
-    <Container>
-      <h1>Applicants List</h1>
-      {
-        applicants === null || applicants === undefined ? null : 
-        loading ? <Loader/> : error ? <AlertMessage variant="danger">{error}</AlertMessage> : applicants.length === 0 ? (<h2>There are currently no applicants for this job</h2>) : 
-          applicants.map(applicant => (
-            <div key={applicant.application_id}>
-              <p>{applicant.applicant_name}</p>
-            </div>
-          ))
-      }
-      
-    </Container>
+    <Suspense fallback={<Loader/>}>
+      <Container>
+        <h1>Applicants List</h1>
+        {
+          applicants === null || applicants === undefined ? null : 
+          loading ? <Loader/> : error ? <AlertMessage variant="danger">{error}</AlertMessage> : applicants.length === 0 ? (<h2>There are currently no applicants for this job</h2>) : 
+            applicants.map(applicant => (
+              <div key={applicant.application_id}>
+                <p>{applicant.applicant_name}</p>
+              </div>
+            ))
+        }
+      </Container>
+    </Suspense>
   )
 }
 

@@ -1,9 +1,10 @@
-import {useState} from 'react'
+import {useState, Suspense} from 'react'
 import {Form, Button, InputGroup} from 'react-bootstrap'
 import '../css/login.css';
 import {Link} from 'react-router-dom';
 import {toast} from 'react-toastify'
 import {FaEye, FaEyeSlash} from 'react-icons/fa'
+import Loader from './Loader';
 
 const Login = ({setAuth}) => {
 
@@ -65,47 +66,48 @@ const Login = ({setAuth}) => {
   }
 
   return (
-    <div className="login-form-container">
-      <div className="login-brand-container">
-        <div>
-          <h1 className="login-brand-title">Job Board</h1>
-          <h3 className="login-brand-slogan">The number one job listing app to help you land your dream career!</h3>
+    <Suspense fallback={<Loader/>}>
+      <div className="login-form-container">
+        <div className="login-brand-container">
+          <div>
+            <h1 className="login-brand-title">Job Board</h1>
+            <h3 className="login-brand-slogan">The number one job listing app to help you land your dream career!</h3>
+          </div>
+        </div>
+        <div className="login-form-actual-container">
+          <Form onSubmit={onSubmitForm} className="login-form">
+            <h2 className="login-form-title">Login</h2>
+            <Form.Group>
+              <Form.Label>Email address</Form.Label>
+              <Form.Control className="mb-3" type="email" name="email" id="exampleEmail" placeholder="Email" value={email} onChange={e => onChange(e)}/>
+            </Form.Group>
+            <Form.Label>Password</Form.Label>
+            <InputGroup>
+              <Form.Control className="mb-3" type={passwordType} name="password" id="" placeholder="Password" value={password} onChange={e => onChange(e)}/>
+              <InputGroup.Text 
+                onClick={handlePasswordVisibility} 
+                className="mb-3 login-password-eye-box"
+              >
+                {showPassword === false ? <FaEye/> : <FaEyeSlash/>}
+              </InputGroup.Text>
+            </InputGroup>
+            <Form.Check
+              checked={!!rememberUser}
+              type='checkbox'
+              label={`Remember Me`}
+              className="mb-3"
+              onChange={e => onChangeRememberUser(e)}
+            />
+
+            <Button type='submit' color="primary" className="mb-3" >Login</Button>
+            <div className="mb-3">
+              <Link to='/forgot-password'>Forgot password?</Link>
+            </div> 
+            <div>No account yet? <Link to={'/register'}>Register</Link></div>
+          </Form>
         </div>
       </div>
-      <div className="login-form-actual-container">
-        <Form onSubmit={onSubmitForm} className="login-form">
-          <h2 className="login-form-title">Login</h2>
-          <Form.Group>
-            <Form.Label>Email address</Form.Label>
-            <Form.Control className="mb-3" type="email" name="email" id="exampleEmail" placeholder="Email" value={email} onChange={e => onChange(e)}/>
-          </Form.Group>
-          <Form.Label>Password</Form.Label>
-          <InputGroup>
-            <Form.Control className="mb-3" type={passwordType} name="password" id="" placeholder="Password" value={password} onChange={e => onChange(e)}/>
-            <InputGroup.Text 
-              onClick={handlePasswordVisibility} 
-              className="mb-3 login-password-eye-box"
-            >
-              {showPassword === false ? <FaEye/> : <FaEyeSlash/>}
-            </InputGroup.Text>
-          </InputGroup>
-          <Form.Check
-            checked={!!rememberUser}
-            type='checkbox'
-            label={`Remember Me`}
-            className="mb-3"
-            onChange={e => onChangeRememberUser(e)}
-          />
-
-          <Button type='submit' color="primary" className="mb-3" >Login</Button>
-          <div className="mb-3">
-            <Link to='/forgot-password'>Forgot password?</Link>
-          </div> 
-          <div>No account yet? <Link to={'/register'}>Register</Link></div>
-        </Form>
-      </div>
-      
-    </div>
+    </Suspense>
   )
 }
 

@@ -23,6 +23,7 @@ const Dashboard = ({isAuthenticated}) => {
   const [sort, setSort] = useState(1)
   const [dateFilter, setDateFilter] = useState(0)
   const [dateFilterBtnText, setDateFilterBtnText] = useState('')
+  const [jobLocationFilterBtnText, setJobLocationFilterBtnText] = useState('')
   const [jobLocationFilter, setJobLocationFilter] = useState('')
 
   useEffect(() => {
@@ -52,6 +53,12 @@ const Dashboard = ({isAuthenticated}) => {
 
   const submitJobLocationFilter = (filterValue) => {
     setJobLocationFilter(filterValue)
+    setJobLocationFilterBtnText(filterValue === 'Remote' ? 'Remote' : filterValue === 'In office' ? 'In office' : filterValue === 'Hybrid' ? 'Hybrid' : '')
+  }
+
+  const delJobLocationFilterBtn = () => {
+    setJobLocationFilterBtnText('')
+    setJobLocationFilter('')
   }
 
   return (
@@ -79,22 +86,29 @@ const Dashboard = ({isAuthenticated}) => {
               <Dropdown.Item onClick={(e) => submitDateFilter(14)}>Last 14 days</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-
           :
-
           <Button variant="secondary" onClick={() => delDateFilterBtn()}>{dateFilterBtnText} <FaTimes/></Button>
         }
         
-        <Dropdown>
-          <Dropdown.Toggle variant="primary" id="dropdown-basic">
-            Job Location
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={(e) => submitJobLocationFilter('Remote')}>Remote</Dropdown.Item>
-            <Dropdown.Item onClick={(e) => submitJobLocationFilter('In office')}>In office</Dropdown.Item>
-            <Dropdown.Item onClick={(e) => submitJobLocationFilter('Hybrid')}>Hybrid</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        {jobLocationFilterBtnText === '' ?
+          <Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+              Job Location
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={(e) => submitJobLocationFilter('Remote')}>Remote</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => submitJobLocationFilter('In office')}>In office</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => submitJobLocationFilter('Hybrid')}>Hybrid</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          :
+          <Button variant="secondary" onClick={() => delJobLocationFilterBtn()}>
+            {jobLocationFilterBtnText} <FaTimes/>
+          </Button>
+        }
+        
+
+        
         
         {/* <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">

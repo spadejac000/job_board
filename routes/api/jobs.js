@@ -24,7 +24,7 @@ router.post('/post-job', async (req, res) => {
 // GET paginated jobs
 router.get('/', async (req, res) => {
   try {
-    const pageSize = 10;
+    const pageSize = 5;
     const page = Number(req.query.pageNumber) || 1
 
     let theJobs = await pool.query('SELECT * FROM jobs');
@@ -47,18 +47,18 @@ router.get('/', async (req, res) => {
     console.log('req query: ', req.query)
 
     let jobs = await (await pool.query('SELECT * FROM jobs WHERE (job_title ILIKE $1 OR company_name ILIKE $1) AND (city ILIKE $2 OR _state ILIKE $2 OR zip ILIKE $2) AND CASE WHEN $3 = 1 THEN date_posted > current_date - 1 WHEN $3 = 3 THEN date_posted > current_date - 3 WHEN $3 = 7 THEN date_posted > current_date - 7 WHEN $3 = 14 THEN date_posted > current_date - 14 ELSE true END AND CASE WHEN $4 = $5 THEN job_location = $5 WHEN $4 = $6 THEN job_location = $6 WHEN $4 = $7 THEN job_location = $7 ELSE true END ORDER BY CASE WHEN $8 = 1 THEN date_posted END ASC, CASE WHEN $8 = 2 THEN date_posted END DESC LIMIT $9 OFFSET $10;',
-    [
-      `%${req.query.whatKeyword}%`, 
-      `%${req.query.whereKeyword}%`,
-      `${req.query.dateFilter}`, 
-      `${req.query.jobLocationFilter}`, 
-      'In office',
-      'Remote',
-      'Hybrid',
-      `${req.query.sort}`,
-      pageSize, 
-      (pageSize * (page - 1))
-    ])).rows
+      [
+        `%${req.query.whatKeyword}%`,
+        `%${req.query.whereKeyword}%`,
+        `${req.query.dateFilter}`,
+        `${req.query.jobLocationFilter}`,
+        'In office',
+        'Remote',
+        'Hybrid',
+        `${req.query.sort}`,
+        pageSize,
+        (pageSize * (page - 1))
+      ])).rows
 
     res.json({jobs, page, pages: Math.ceil(count / pageSize), totalJobs, count})
 

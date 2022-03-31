@@ -14,9 +14,7 @@ const Header = ({isAuthenticated, setAuth}) => {
   const location = useLocation()
 
   useEffect(() => {
-    // if(isAuthenticated) {
-      dispatch(printUser())
-    // }
+    dispatch(printUser())
   }, [dispatch, isAuthenticated])
 
   let user = useSelector((state) => {
@@ -53,7 +51,7 @@ const Header = ({isAuthenticated, setAuth}) => {
               <div className="navbar-user-name ms-3">
                 <span style={{color: 'white'}} className="welcome-title">{user}</span>
               </div>
-              <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container navigation-bar-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link>
+              {/* <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container navigation-bar-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link> */}
 
               <NavDropdown className="navigation-bar-icon-container navbar-jobs-link" title={<FaBriefcase/>} id="jobs-nav-dropdown" align="end">
                 <NavDropdown.Item>

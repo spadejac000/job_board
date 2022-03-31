@@ -219,11 +219,11 @@ const Dashboard = ({isAuthenticated}) => {
           </Col>
           <Col>
             <SelectedJob/>
-          </Col>
-        </Row>
+          </Col> 
+        </Row> 
         <Paginate pages={pages} page={page} whatKeyword={whatKeyword ? whatKeyword : ''} whereKeyword={whereKeyword ? whereKeyword : ''}/>
       </Container>
-      <MessagesBox isAuthenticated={isAuthenticated}/>
+      {/* <MessagesBox isAuthenticated={isAuthenticated}/> */}
     </>
   )
 }

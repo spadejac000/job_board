@@ -12,3 +12,7 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.no-jobs-div {
+  margin: 5rem 0rem;
+}

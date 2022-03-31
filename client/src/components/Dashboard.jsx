@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import Filters from './Filters';
-import { Container, Row, Col, Dropdown } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, Button } from 'react-bootstrap';
 import Jobs from './Jobs'
 import SelectedJob from './SelectedJob'
 import Paginate from './Paginate'
@@ -11,6 +11,7 @@ import AlertMessage from './AlertMessage';
 import {useDispatch, useSelector} from 'react-redux'
 import {getJobs} from '../actions/jobActions'
 import {useParams} from 'react-router-dom'
+import {FaTimes} from 'react-icons/fa'
 
 const Dashboard = ({isAuthenticated}) => {
 
@@ -21,6 +22,7 @@ const Dashboard = ({isAuthenticated}) => {
   const pageNumber = params.pageNumber || 1;
   const [sort, setSort] = useState(1)
   const [dateFilter, setDateFilter] = useState(0)
+  const [dateFilterBtnText, setDateFilterBtnText] = useState('')
   const [jobLocationFilter, setJobLocationFilter] = useState('')
 
   useEffect(() => {
@@ -40,6 +42,12 @@ const Dashboard = ({isAuthenticated}) => {
 
   const submitDateFilter = (filterValue) => {
     setDateFilter(filterValue)
+    setDateFilterBtnText(filterValue === 1 ? 'Last 24 hours' : filterValue === 3 ? 'Last 3 days' : filterValue === 7 ? 'Last 7 days' : filterValue === 14 ? 'Last 14 days' : '')
+  }
+
+  const delDateFilterBtn = () => {
+    setDateFilterBtnText('')
+    setDateFilter(0)
   }
 
   const submitJobLocationFilter = (filterValue) => {
@@ -52,22 +60,30 @@ const Dashboard = ({isAuthenticated}) => {
 
       <Container className="filter-row">
 
-        <Dropdown>
-          <Dropdown.Toggle variant="primary" id="dropdown-basic">
-            Date Posted
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={(e) => submitDateFilter(1)}>
-              Last 24 hours
-            </Dropdown.Item>
-            <Dropdown.Item onClick={(e) => submitDateFilter(3)}>
-              Last 3 days
-            </Dropdown.Item>
-            <Dropdown.Item onClick={(e) => submitDateFilter(7)}>Last 7 days</Dropdown.Item>
-            <Dropdown.Item onClick={(e) => submitDateFilter(14)}>Last 14 days</Dropdown.Item>
-            <Dropdown.Item onClick={(e) => submitDateFilter(1)}>Since your last visit</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        {dateFilterBtnText === '' ? 
+          <Dropdown>
+            <Dropdown.Toggle 
+              variant="primary" 
+              id="dropdown-basic"
+            >
+              Date Posted
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={(e) => submitDateFilter(1)}>
+                Last 24 hours
+              </Dropdown.Item>
+              <Dropdown.Item onClick={(e) => submitDateFilter(3)}>
+                Last 3 days
+              </Dropdown.Item>
+              <Dropdown.Item onClick={(e) => submitDateFilter(7)}>Last 7 days</Dropdown.Item>
+              <Dropdown.Item onClick={(e) => submitDateFilter(14)}>Last 14 days</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          :
+
+          <Button variant="secondary" onClick={() => delDateFilterBtn()}>{dateFilterBtnText} <FaTimes/></Button>
+        }
         
         <Dropdown>
           <Dropdown.Toggle variant="primary" id="dropdown-basic">

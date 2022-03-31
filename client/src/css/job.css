@@ -41,6 +41,7 @@
   top: 30%;
   right: -20%;
   padding: .5rem 1rem;
+  z-index: 1;
 }
 
 .exit-sign-in-pop-up {

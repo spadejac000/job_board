@@ -1,7 +1,6 @@
 import {useState} from 'react'
-import {Form, FormControl, Button, Container, InputGroup, Dropdown} from 'react-bootstrap';
+import {Form, FormControl, Button, Container, InputGroup} from 'react-bootstrap';
 import '../css/filters.css'
-import {FaSearch, FaMapPin} from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
 
 const Filters = () => {
@@ -39,7 +38,6 @@ const Filters = () => {
             aria-label="Search"
             onChange={event => {setWhatKeyword(event.target.value)}}
             />
-            <InputGroup.Text><FaSearch/></InputGroup.Text>
           </div>
           <div className="d-flex input-group">
             <InputGroup.Text>Where</InputGroup.Text>
@@ -50,7 +48,6 @@ const Filters = () => {
             aria-label="Search"
             onChange={event => {setWhereKeyword(event.target.value)}}
             />
-            <InputGroup.Text><FaMapPin/></InputGroup.Text>
           </div>
           <div>
             <Button type="submit" variant="primary">Search</Button>

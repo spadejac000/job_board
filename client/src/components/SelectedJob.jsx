@@ -96,7 +96,7 @@ const SelectedJob = () => {
               <Col>
                 <h2>{selectedJob.job_title}</h2>
                 <h6>{selectedJob.company_name}</h6>
-                <h6>{selectedJob.salary}</h6>
+                <h6>${selectedJob.salary}</h6>
                 <Button onClick={handleShow}>Apply</Button>
               </Col>
               <Col className="exit-selected-job-col">
@@ -111,7 +111,7 @@ const SelectedJob = () => {
             <hr/>
             <strong>Job Location</strong><p>{selectedJob.job_location}</p>
             <strong>Job Type</strong><p>{selectedJob.job_type}</p>
-            <strong>Salary</strong><p>{selectedJob.salary}</p>
+            <strong>Salary</strong><p>${selectedJob.salary}</p>
             <hr/>
             <p>{selectedJob._description}</p>
           </Card.Body>

@@ -209,7 +209,7 @@ const Dashboard = ({isAuthenticated}) => {
             ) : error ? <AlertMessage variant="danger">{error}</AlertMessage> : (
               <div>
                 <div className='sort-jobs-container'>
-                  <p>Sort by: <a href="">relavence</a> - <a href="" onClick={(e) => sortByDatePosted(e)}>date</a></p>
+                  <p>Sort by: <a href="">relevance</a> - <a href="" onClick={(e) => sortByDatePosted(e)}>date</a></p>
                   <p>Page {page} of {jobs.jobs === null ? 0 : count} jobs</p>
                 </div>
                 <Jobs jobs={jobs} isAuthenticated={isAuthenticated}/>

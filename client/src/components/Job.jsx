@@ -50,7 +50,12 @@ const Job = ({job, isAuthenticated}) => {
 
   const handleBanJob = (e) => {
     e.stopPropagation();
-    setViewBanCard(true)
+    if(isAuthenticated) {
+      setViewBanCard(true)
+    } else {
+      setShowSignIn(true)
+    }
+    
   }
 
   const handleExitShowSignIn = (e) => {
@@ -82,8 +87,8 @@ const Job = ({job, isAuthenticated}) => {
         <Col md={10}>
           <h2>{job_title}</h2>
           <h6>{company_name}</h6>
-          <h6>{work_address} {city}, {_state}, {zip}</h6>
-          <Badge className="salary-badge" bg="primary">{salary}</Badge>
+          <h6>{city}, {_state}</h6>
+          <Badge className="salary-badge" bg="primary">${salary}</Badge>
           <p>Posted {datePostedInDays === 0 ? 'today' : datePostedInDays === 1 ? 'yesterday' : `${datePostedInDays} days ago`}</p>
           {test_job === true ? <h3><Badge>Test Job!</Badge></h3> : null}
         </Col>

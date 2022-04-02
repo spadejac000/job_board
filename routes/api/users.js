@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const jwtGenerator = require('../../utils/jwtGenerator')
 const validInfo = require('../../middleware/validInfo')
 const authorization = require('../../middleware/authorization')
+const nodemailer = require("nodemailer");
 
 // register
 router.post('/register', validInfo, async (req, res) => {
@@ -107,6 +108,47 @@ router.put('/:id', async (req, res) => {
 
     res.json(updateUserPassword)
   } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+router.post('/forgot-password', async (req, res) => {
+  try {
+
+    console.log('req body in forgot password: ', req.body)
+
+    const email = await pool.query('SELECT * FROM users WHERE user_email = $1', [req.body.email])
+    
+    // if(email.rows.length !== 0) {
+
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: 'spadejacob@gmail.com',
+          pass: 'Pirate9*'
+        }
+      });
+
+      let info = await transporter.sendMail({
+        from: 'spadejacob@gmail.com', // sender address
+        to: 'spade.jacob@yahoo.com, spadejacob105@gmail.com',
+        subject: "Password Reset", // Subject line
+        text: "Hello world?", // plain text body
+        html: "<b>Click here to reset password</b>", // html body
+      });
+
+      console.log("Message sent: %s", info.messageId);
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // }
+
+    res.send('working')
+
+  } catch (error) {
+    console.log('uh oh')
     console.error(error.message)
     res.status(500).send('Server Error')
   }

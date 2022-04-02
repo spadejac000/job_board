@@ -84,7 +84,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
               <NavDropdown className="navigation-bar-icon-container" id="basic-nav-dropdown" align="end">
 
-                <NavDropdown.Item>
+                {/* <NavDropdown.Item>
                   <LinkContainer className="nav-dropdown-item-link-container" to="/favorite-jobs">
                     <div>
                       <div className="dropdown-item-left-grouping">
@@ -96,7 +96,7 @@ const Header = ({isAuthenticated, setAuth}) => {
                       <FaChevronRight />
                     </div>
                   </LinkContainer>
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
 
                 <NavDropdown.Item>
                   <LinkContainer className="nav-dropdown-item-link-container" to="/settings">

@@ -76,25 +76,25 @@ const PostJob = ({isAuthenticated}) => {
           <h1 className="post-job-form-title">Post Job</h1>
           <hr/>
           <Form.Group>
-            <Form.Label>Job title</Form.Label>
-            <Form.Control className="mb-3" type="text" name="jobTitle" id="job-title-post-job" placeholder="Job title" value={jobTitle} onChange={e => onChange(e)}/>
+            <Form.Label className="required">Job title</Form.Label>
+            <Form.Control className="mb-3" type="text" name="jobTitle" id="job-title-post-job" placeholder="Job title" value={jobTitle} onChange={e => onChange(e)} required/>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Company name</Form.Label>
-            <Form.Control className="mb-3" type="text" name="companyName" id="company-name-post-job" placeholder="Company name" value={companyName} onChange={e => onChange(e)}/>
+            <Form.Label className="required">Company name</Form.Label>
+            <Form.Control className="mb-3" type="text" name="companyName" id="company-name-post-job" placeholder="Company name" value={companyName} onChange={e => onChange(e)} required/>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Address</Form.Label>
-            <Form.Control className="mb-3" type="text" name="address" id="address-post-job" placeholder="Address" value={address} onChange={e => onChange(e)}/>
+            <Form.Label className="required">Address</Form.Label>
+            <Form.Control className="mb-3" type="text" name="address" id="address-post-job" placeholder="Address" value={address} onChange={e => onChange(e)} required/>
           </Form.Group>
           <Row>
             <Form.Group as={Col}>
-              <Form.Label>City</Form.Label>
-              <Form.Control className="mb-3" type="text" name="city" id="city-post-job" placeholder="City" value={city} onChange={e => onChange(e)}/>
+              <Form.Label className="required">City</Form.Label>
+              <Form.Control className="mb-3" type="text" name="city" id="city-post-job" placeholder="City" value={city} onChange={e => onChange(e)} required/>
             </Form.Group>
             <Form.Group as={Col}>
-              <Form.Label>State</Form.Label>
-              <Form.Select name="state" onChange={e => onChangeDropdowns(e)} className="mb-3" value={state}>
+              <Form.Label className="required">State</Form.Label>
+              <Form.Select name="state" onChange={e => onChangeDropdowns(e)} className="mb-3" value={state} required>
                 <option>Choose state</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -150,13 +150,13 @@ const PostJob = ({isAuthenticated}) => {
               </Form.Select>
             </Form.Group>
             <Form.Group as={Col}>
-              <Form.Label>Zip code</Form.Label>
-              <Form.Control className="mb-3" type="text" name="zip" id="zip-post-job" placeholder="Zip code" value={zip} onChange={e => onChange(e)}/>
+              <Form.Label className="required">Zip code</Form.Label>
+              <Form.Control className="mb-3" type="text" name="zip" id="zip-post-job" placeholder="Zip code" value={zip} onChange={e => onChange(e)} required/>
             </Form.Group>
           </Row>
           <Form.Group>
-            <Form.Label>Where the job is performed</Form.Label>
-            <Form.Select name="jobLocation" onChange={e => onChangeDropdowns(e)} className="mb-3" value={jobLocation}>
+            <Form.Label className="required">Where the job is performed</Form.Label>
+            <Form.Select name="jobLocation" onChange={e => onChangeDropdowns(e)} className="mb-3" value={jobLocation} required>
               <option>Choose job location</option>
               <option>Remote</option>
               <option>In office</option>
@@ -164,8 +164,8 @@ const PostJob = ({isAuthenticated}) => {
             </Form.Select>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Job type</Form.Label>
-            <Form.Select name="jobType" onChange={e => onChangeDropdowns(e)} className="mb-3" defaultValue={jobType}>
+            <Form.Label className="required">Job type</Form.Label>
+            <Form.Select name="jobType" onChange={e => onChangeDropdowns(e)} className="mb-3" defaultValue={jobType} required>
               <option>Choose job type</option>
               <option>Full-time</option>
               <option>Part-time</option>
@@ -176,8 +176,8 @@ const PostJob = ({isAuthenticated}) => {
             </Form.Select>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Salary</Form.Label>
-            <Form.Control className="mb-3" type="text" name="salary" id="salary-post-job" placeholder="Salary" value={salary} onChange={e => onChange(e)}/>
+            <Form.Label className="required">Salary</Form.Label>
+            <Form.Control className="mb-3" type="text" name="salary" id="salary-post-job" placeholder="Salary" value={salary} onChange={e => onChange(e)} required/>
           </Form.Group>
           <Form.Group style={{marginBottom: '1rem'}}>
             <h6>Benefits Offered</h6>
@@ -223,8 +223,8 @@ const PostJob = ({isAuthenticated}) => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label><h6>Job Description (Max: 10000 characters)</h6></Form.Label>
-            <Form.Control placeholder="Describe your available position..." name="description" maxLength="10000" as="textarea" rows={8} defaultValue={description} onChange={e => onChange(e)}/>
+            <Form.Label><h6 className="required">Job Description (Max: 10000 characters)</h6></Form.Label>
+            <Form.Control placeholder="Describe your available position..." name="description" maxLength="10000" as="textarea" rows={8} defaultValue={description} onChange={e => onChange(e)} required/>
           </Form.Group>
           <Button type="submit" className="mb-3 btn-primary btn-lg">Post Job</Button>
         </Form>

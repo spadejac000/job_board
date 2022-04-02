@@ -100,9 +100,9 @@ const Login = ({setAuth}) => {
             />
 
             <Button type='submit' color="primary" className="mb-3" >Login</Button>
-            <div className="mb-3">
+            {/* <div className="mb-3">
               <Link to='/forgot-password'>Forgot password?</Link>
-            </div> 
+            </div>  */}
             <div>No account yet? <Link to={'/register'}>Register</Link></div>
           </Form>
         </div>

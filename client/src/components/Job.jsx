@@ -93,12 +93,12 @@ const Job = ({job, isAuthenticated}) => {
           {test_job === true ? <h3><Badge>Test Job!</Badge></h3> : null}
         </Col>
         <Col md={2} className="save-ban-col">
-          <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>
+          {/* <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>
             <FaHeart className={heartRed === 'true' ? 'heart-job-red' : ''}/>
           </div>
           <div onClick={(e) => handleBanJob(e)}>
             <FaBan/>
-          </div>
+          </div> */}
         </Col>
       </Row>
       <>

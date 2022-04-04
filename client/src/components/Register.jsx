@@ -30,11 +30,37 @@ const Register = ({setAuth}) => {
   }
 
   const validateFirstName = () => {
-    setFirstNameError("Please enter your first name")
+    if(firstName === "") {
+      setFirstNameError("Please enter your first name")
+    } else {
+      setFirstNameError("")
+    }
+  }
+
+  const validateLastName = () => {
+    if(lastName === "") {
+      setLastNameError("Please enter your last name")
+    }
+  }
+
+  const validateEmail = () => {
+    if(email !== "/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/") {
+      setEmailError("Please enter a valid email")
+    }
+  }
+
+  const validatePassword = () => {
+    if(password.length < 7) {
+      setPasswordError("Please enter a valid password")
+    }
   }
 
   const validateConfirmPassword = () => {
-    setConfirmPasswordError("Please confirm password")
+    if(confirmPassword < 7) {
+      setConfirmPasswordError("Please confirm password")
+    } else {
+      setConfirmPasswordError("")
+    }
   }
 
   const onSubmitForm = async (e) => {
@@ -91,6 +117,7 @@ const Register = ({setAuth}) => {
               required
               onBlur={() => validateFirstName()}
               isInvalid={firstNameError === "" ? false : true}
+              isValid={firstName.length > 0 ? true : false}
             />
             <Form.Control.Feedback type={firstNameError === "" ? "valid" : "invalid"}>
               {firstNameError}
@@ -107,22 +134,51 @@ const Register = ({setAuth}) => {
               required
               onBlur={() => validateLastName()}
               isInvalid={lastNameError === "" ? false : true}
+              isValid={lastName.length > 0 ? true : false}
             />
             <Form.Control.Feedback type={lastNameError === "" ? "valid" : "invalid"}>
               {lastNameError}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group>
-            <Form.Control className="mb-3" type="email" name="email" id="email-register" placeholder="Email" value={email} onChange={e => onChange(e)} />
+          <Form.Group className="mb-3">
+            <Form.Control 
+              type="email" 
+              name="email" 
+              id="email-register" 
+              placeholder="Email" 
+              value={email} 
+              onChange={e => onChange(e)} 
+              required
+              onBlur={() => validateEmail()}
+              isInvalid={emailError === "" ? false : true}
+              isValid={email.length > 0 ? true : false}
+            />
+            <Form.Control.Feedback type={emailError === "" ? "valid" : "invalid"}>
+              {emailError}
+            </Form.Control.Feedback>
           </Form.Group>
-          <InputGroup>
-            <Form.Control className="mb-3" type={passwordType} name="password" id="password-register" placeholder="Password" value={password} onChange={e => onChange(e)}/>
+          <InputGroup className="mb-3">
+            <Form.Control 
+              type={passwordType} 
+              name="password" 
+              id="password-register" 
+              placeholder="Password" 
+              value={password} 
+              onChange={e => onChange(e)}
+              required
+              onBlur={() => validatePassword()}
+              isInvalid={passwordError === "" ? false : true}
+              isValid={password.length > 0 ? true : false}
+            />
             <InputGroup.Text 
               onClick={handlePasswordVisibility} 
-              className="mb-3 register-password-eye-box"
+              className="register-password-eye-box"
             >
               {showPassword === false ? <FaEye/> : <FaEyeSlash/>}
             </InputGroup.Text>
+            <Form.Control.Feedback type={passwordError === "" ? "valid" : "invalid"}>
+              {passwordError}
+            </Form.Control.Feedback>
           </InputGroup>
           
           <InputGroup className="mb-3" hasValidation>
@@ -135,6 +191,7 @@ const Register = ({setAuth}) => {
               required
               onBlur={() => validateConfirmPassword()}
               isInvalid={confirmPasswordError === "" ? false : true}
+              isValid={confirmPassword.length > 0 ? true : false}
             />
             <InputGroup.Text 
               onClick={handlePasswordVisibility} 

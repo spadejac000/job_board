@@ -129,7 +129,7 @@ router.post('/forgot-password', async (req, res) => {
         secure: false, // true for 465, false for other ports
         auth: {
           user: 'spadejacob@gmail.com',
-          pass: 'Pirate9*'
+          pass: ''
         }
       });
 

@@ -40,24 +40,32 @@ const Register = ({setAuth}) => {
   const validateLastName = () => {
     if(lastName === "") {
       setLastNameError("Please enter your last name")
+    } else {
+      setLastNameError("")
     }
   }
 
   const validateEmail = () => {
-    if(email !== "/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/") {
+    if(!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
       setEmailError("Please enter a valid email")
+    } else {
+      setEmailError("")
     }
   }
 
   const validatePassword = () => {
     if(password.length < 7) {
       setPasswordError("Please enter a valid password")
+    } else {
+      setPasswordError("")
     }
   }
 
   const validateConfirmPassword = () => {
     if(confirmPassword < 7) {
       setConfirmPasswordError("Please confirm password")
+    } else if(password !== confirmPassword) {
+      setConfirmPasswordError("Passwords must match")
     } else {
       setConfirmPasswordError("")
     }

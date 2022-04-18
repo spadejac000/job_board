@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
-import {Card, Badge, Button} from 'react-bootstrap'
-import {FaEdit, FaTimes} from 'react-icons/fa'
+import {Card, Badge, Button, Row, Col} from 'react-bootstrap'
+import {FaEdit, FaTimes, FaFile} from 'react-icons/fa'
 import {useDispatch, useSelector} from 'react-redux'
 import EditJobModal from './EditJobModal'
 import {getUserJobs} from '../actions/jobActions'
 import {Link} from 'react-router-dom'
+import '../css/user-job.css'
 
 const UserJob = ({job}) => {
 
@@ -42,25 +43,33 @@ const UserJob = ({job}) => {
 
   return (
     <div>
-      <Card key={job.job_id} className="mt-5 mb-5 p-5">
-        <h1>{job.job_title}</h1>
-        <h3>{job.company_name}</h3>
-        <h6>
-          {job.work_address} {job.city} {job._state} {job.zip}
-        </h6>
-        <div className="user-job-salary-container"><h6>Salary: </h6><Badge>{job.salary}</Badge></div>
-        <div className="user-job-benefits-container"><h6>Benefits: </h6><Badge>None right now</Badge></div>
-        <div className="user-job-type-container"><h6>Job Type: </h6><Badge>{job.job_type}</Badge></div>
-        <div className="user-job-location-container"><h6>Job Location: </h6><Badge>{job.job_location}</Badge></div>
-
-        <h6>Job Description: </h6>
-        <p>{job._description}</p>
-        <div className="user-job-actions-container">
-          <Link to={`/applicants/${job.job_id}`} className="btn btn-primary">View Applicants</Link>
-          <Button variant="warning" onClick={handleShow}><FaEdit onClick={() => editUserJob(job.job_id)}/> Edit</Button>
-          <Button variant="danger" onClick={() => deleteUserJob(job.job_id)}><FaTimes/> Delete</Button>
-        </div>
-      </Card>
+      <div key={job.job_id} className="">
+        <Row className="user-job-row g-0">
+          <Col>
+            <p className="user-job-data">{job.job_title}</p>
+          </Col>
+          <Col>
+            <p className="user-job-data">{job.company_name}</p>
+          </Col>
+          <Col>
+            <p className="user-job-data">{job.job_location}</p>
+          </Col>
+          <Col>
+            <p className="user-job-data">{job.job_type}</p>
+          </Col>
+          <Col>
+            <p className="user-job-data">{job.city} {job._state}</p>
+          </Col>
+          <Col>
+            <div className="user-job-actions-container user-job-data">
+              <Link to={`/applicants/${job.job_id}`} className="btn btn-primary"><FaFile/></Link>
+              <Button variant="warning" onClick={handleShow}><FaEdit onClick={() => editUserJob(job.job_id)}/></Button>
+              <Button variant="danger" onClick={() => deleteUserJob(job.job_id)}><FaTimes/></Button>
+            </div>
+          </Col>
+        </Row>
+        <hr className="my-0"/>
+      </div>
       <EditJobModal job={job} show={show} handleClose={handleClose} editUserJob={editUserJob}/>
     </div>
     

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {getUserJobs} from '../actions/jobActions'
-import {Container, Button} from 'react-bootstrap'
+import {Container, Button, Row, Col} from 'react-bootstrap'
 import '../css/user-jobs.css'
 import {motion, AnimatePresence} from 'framer-motion'
 import UserJob from './UserJob'
@@ -47,16 +47,38 @@ const UserJobs = ({isAuthenticated}) => {
           <Loader/> :
           errorUserJobs ?
           <AlertMessage variant="danger">{errorUserJobs}</AlertMessage> : 
-          userJobs.map((job) => (
-          <motion.div 
-            key={job.job_id}
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-          >
-            <UserJob job={job}/>
-          </motion.div>
-        ))
+          <div>
+            <Row className="mt-5 user-jobs-header g-0">
+              <Col>
+                <h6 className="user-jobs-title">Job Title</h6>
+              </Col>
+              <Col>
+                <h6 className="user-jobs-title">Company</h6>
+              </Col>
+              <Col>
+                <h6 className="user-jobs-title">Work Type</h6>
+              </Col>
+              <Col>
+                <h6 className="user-jobs-title">Job Type</h6>
+              </Col>
+              <Col>
+                <h6 className="user-jobs-title">Job Address</h6>
+              </Col>
+              <Col>
+                <h6 className="user-jobs-title">Actions</h6>
+              </Col>
+            </Row>
+            {userJobs.map((job) => (
+            <motion.div 
+              key={job.job_id}
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              exit={{opacity: 0}}
+            >
+              <UserJob job={job}/>
+            </motion.div>
+          ))}
+        </div>
         }
       </AnimatePresence>
     </Container>

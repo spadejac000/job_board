@@ -10,7 +10,7 @@ const nodemailer = require("nodemailer");
 router.post('/register', validInfo, async (req, res) => {
   try {
 
-    const {firstName, lastName, email, password} = req.body
+    const {firstName, lastName, email, password, role} = req.body
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [email])
 
     if(user.rows.length !== 0) {
@@ -21,7 +21,7 @@ router.post('/register', validInfo, async (req, res) => {
     const salt = await bcrypt.genSalt(saltRound)
     const bcryptPassword = await bcrypt.hash(password, salt)
 
-    let newUser = await pool.query("INSERT INTO users (user_first_name, user_last_name, user_email, user_password) VALUES ($1, $2, $3, $4) RETURNING *", [firstName, lastName, email, bcryptPassword]);
+    let newUser = await pool.query("INSERT INTO users (user_first_name, user_last_name, user_email, user_password, user_role) VALUES ($1, $2, $3, $4, $5) RETURNING *", [firstName, lastName, email, bcryptPassword, role]);
 
     const token = jwtGenerator(newUser.rows[0].user_id, )
     res.json({token})
@@ -56,9 +56,9 @@ router.post("/login", validInfo, async (req, res) => {
 
 router.get('/', authorization, async (req, res) => {
   try {
-    const user = await pool.query("SELECT user_first_name FROM users WHERE user_id = $1", [req.user])
-    let userName = user.rows[0]
-    res.json({userName: user.rows[0], userID: req.user})
+    const user = await pool.query("SELECT user_first_name, user_role FROM users WHERE user_id = $1", [req.user])
+    console.log('user rows: ', user.rows[0].user_first_name)
+    res.json({userName: user.rows[0].user_first_name, userRole: user.rows[0].user_role, userID: req.user})
   } catch (error) {
     console.error(error.message)
     res.status(500).send("server error")

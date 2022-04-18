@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {Form, Button, InputGroup} from 'react-bootstrap'
+import {Form, Button, InputGroup, Card} from 'react-bootstrap'
 import {Link} from 'react-router-dom';
 import '../css/register.css';
 import {toast} from 'react-toastify'
@@ -14,6 +14,9 @@ const Register = ({setAuth}) => {
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
   const [confirmPasswordError, setConfirmPasswordError] = useState("")
+  const [role, setRole] = useState(null)
+  const [jobSeekerRole, setJobSeekerRole] = useState(false)
+  const [employeerRole, setEmployeerRole] = useState(false)
 
   const [inputs, setInputs] = useState({
     firstName: "",
@@ -27,6 +30,10 @@ const Register = ({setAuth}) => {
 
   const onChange = (e) => {
     setInputs({...inputs, [e.target.name] : e.target.value})
+  }
+
+  const onChangeRole = (e) => {
+    setRole(e.target.value)
   }
 
   const validateFirstName = () => {
@@ -77,7 +84,7 @@ const Register = ({setAuth}) => {
       if(password !== confirmPassword) {
         toast.error("Passwords do not match")
       } else {
-        const body = {firstName, lastName, email, password}
+        const body = {firstName, lastName, email, password, role}
         const response = await fetch('/api/users/register', {
           method: "POST",
           headers: {"Content-Type": "application/json"},
@@ -211,6 +218,37 @@ const Register = ({setAuth}) => {
               {confirmPasswordError}
             </Form.Control.Feedback>
           </InputGroup>
+
+          <h3>Your role</h3>
+          
+          <div>
+            <Card className="p-2 mb-3">
+              <Form.Check
+                inline
+                label="Employeer"
+                name="group1"
+                type="radio"
+                id={`inline-radio-1`}
+                value="employeer"
+                onChange={e => onChangeRole(e)}
+                required
+              />
+            </Card>
+            
+            <Card className="p-2 mb-3">
+              <Form.Check
+                inline
+                label="Job Seeker"
+                name="group1"
+                type="radio"
+                id={`inline-radio-2`}
+                value="job_seeker"
+                onChange={e => onChangeRole(e)}
+                required
+              />
+            </Card>
+          </div>
+          
 
           <Button type="submit" className="mb-3 btn-primary">Register</Button>
           <div>Have an account? <Link to={'/login'}>Login</Link></div>

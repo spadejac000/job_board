@@ -41,6 +41,12 @@ const App = () => {
     state.theme
   )
 
+  let userRole = useSelector((state) =>
+    state.user.userRole
+  )
+
+  console.log('user role: ', userRole)
+
   const isAuth = async () => {
     try {
       const response = await fetch('/api/users/is-verify', {
@@ -68,7 +74,7 @@ const App = () => {
           <Routes>
             <Route exact path="/login" element={!isAuthenticated ? <Login setAuth={setAuth}/> : <Navigate to="/"/>}/>
             <Route exact path="/register" element={!isAuthenticated ? <Register setAuth={setAuth}/> : <Navigate to="/login"/>}/>
-            <Route exact path="/" element={<Dashboard  isAuthenticated={isAuthenticated}/>}/>
+            <Route exact path="/" element={userRole === "employeer" ? <UserJobs isAuthenticated={isAuthenticated}/> : <Dashboard  isAuthenticated={isAuthenticated}/>}/>
             <Route exact path="/post-job" element={<PostJob isAuthenticated={isAuthenticated}/>}/>
             <Route exact path="/jobs-created" element={<UserJobs isAuthenticated={isAuthenticated}/>}/>
             <Route exact path="/messages" element={<Messages isAuthenticated={isAuthenticated}/>}/>

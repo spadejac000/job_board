@@ -7,7 +7,8 @@ CREATE TABLE users(
   user_first_name VARCHAR(255) NOT NULL,
   user_last_name VARCHAR(255) NOT NULL,
   user_email VARCHAR(255) NOT NULL,
-  user_password VARCHAR(255) NOT NULL
+  user_password VARCHAR(255) NOT NULL,
+  user_role VARCHAR(255)
 );
 
 CREATE TABLE jobs(

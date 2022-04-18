@@ -13,6 +13,8 @@ const PostJob = ({isAuthenticated}) => {
     state.user.userID
   )
 
+  const testJob = false;
+
   const [benefits, setBenefits] = useState({
     healthInsurance: false,
     paidTimeOff: false,
@@ -62,7 +64,7 @@ const PostJob = ({isAuthenticated}) => {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, userID}
+      const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, userID, testJob}
       dispatch(postJob(body))
     } catch (error) {
       console.error(error.message)

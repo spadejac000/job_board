@@ -25,6 +25,10 @@ const Header = ({isAuthenticated, setAuth}) => {
     }
   })
 
+  let userRole = useSelector((state) =>
+    state.user.userRole
+  )
+
   const logout = (e) => {
     e.preventDefault()
     localStorage.removeItem('token')
@@ -32,6 +36,90 @@ const Header = ({isAuthenticated, setAuth}) => {
   }
 
   return (
+
+    isAuthenticated && userRole === "employeer" ? 
+
+    <Navbar 
+        expand="lg" 
+        className={`logged-in-navbar ${location.pathname !== '/messages' ? 'mb-5' : ''}`}
+      >
+        <Container>
+          <Navbar.Brand className="logged-in-nav-brand-logo" as={Link} to="/">Job Board</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="ms-auto my-2 my-lg-0 nav-system"
+              style={{ maxHeight: '100px' }}
+              navbarScroll
+            >
+              <div className="navbar-user-name ms-3">
+                <span style={{color: 'white'}} className="welcome-title">{user}</span>
+              </div>
+
+              <NavDropdown className="navigation-bar-icon-container navbar-jobs-link" title={<FaBriefcase/>} id="jobs-nav-dropdown" align="end">
+                <NavDropdown.Item>
+                  <LinkContainer className="nav-dropdown-item-link-container" to="/post-job">
+                    <div>
+                      <div className="dropdown-item-left-grouping">
+                        <div className="dropdown-navigation-bar-icon-container">
+                          <FaThumbtack />
+                        </div>
+                        Post Job
+                      </div>
+                      <FaChevronRight />
+                    </div>
+                  </LinkContainer>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <LinkContainer className="nav-dropdown-item-link-container" to="/jobs-created">
+                    <div>
+                      <div className="dropdown-item-left-grouping">
+                        <div className="dropdown-navigation-bar-icon-container">
+                          <FaList />
+                        </div>
+                        View Jobs
+                      </div>
+                      <FaChevronRight/>
+                    </div>
+                  </LinkContainer>
+                </NavDropdown.Item>
+              </NavDropdown>
+
+              <NavDropdown className="navigation-bar-icon-container" id="basic-nav-dropdown" align="end">
+
+                <NavDropdown.Item>
+                  <LinkContainer className="nav-dropdown-item-link-container" to="/settings">
+                    <div>
+                      <div className="dropdown-item-left-grouping">
+                        <div className="dropdown-navigation-bar-icon-container">
+                          <FaCog />
+                        </div>
+                        Settings
+                      </div>
+                      <FaChevronRight />
+                    </div>
+                  </LinkContainer>
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={e => logout(e)}>
+                  <LinkContainer className="nav-dropdown-item-link-container" to="/">
+                    <div>
+                      <div className="dropdown-item-left-grouping">
+                        <div className="dropdown-navigation-bar-icon-container">
+                          <FaUser />
+                        </div>
+                        Sign Out
+                      </div>
+                      <FaChevronRight/>
+                    </div>
+                  </LinkContainer>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+    :
 
     isAuthenticated ? 
 

@@ -3,7 +3,7 @@ import {Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import '../css/header.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {printUser} from '../actions/userActions'
-import {FaUser, FaComment, FaCog, FaChevronRight, FaBriefcase, FaThumbtack, FaList, FaHeart} from 'react-icons/fa'
+import {FaUser, FaComment, FaCog, FaChevronRight, FaBriefcase, FaThumbtack, FaList, FaHeart, FaDoorOpen} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import {LinkContainer} from 'react-router-bootstrap'
 import {useLocation} from 'react-router-dom'
@@ -18,8 +18,8 @@ const Header = ({isAuthenticated, setAuth}) => {
   }, [dispatch, isAuthenticated])
 
   let user = useSelector((state) => {
-    if(state.user.userName) {
-      return state.user.userName.user_first_name
+    if(state.user.userFirstName) {
+      return state.user.userFirstName
     } else {
       return null
     }
@@ -141,35 +141,6 @@ const Header = ({isAuthenticated, setAuth}) => {
               </div>
               {/* <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container navigation-bar-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link> */}
 
-              <NavDropdown className="navigation-bar-icon-container navbar-jobs-link" title={<FaBriefcase/>} id="jobs-nav-dropdown" align="end">
-                <NavDropdown.Item>
-                  <LinkContainer className="nav-dropdown-item-link-container" to="/post-job">
-                    <div>
-                      <div className="dropdown-item-left-grouping">
-                        <div className="dropdown-navigation-bar-icon-container">
-                          <FaThumbtack />
-                        </div>
-                        Post Job
-                      </div>
-                      <FaChevronRight />
-                    </div>
-                  </LinkContainer>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <LinkContainer className="nav-dropdown-item-link-container" to="/jobs-created">
-                    <div>
-                      <div className="dropdown-item-left-grouping">
-                        <div className="dropdown-navigation-bar-icon-container">
-                          <FaList />
-                        </div>
-                        View Jobs
-                      </div>
-                      <FaChevronRight/>
-                    </div>
-                  </LinkContainer>
-                </NavDropdown.Item>
-              </NavDropdown>
-
               <NavDropdown className="navigation-bar-icon-container" id="basic-nav-dropdown" align="end">
 
                 {/* <NavDropdown.Item>
@@ -186,6 +157,19 @@ const Header = ({isAuthenticated, setAuth}) => {
                   </LinkContainer>
                 </NavDropdown.Item> */}
 
+                <NavDropdown.Item>
+                  <LinkContainer className="nav-dropdown-item-link-container" to="/profile">
+                    <div>
+                      <div className="dropdown-item-left-grouping">
+                        <div className="dropdown-navigation-bar-icon-container">
+                          <FaUser/>
+                        </div>
+                        Profile
+                      </div>
+                      <FaChevronRight/>
+                    </div>
+                  </LinkContainer>
+                </NavDropdown.Item>
                 <NavDropdown.Item>
                   <LinkContainer className="nav-dropdown-item-link-container" to="/settings">
                     <div>
@@ -204,7 +188,7 @@ const Header = ({isAuthenticated, setAuth}) => {
                     <div>
                       <div className="dropdown-item-left-grouping">
                         <div className="dropdown-navigation-bar-icon-container">
-                          <FaUser />
+                          <FaDoorOpen/>
                         </div>
                         Sign Out
                       </div>

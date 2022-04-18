@@ -56,9 +56,9 @@ router.post("/login", validInfo, async (req, res) => {
 
 router.get('/', authorization, async (req, res) => {
   try {
-    const user = await pool.query("SELECT user_first_name, user_role FROM users WHERE user_id = $1", [req.user])
+    const user = await pool.query("SELECT user_first_name, user_last_name, user_email, user_role FROM users WHERE user_id = $1", [req.user])
     console.log('user rows: ', user.rows[0].user_first_name)
-    res.json({userName: user.rows[0].user_first_name, userRole: user.rows[0].user_role, userID: req.user})
+    res.json({userFirstName: user.rows[0].user_first_name, userLastName: user.rows[0].user_last_name, userEmail: user.rows[0].user_email, userRole: user.rows[0].user_role, userID: req.user})
   } catch (error) {
     console.error(error.message)
     res.status(500).send("server error")

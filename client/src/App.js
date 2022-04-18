@@ -23,6 +23,7 @@ const DynamicRoutes = lazy(() => import('./components/DynamicRoutes'))
 const FavoriteJobs = lazy(() => import('./components/FavoriteJobs'))
 const ForgotPassword = lazy(() => import('./components/ForgotPassword'))
 const Applicants = lazy(() => import('./components/Applicants'))
+const Profile = lazy(() => import('./components/Profile'))
 
 
 const App = () => {
@@ -82,6 +83,7 @@ const App = () => {
             <Route exact path="/forgot-password" element={<ForgotPassword isAuthenticated={isAuthenticated}/>}/>
             <Route exact path="/settings" element={<Settings setAuth={setAuth} isAuthenticated={isAuthenticated}/>}/>
             <Route exact path="/favorite-jobs" element={<FavoriteJobs isAuthenticated={isAuthenticated}/>}/>
+            <Route exact path="/profile" element={<Profile isAuthenticated={isAuthenticated}/>}/>
             <Route path="/search/what/:whatKeyword" element={<Dashboard/>}/>
             <Route path="/search/where/:whereKeyword" element={<Dashboard/>}/>
             <Route path="/search/:whatKeyword/:whereKeyword" element={<Dashboard/>}/>

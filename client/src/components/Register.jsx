@@ -120,7 +120,7 @@ const Register = ({setAuth}) => {
       </div>
       <div className="register-form-actual-container">
         <Form onSubmit={onSubmitForm} className="register-form">
-          <h2 className="register-form-title">Register</h2>
+          <h2 className="register-form-title">Create Account</h2>
           <Form.Group className="mb-3" hasValidation>
             <Form.Control  
               type="text" 
@@ -219,7 +219,7 @@ const Register = ({setAuth}) => {
             </Form.Control.Feedback>
           </InputGroup>
 
-          <h3>Your role</h3>
+          <h6>Your role</h6>
           
           <div>
             <Card className="p-2 mb-3">
@@ -250,7 +250,7 @@ const Register = ({setAuth}) => {
           </div>
           
 
-          <Button type="submit" className="mb-3 btn-primary">Register</Button>
+          <Button type="submit" className="mb-3 btn-primary">Create Account</Button>
           <div>Have an account? <Link to={'/login'}>Login</Link></div>
         </Form>
       </div>

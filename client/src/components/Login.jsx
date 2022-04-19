@@ -91,13 +91,13 @@ const Login = ({setAuth}) => {
                 {showPassword === false ? <FaEye/> : <FaEyeSlash/>}
               </InputGroup.Text>
             </InputGroup>
-            <Form.Check
+            {/* <Form.Check
               checked={!!rememberUser}
               type='checkbox'
               label={`Remember Me`}
               className="mb-3"
               onChange={e => onChangeRememberUser(e)}
-            />
+            /> */}
 
             <Button type='submit' color="primary" className="mb-3" >Login</Button>
             {/* <div className="mb-3">

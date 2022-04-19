@@ -1,0 +1,35 @@
+@media(min-width: 900px) {
+
+  .profile-container {
+    width: 50%;
+  }
+
+  .profile-resume-img {
+    border-radius: .25rem;
+  }
+}
+
+.profile-page-id-header {
+  display: flex;
+  width: 100%;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.profile-img-div-col {
+  width: 20%;
+  margin-right: 3rem;
+}
+
+/* .profile-img-div {
+} */
+
+.profile-img-div > img {
+  width: 100%;
+  border-radius: 100%;
+}
+
+.profile-user-name {
+  display: flex;
+  align-items: center;
+}

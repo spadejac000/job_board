@@ -46,8 +46,6 @@ const App = () => {
     state.user.userRole
   )
 
-  console.log('user role: ', userRole)
-
   const isAuth = async () => {
     try {
       const response = await fetch('/api/users/is-verify', {
@@ -90,7 +88,7 @@ const App = () => {
             <Route path="/page/:pageNumber" element={<Dashboard/>}/>
             <Route path="/search/:whatKeyword/:whereKeyword/page/:pageNumber" element={<Dashboard/>}/>
             <Route path="/dynamic/:id" element={<DynamicRoutes/>} />
-            <Route path="*" element={<NotFound/>} />
+            {/* <Route path="*" element={<NotFound/>} /> */}
           </Routes>
           <Footer/>
         </Suspense>

@@ -5,6 +5,7 @@ const jwtGenerator = require('../../utils/jwtGenerator')
 const validInfo = require('../../middleware/validInfo')
 const authorization = require('../../middleware/authorization')
 const nodemailer = require("nodemailer");
+const {cloudinary} = require('../../utils/cloudinary')
 
 // register
 router.post('/register', validInfo, async (req, res) => {
@@ -57,7 +58,6 @@ router.post("/login", validInfo, async (req, res) => {
 router.get('/', authorization, async (req, res) => {
   try {
     const user = await pool.query("SELECT user_first_name, user_last_name, user_email, user_role FROM users WHERE user_id = $1", [req.user])
-    console.log('user rows: ', user.rows[0].user_first_name)
     res.json({userFirstName: user.rows[0].user_first_name, userLastName: user.rows[0].user_last_name, userEmail: user.rows[0].user_email, userRole: user.rows[0].user_role, userID: req.user})
   } catch (error) {
     console.error(error.message)
@@ -148,7 +148,45 @@ router.post('/forgot-password', async (req, res) => {
     res.send('working')
 
   } catch (error) {
-    console.log('uh oh')
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// store the user profile image
+router.post('/profile-image/:id', async (req, res) => {
+  try {
+    const userProfileImg = await pool.query('UPDATE users SET user_profile_image = $1 WHERE user_id = $2;', [req.files, req.params.id])
+    res.json({userProfileImg})
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// get stored user resume
+router.get('/get-user-resume', async (req, res) => {
+  try {
+    const {resources} = await cloudinary.search
+      .expression('folder:job_board_resumes')
+      .max_results(1)
+      .execute()
+    const publicIds = resources.map((resume) => resume.public_id)
+    res.send(publicIds)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// store the user resume
+router.post('/upload-resume', async (req, res) => {
+  try {
+    const resumeString = req.body.data
+    const uploadedResponse = await cloudinary.uploader.upload(resumeString, {upload_preset: 'job_board_resumes'})
+    console.log(uploadedResponse)
+    res.json({msg: 'Resume has been saved'})
+  } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')
   }

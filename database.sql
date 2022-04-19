@@ -8,7 +8,8 @@ CREATE TABLE users(
   user_last_name VARCHAR(255) NOT NULL,
   user_email VARCHAR(255) NOT NULL,
   user_password VARCHAR(255) NOT NULL,
-  user_role VARCHAR(255)
+  user_role VARCHAR(255),
+  -- user_profile_image BYTEA
 );
 
 CREATE TABLE jobs(

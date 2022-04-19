@@ -9,8 +9,6 @@ export const printUser = () => async (dispatch) => {
       headers: {token: localStorage.token}
     })
     const parseResponse = await data.json();
-
-    console.log('response here: ', parseResponse)
     
     dispatch({
       type: USER_SUCCESS, 

@@ -6,6 +6,7 @@ import '../css/profile.css'
 import {Image} from 'cloudinary-react'
 import {FaEdit} from 'react-icons/fa'
 import ProfilePictureModal from './ProfilePictureModal'
+import EditContactInfoModal from './EditContactInfoModal'
 
 const Profile = () => {
 
@@ -17,6 +18,9 @@ const Profile = () => {
   const [showSource, setShowSource] = useState('');
   const [profileImage, setProfileImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
   const [showProfilePicSource, setShowProfilePicSource] = useState('')
+  const [showEditContactInfo, setShowEditContactInfo] = useState(false)
+  const handleEditContactInfoClose = () => setShowEditContactInfo(false)
+  const handleShowEditContactInfo = () => setShowEditContactInfo(true)
   const [alertMsg, setAlertMsg] = useState('')
 
   // maybe
@@ -62,6 +66,7 @@ const Profile = () => {
   }
 
   const uploadResume = async (base64EncodedResume) => {
+    console.log(base64EncodedResume)
     try {
       await fetch('/api/users/upload-resume', {
         method: 'POST',
@@ -125,14 +130,19 @@ const Profile = () => {
           </Button>
         </Form>
         {showSource && (
-          <img src={showSource} alt="chosen resume" className="profile-resume-img"/>
+          <canvas id="pdf-render">helloe</canvas>
         )}
         </Card.Body>
       </Card>
       <Card className="mb-3 profile-contact-info-card">
         <Card.Header className="profile-contact-info-card-header">
           <h3>Contact Information</h3>
-          <h3><FaEdit/></h3>
+          <h3 
+            onClick={handleShowEditContactInfo}
+            className="edit-contact-info-btn"
+          >
+            <FaEdit/>
+          </h3>
         </Card.Header>
         <Card.Body>
           <p>{user.userEmail}</p>
@@ -143,6 +153,9 @@ const Profile = () => {
         showEditProfileImg={showEditProfileImg} handleEditProfilImgClose={handleEditProfilImgClose}
         showProfilePicSource={showProfilePicSource}
         setShowProfilePicSource={setShowProfilePicSource}
+      />
+      <EditContactInfoModal
+        showEditContactInfo={showEditContactInfo} handleEditContactInfoClose={handleEditContactInfoClose}
       />
     </Container>
   )

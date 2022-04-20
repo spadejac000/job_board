@@ -9,7 +9,7 @@ CREATE TABLE users(
   user_email VARCHAR(255) NOT NULL,
   user_password VARCHAR(255) NOT NULL,
   user_role VARCHAR(255),
-  -- user_profile_image BYTEA
+  user_phone VARCHAR(255)
 );
 
 CREATE TABLE jobs(

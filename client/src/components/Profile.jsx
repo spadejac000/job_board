@@ -16,6 +16,8 @@ const Profile = () => {
   const [selectedResume, setSelectedResume] = useState('');
   const [showSource, setShowSource] = useState('');
   const [profileImage, setProfileImage] = useState('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')
+  const [showProfilePicSource, setShowProfilePicSource] = useState('')
+  const [alertMsg, setAlertMsg] = useState('')
 
   // maybe
   const [resumeId, setResumeId] = useState('')
@@ -68,6 +70,7 @@ const Profile = () => {
       })
     } catch (error) {
       console.error(error)
+      setAlertMsg(error)
     }
   }
 
@@ -81,7 +84,12 @@ const Profile = () => {
         <div className="profile-img-div-col">
           <div className="profile-img-container">
             <div className="profile-img-div">
-              <img src={profileImage} alt=""/>
+              {showProfilePicSource ?
+                <img src={showProfilePicSource} alt=""/>
+                :
+                <img src={profileImage} alt=""/>
+              }
+              
             </div>
             <div 
               className="profile-img-overlay" 
@@ -92,15 +100,17 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          
         </div>
         <h1 className="text-center profile-user-name">
           {user.userFirstName} {user.userLastName}
         </h1>
       </div>
-      <Card className="p-3 mb-3">
-        <h3>Get Started</h3>
-        <Form className="mb-5" onSubmit={handleSubmitResume}>
+      <Card className="mb-3">
+        <Card.Header>
+          <h3>Get Started</h3>
+        </Card.Header>
+        <Card.Body>
+        <Form className="" onSubmit={handleSubmitResume}>
           <Form.Group controlId="formResume" className="mb-3">
             <Form.Label>UPLOAD A RESUME</Form.Label>
             <Form.Control 
@@ -117,6 +127,7 @@ const Profile = () => {
         {showSource && (
           <img src={showSource} alt="chosen resume" className="profile-resume-img"/>
         )}
+        </Card.Body>
       </Card>
       <Card className="mb-3 profile-contact-info-card">
         <Card.Header className="profile-contact-info-card-header">
@@ -130,6 +141,8 @@ const Profile = () => {
       </Card>
       <ProfilePictureModal 
         showEditProfileImg={showEditProfileImg} handleEditProfilImgClose={handleEditProfilImgClose}
+        showProfilePicSource={showProfilePicSource}
+        setShowProfilePicSource={setShowProfilePicSource}
       />
     </Container>
   )

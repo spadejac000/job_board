@@ -184,8 +184,34 @@ router.post('/upload-resume', async (req, res) => {
   try {
     const resumeString = req.body.data
     const uploadedResponse = await cloudinary.uploader.upload(resumeString, {upload_preset: 'job_board_resumes'})
-    console.log(uploadedResponse)
     res.json({msg: 'Resume has been saved'})
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// get the user profile picture
+router.get('/get-profile-pic', async (req, res) => {
+  try {
+    const {resources} = await cloudinary.search
+      .expression('folder:job_board_resumes')
+      .max_results(1)
+      .execute()
+    const publicIds = resources.map((resume) => resume.public_id)
+    res.send(publicIds)
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// store the user profile picture
+router.post('/upload-profile-pic', async (req, res) => {
+  try {
+    const profilePicString = req.body.data
+    const uploadedResponse = await cloudinary.uploader.upload(profilePicString, {upload_preset: 'job_board_profile_pictures'})
+    res.json({msg: 'Profile pic has been saved'})
   } catch (error) {
     console.error(error.message)
     res.status(500).send('Server Error')

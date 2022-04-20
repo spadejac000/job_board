@@ -7,8 +7,9 @@ const path = require('path')
 
 const app = express();
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}))
 app.use(fileUpload())
+app.use(bodyParser.urlencoded({limit: '50mb'}));
 
 const port = process.env.PORT || 5000
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Card, Badge, Button, Row, Col} from 'react-bootstrap'
+import {Button, Row, Col} from 'react-bootstrap'
 import {FaEdit, FaTimes, FaFile} from 'react-icons/fa'
 import {useDispatch, useSelector} from 'react-redux'
 import EditJobModal from './EditJobModal'

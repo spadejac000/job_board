@@ -12,24 +12,54 @@
 .profile-page-id-header {
   display: flex;
   width: 100%;
+  height: 100%;
   margin-bottom: 1rem;
   justify-content: center;
 }
 
 .profile-img-div-col {
-  width: 20%;
+  width: 125px;
   margin-right: 3rem;
 }
 
-/* .profile-img-div {
-} */
+.profile-img-div-col > div {
+  position: relative;
+  height: 100%;
+}
+
+.profile-img-overlay {
+  position: absolute;
+  background: rgba(0,0,0,0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border-radius: 100%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+}
+
+.profile-img-overlay:hover {
+  opacity: 1;
+}
 
 .profile-img-div > img {
   width: 100%;
+  height: 100%;
   border-radius: 100%;
 }
 
 .profile-user-name {
   display: flex;
   align-items: center;
+  margin-bottom: 0px;
+}
+
+.profile-contact-info-card-header {
+  display: flex;
+  justify-content: space-between;
 }

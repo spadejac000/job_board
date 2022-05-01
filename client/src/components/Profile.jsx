@@ -7,6 +7,7 @@ import {Image} from 'cloudinary-react'
 import {FaEdit} from 'react-icons/fa'
 import ProfilePictureModal from './ProfilePictureModal'
 import EditContactInfoModal from './EditContactInfoModal'
+import { Document, Page} from 'react-pdf';
 
 const Profile = () => {
 
@@ -130,7 +131,10 @@ const Profile = () => {
           </Button>
         </Form>
         {showSource && (
-          <canvas id="pdf-render">helloe</canvas>
+          <Document
+            file="/Users/jacobspade/code/job_board/client/src/Jacob_Resume.pdf"
+          >
+          </Document>
         )}
         </Card.Body>
       </Card>

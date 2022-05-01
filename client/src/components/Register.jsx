@@ -61,8 +61,8 @@ const Register = ({setAuth}) => {
   }
 
   const validatePassword = () => {
-    if(password.length < 7) {
-      setPasswordError("Please enter a valid password")
+    if(password.length < 8) {
+      setPasswordError("Password must be at least 8 characters")
     } else {
       setPasswordError("")
     }

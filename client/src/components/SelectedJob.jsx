@@ -22,6 +22,10 @@ const SelectedJob = () => {
     dispatch(selectJob())
   }, [dispatch])
 
+  const [nameError, setNameError] = useState("")
+  const [emailError, setEmailError] = useState("")
+  const [phoneError, setPhoneError] = useState("")
+  const [locationError, setLocationError] = useState("")
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -87,6 +91,39 @@ const SelectedJob = () => {
     setCoverLetter(e.target.files[0])
   }
 
+  // input validation functions
+  const validateName = () => {
+    if(name === "") {
+      setNameError("Please enter your name")
+    } else {
+      setNameError("")
+    }
+  }
+
+  const validateEmail = () => {
+    if(!email.match(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+      setEmailError("Please enter a valid email")
+    } else {
+      setEmailError("")
+    }
+  }
+
+  const validatePhone = () => {
+    if(!phone.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)) {
+      setPhoneError("Please enter a valid phone number")
+    } else {
+      setPhoneError("")
+    }
+  }
+
+  const validateLocation = () => {
+    if(location === "") {
+      setLocationError("Please enter a valid location")
+    } else {
+      setLocationError("")
+    }
+  }
+
   return (
     <>
       {selectedJob === null ? (null): (
@@ -128,24 +165,36 @@ const SelectedJob = () => {
             {message ? <AlertMessage alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow} variant="info">{message}</AlertMessage> : null}
             <Form onSubmit={(e) => onSubmitApplication(e, selectedJob.job_id)}>
               <Form.Label>Name</Form.Label>
-              <InputGroup className="mb-3">
+              <InputGroup className="mb-3" hasValidation>
                 <FormControl
                   placeholder="Name"
                   name="name"
                   value={name} 
                   onChange={e => onChange(e)}
                   required
+                  onBlur={() => validateName()}
+                  isInvalid={nameError === "" ? false : true}
+                  isValid={name.length > 0 ? true : false}
                 />
+                <Form.Control.Feedback type={nameError === "" ? "valid" : "invalid"}>
+                  {nameError}
+                </Form.Control.Feedback>
               </InputGroup>
               <Form.Label>Email</Form.Label>
-              <InputGroup className="mb-3">
+              <InputGroup className="mb-3"  hasValidation>
                 <FormControl
                   placeholder="Email"
                   name="email"
                   value={email} 
                   onChange={e => onChange(e)}
                   required
+                  onBlur={() => validateEmail()}
+                  isInvalid={emailError === "" ? false : true}
+                  isValid={email.length > 0 ? true : false}
                 />
+                <Form.Control.Feedback type={emailError === "" ? "valid" : "invalid"}>
+                  {emailError}
+                </Form.Control.Feedback>
               </InputGroup>
               <Form.Label>Phone number</Form.Label>
               <InputGroup className="mb-3">
@@ -155,7 +204,13 @@ const SelectedJob = () => {
                   value={phone} 
                   onChange={e => onChange(e)}
                   required
+                  onBlur={() => validatePhone()}
+                  isInvalid={phoneError === "" ? false : true}
+                  isValid={phone.length > 0 ? true : false}
                 />
+                <Form.Control.Feedback type={phoneError === "" ? "valid" : "invalid"}>
+                  {phoneError}
+                </Form.Control.Feedback>
               </InputGroup>
               <Form.Label>Location</Form.Label>
               <InputGroup className="mb-3">
@@ -165,18 +220,24 @@ const SelectedJob = () => {
                   value={location} 
                   onChange={e => onChange(e)}
                   required
+                  onBlur={() => validateLocation()}
+                  isInvalid={locationError === "" ? false : true}
+                  isValid={location.length > 0 ? true : false}
                 />
+                <Form.Control.Feedback type={locationError === "" ? "valid" : "invalid"}>
+                  {locationError}
+                </Form.Control.Feedback>
               </InputGroup>
               <ResumeUpload 
                 message={message} 
                 alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
                 handleUploadResume={handleUploadResume}
               />
-              <CoverLetterUpload 
+              {/* <CoverLetterUpload 
                 message={message} 
                 alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
                 handleUploadCoverLetter={handleUploadCoverLetter}
-              />
+              /> */}
               <Progress percentage={uploadPercentage}/>
               <Button variant="primary" type="submit">
               Submit

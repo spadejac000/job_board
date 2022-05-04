@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const pool = require('../../db')
+const {cloudinary} = require('../../utils/cloudinary')
 
 // post job
 router.post('/post-job', async (req, res) => {
@@ -171,8 +172,9 @@ router.post('/upload-application', async (req, res) => {
   
     const application = await pool.query("INSERT INTO applications (applicant_name, applicant_email, applicant_phone, applicant_location, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;", [name, email, phone, location, jobID, userID])
   
-    const resume = req.files.resume
-    const coverLetter = req.files.coverLetter
+    const resumeString = req.files.resume
+    const uploadedResponse = await cloudinary.uploader.upload(resumeString, {upload_preset: 'job_board_resumes'})
+
     res.send('Application Completed')
   } catch (error) {
     console.error(error.message)

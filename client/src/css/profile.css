@@ -67,3 +67,20 @@
 .edit-contact-info-btn {
   cursor: pointer;
 }
+
+.profile-resume-file-icon {
+  font-size: 4rem;
+}
+
+.profile-resume-uploaded-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-resume-file-info-div {
+  display: flex;
+}
+
+.profile-resume-options-ellipsis {
+  cursor: pointer;
+}

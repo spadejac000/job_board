@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import {Container, Card, Button, Form} from 'react-bootstrap'
+import {Container, Card, Button, Form, ListGroup} from 'react-bootstrap'
 import {useSelector} from 'react-redux'
 import axios from 'axios'
 import '../css/profile.css'
 import {Image} from 'cloudinary-react'
-import {FaEdit} from 'react-icons/fa'
+import {FaEdit, FaFile, FaEllipsisV} from 'react-icons/fa'
 import ProfilePictureModal from './ProfilePictureModal'
 import EditContactInfoModal from './EditContactInfoModal'
 import { Document, Page} from 'react-pdf';
 
 const Profile = () => {
 
+  const [showResumeOptions, setShowResumeOptions] = useState(false)
   const [showEditProfileImg, setShowEditProfileImg] = useState(false);
   const handleEditProfilePictureShow = () => setShowEditProfileImg(true);
   const handleEditProfilImgClose = () => setShowEditProfileImg(false);
@@ -50,6 +51,11 @@ const Profile = () => {
     e.preventDefault()
     const resume = e.target.files[0]
     showResume(resume)
+  }
+
+  const handleUploadedResumeOptions = (e) => {
+    e.preventDefault()
+    setShowResumeOptions(true)
   }
 
   const showResume = (file) => {
@@ -126,15 +132,40 @@ const Profile = () => {
               // value={resumeInputState} 
               className="form-resume-input"/>
           </Form.Group>
-          <Button className="btn" type="submit">
+          <Button className="btn mb-3" type="submit">
             Upload Resume
           </Button>
         </Form>
         {showSource && (
-          <Document
-            file="/Users/jacobspade/code/job_board/client/src/Jacob_Resume.pdf"
-          >
-          </Document>
+          <div>
+            <div className="profile-resume-uploaded-container">
+              <div>
+                <p><strong>Resume</strong></p>
+                <div className="profile-resume-file-info-div">
+                  <FaFile className="profile-resume-file-icon"/>
+                  <p>File Name</p>
+                </div>
+                
+              </div>
+              <div>
+                <FaEllipsisV
+                  className="profile-resume-options-ellipsis" 
+                  onClick={(e) => handleUploadedResumeOptions(e)}
+                />
+              </div>
+            </div>
+            <>
+              {showResumeOptions ? 
+                <ListGroup>
+                  <ListGroup.Item>Cras justo odio</ListGroup.Item>
+                  <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+                  <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+                  <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+                  <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                </ListGroup>
+              : null}
+            </>
+          </div>
         )}
         </Card.Body>
       </Card>

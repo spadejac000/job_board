@@ -22,6 +22,8 @@ const SelectedJob = () => {
     dispatch(selectJob())
   }, [dispatch])
 
+  const emptyString = "";
+  const [showReturnToJobSearchPage, setShowReturnToJobSearchPage] = useState(false)
   const [resumeName, setResumeName] = useState("")
   const [nameError, setNameError] = useState("")
   const [emailError, setEmailError] = useState("")
@@ -29,7 +31,17 @@ const SelectedJob = () => {
   const [locationError, setLocationError] = useState("")
   const [showSource, setShowSource] = useState('');
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setMessage('')
+    setInputs({
+      name: "",
+      email: "",
+      phone: "",
+      location: ""
+    })
+    setShowReturnToJobSearchPage(false)
+    setShow(false)
+  };
   const handleShow = () => setShow(true);
   const [alertMessageShow, setAlertMessageShow] = useState(false)
   const [coverLetter, setCoverLetter] = useState('')
@@ -76,6 +88,7 @@ const SelectedJob = () => {
         }
       })
       setMessage('Application Complete')
+      setShowReturnToJobSearchPage(true)
     } catch (error) {
       if(error.response.status === 500) {
         setMessage('There was a problem with the server')
@@ -176,86 +189,93 @@ const SelectedJob = () => {
             <h5>{selectedJob ? selectedJob.job_title : null}</h5>
             <hr/>
             {message ? <AlertMessage alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow} variant="info">{message}</AlertMessage> : null}
-            <Form onSubmit={(e) => onSubmitApplication(e, selectedJob.job_id)}>
-              <Form.Label>Name</Form.Label>
-              <InputGroup className="mb-3" hasValidation>
-                <FormControl
-                  placeholder="Name"
-                  name="name"
-                  value={name} 
-                  onChange={e => onChange(e)}
-                  required
-                  onBlur={() => validateName()}
-                  isInvalid={nameError === "" ? false : true}
-                  isValid={name.length > 0 ? true : false}
+            {showReturnToJobSearchPage === false ?
+              <Form onSubmit={(e) => onSubmitApplication(e, selectedJob.job_id)}>
+                <Form.Label>Name</Form.Label>
+                <InputGroup className="mb-3" hasValidation>
+                  <FormControl
+                    placeholder="Name"
+                    name="name"
+                    value={name} 
+                    onChange={e => onChange(e)}
+                    required
+                    onBlur={() => validateName()}
+                    isInvalid={nameError === "" ? false : true}
+                    isValid={name.length > 0 ? true : false}
+                  />
+                  <Form.Control.Feedback type={nameError === "" ? "valid" : "invalid"}>
+                    {nameError}
+                  </Form.Control.Feedback>
+                </InputGroup>
+                <Form.Label>Email</Form.Label>
+                <InputGroup className="mb-3"  hasValidation>
+                  <FormControl
+                    placeholder="Email"
+                    name="email"
+                    value={email} 
+                    onChange={e => onChange(e)}
+                    required
+                    onBlur={() => validateEmail()}
+                    isInvalid={emailError === "" ? false : true}
+                    isValid={email.length > 0 ? true : false}
+                  />
+                  <Form.Control.Feedback type={emailError === "" ? "valid" : "invalid"}>
+                    {emailError}
+                  </Form.Control.Feedback>
+                </InputGroup>
+                <Form.Label>Phone number</Form.Label>
+                <InputGroup className="mb-3">
+                  <FormControl
+                    placeholder="Phone number"
+                    name="phone"
+                    value={phone} 
+                    onChange={e => onChange(e)}
+                    required
+                    onBlur={() => validatePhone()}
+                    isInvalid={phoneError === "" ? false : true}
+                    isValid={phone.length > 0 ? true : false}
+                  />
+                  <Form.Control.Feedback type={phoneError === "" ? "valid" : "invalid"}>
+                    {phoneError}
+                  </Form.Control.Feedback>
+                </InputGroup>
+                <Form.Label>Location</Form.Label>
+                <InputGroup className="mb-3">
+                  <FormControl
+                    placeholder="Location"
+                    name="location"
+                    value={location} 
+                    onChange={e => onChange(e)}
+                    required
+                    onBlur={() => validateLocation()}
+                    isInvalid={locationError === "" ? false : true}
+                    isValid={location.length > 0 ? true : false}
+                  />
+                  <Form.Control.Feedback type={locationError === "" ? "valid" : "invalid"}>
+                    {locationError}
+                  </Form.Control.Feedback>
+                </InputGroup>
+                <ResumeUpload 
+                  message={message} 
+                  alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
+                  handleUploadResume={handleResumeInputChange}
                 />
-                <Form.Control.Feedback type={nameError === "" ? "valid" : "invalid"}>
-                  {nameError}
-                </Form.Control.Feedback>
-              </InputGroup>
-              <Form.Label>Email</Form.Label>
-              <InputGroup className="mb-3"  hasValidation>
-                <FormControl
-                  placeholder="Email"
-                  name="email"
-                  value={email} 
-                  onChange={e => onChange(e)}
-                  required
-                  onBlur={() => validateEmail()}
-                  isInvalid={emailError === "" ? false : true}
-                  isValid={email.length > 0 ? true : false}
-                />
-                <Form.Control.Feedback type={emailError === "" ? "valid" : "invalid"}>
-                  {emailError}
-                </Form.Control.Feedback>
-              </InputGroup>
-              <Form.Label>Phone number</Form.Label>
-              <InputGroup className="mb-3">
-                <FormControl
-                  placeholder="Phone number"
-                  name="phone"
-                  value={phone} 
-                  onChange={e => onChange(e)}
-                  required
-                  onBlur={() => validatePhone()}
-                  isInvalid={phoneError === "" ? false : true}
-                  isValid={phone.length > 0 ? true : false}
-                />
-                <Form.Control.Feedback type={phoneError === "" ? "valid" : "invalid"}>
-                  {phoneError}
-                </Form.Control.Feedback>
-              </InputGroup>
-              <Form.Label>Location</Form.Label>
-              <InputGroup className="mb-3">
-                <FormControl
-                  placeholder="Location"
-                  name="location"
-                  value={location} 
-                  onChange={e => onChange(e)}
-                  required
-                  onBlur={() => validateLocation()}
-                  isInvalid={locationError === "" ? false : true}
-                  isValid={location.length > 0 ? true : false}
-                />
-                <Form.Control.Feedback type={locationError === "" ? "valid" : "invalid"}>
-                  {locationError}
-                </Form.Control.Feedback>
-              </InputGroup>
-              <ResumeUpload 
-                message={message} 
-                alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
-                handleUploadResume={handleResumeInputChange}
-              />
-              {/* <CoverLetterUpload 
-                message={message} 
-                alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
-                handleUploadCoverLetter={handleUploadCoverLetter}
-              /> */}
-              <Progress percentage={uploadPercentage}/>
-              <Button variant="primary" type="submit">
-              Submit
-            </Button>
-            </Form>
+                {/* <CoverLetterUpload 
+                  message={message} 
+                  alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
+                  handleUploadCoverLetter={handleUploadCoverLetter}
+                /> */}
+                <Progress percentage={uploadPercentage}/>
+                <Button variant="primary" type="submit">
+                Submit
+              </Button>
+              </Form>
+            :
+              <Button variant="primary" onClick={handleClose}>
+                Return to job search
+              </Button>
+
+            }
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>

@@ -2,7 +2,6 @@ import {createGlobalStyle} from 'styled-components'
 
 export const lightTheme = {
   body: 'white',
-  color: 'black',
   cardBGColor: 'white',
   loginRegisterBackgroundColor: 'white',
   navbarBrandLogoColor: 'white',

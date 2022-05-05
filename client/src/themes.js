@@ -6,7 +6,8 @@ export const lightTheme = {
   cardBGColor: 'white',
   loginRegisterBackgroundColor: 'white',
   navbarBrandLogoColor: 'white',
-  loggedInNavBorder: '1px solid #e9ecef'
+  loggedInNavBorder: '1px solid #e9ecef',
+  loggedInNavIconBGColor: '#e4e6eb'
 }
 
 export const darkTheme = {
@@ -40,6 +41,7 @@ export const darkTheme = {
   loggedInNavBorder: '1px solid #ffffff1a',
   dashNavBrandLogoColor: 'white',
   loggedInNavColor: 'white!important',
+  loggedInNavIconBGColor: '#ffffff1a',
   messageSidebarBorder: '1px solid #ffffff1a',
   navTabsBGColor: '#212529',
   navTabsBorder: 'none',
@@ -168,9 +170,13 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .logged-in-nav-brand-logo,
-  .navigation-bar-icon-container,
   a {
     color: ${props => props.theme.loggedInNavColor};
+  }
+
+  .navigation-bar-icon-container {
+    color: ${props => props.theme.loggedInNavColor};
+    background: ${props => props.theme.loggedInNavIconBGColor};
   }
 
   .message-sidebar,

@@ -53,7 +53,7 @@ const Header = ({isAuthenticated, setAuth}) => {
               navbarScroll
             >
               <div className="navbar-user-name ms-3">
-                <span style={{color: 'white'}} className="welcome-title">{user}</span>
+                <span className="welcome-title">{user}</span>
               </div>
 
               <NavDropdown className="navigation-bar-icon-container navbar-jobs-link" title={<FaBriefcase/>} id="jobs-nav-dropdown" align="end">
@@ -137,7 +137,7 @@ const Header = ({isAuthenticated, setAuth}) => {
               navbarScroll
             >
               <div className="navbar-user-name ms-3">
-                <span style={{color: 'white'}} className="welcome-title">{user}</span>
+                <span className="welcome-title">{user}</span>
               </div>
               {/* <Nav.Link className="navbar-messages-link" as={Link} to="/messages"><div className="navbar-message-icon-container navigation-bar-icon-container"><FaComment className="navbar-message-icon"/></div></Nav.Link> */}
 

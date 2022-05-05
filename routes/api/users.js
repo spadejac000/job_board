@@ -183,6 +183,7 @@ router.get('/get-user-resume', async (req, res) => {
 router.post('/upload-resume', async (req, res) => {
   try {
     const resumeString = req.body.data
+    console.log('upload resume: ', resumeString)
     const uploadedResponse = await cloudinary.uploader.upload(resumeString, {upload_preset: 'job_board_resumes'})
     res.json({msg: 'Resume has been saved'})
   } catch (error) {

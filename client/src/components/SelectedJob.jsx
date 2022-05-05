@@ -26,12 +26,12 @@ const SelectedJob = () => {
   const [emailError, setEmailError] = useState("")
   const [phoneError, setPhoneError] = useState("")
   const [locationError, setLocationError] = useState("")
+  const [showSource, setShowSource] = useState('');
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [alertMessageShow, setAlertMessageShow] = useState(false)
   const [coverLetter, setCoverLetter] = useState('')
-  const [resume, setResume] = useState('')
   const [message, setMessage] = useState('')
   const [uploadPercentage, setUploadPercentage] = useState(0)
   const [inputs, setInputs] = useState({
@@ -51,7 +51,7 @@ const SelectedJob = () => {
     e.preventDefault();
     setAlertMessageShow(true)
     const applicationData = new FormData();
-    applicationData.append('resume', resume)
+    applicationData.append('resume', showSource)
     applicationData.append('coverLetter', coverLetter)
     applicationData.append('name', name)
     applicationData.append('email', email)
@@ -83,8 +83,18 @@ const SelectedJob = () => {
     }
   }
 
-  const handleUploadResume = (e) => {
-    setResume(e.target.files[0])
+  const handleResumeInputChange = (e) => {
+    e.preventDefault()
+    const resume = e.target.files[0]
+    showResume(resume)
+  }
+
+  const showResume = (file) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onloadend = () => {
+      setShowSource(reader.result)
+    }
   }
 
   const handleUploadCoverLetter = (e) => {
@@ -231,7 +241,7 @@ const SelectedJob = () => {
               <ResumeUpload 
                 message={message} 
                 alertMessageShow={alertMessageShow} setAlertMessageShow={setAlertMessageShow}
-                handleUploadResume={handleUploadResume}
+                handleUploadResume={handleResumeInputChange}
               />
               {/* <CoverLetterUpload 
                 message={message} 

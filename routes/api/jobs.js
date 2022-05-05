@@ -164,15 +164,15 @@ router.delete('/favorites/:id', async (req, res) => {
 // job application end point
 router.post('/upload-application', async (req, res) => {
   try {
-    if(req.files === null) {
-      return res.status(400).json({msg: 'Upload resume and cover letter'})
+    if(req.body.resume === null) {
+      return res.status(400).json({msg: 'Upload resume'})
     }
   
     const {name, email, phone, location, jobID, userID} = req.body
   
     const application = await pool.query("INSERT INTO applications (applicant_name, applicant_email, applicant_phone, applicant_location, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;", [name, email, phone, location, jobID, userID])
-  
-    const resumeString = req.files.resume
+    const resumeString = req.body.resume
+    console.log('upload application: ', resumeString)
     const uploadedResponse = await cloudinary.uploader.upload(resumeString, {upload_preset: 'job_board_resumes'})
 
     res.send('Application Completed')

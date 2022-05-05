@@ -28,11 +28,11 @@ const Profile = () => {
   // maybe
   const [resumeId, setResumeId] = useState('')
 
+  // get user resume from back end
   const loadResume = async () => {
     try {
       const res = await fetch('/api/users/get-user-resume')
       const data = await res.json()
-      console.log('data: ', data)
       setResumeId(data)
     } catch (error) {
       console.error(error)
@@ -47,15 +47,11 @@ const Profile = () => {
     }
   })
 
+  // functions that handle submitting a resume
   const handleResumeInputChange = (e) => {
     e.preventDefault()
     const resume = e.target.files[0]
     showResume(resume)
-  }
-
-  const handleUploadedResumeOptions = (e) => {
-    e.preventDefault()
-    setShowResumeOptions(true)
   }
 
   const showResume = (file) => {
@@ -73,7 +69,6 @@ const Profile = () => {
   }
 
   const uploadResume = async (base64EncodedResume) => {
-    console.log(base64EncodedResume)
     try {
       await fetch('/api/users/upload-resume', {
         method: 'POST',
@@ -84,6 +79,12 @@ const Profile = () => {
       console.error(error)
       setAlertMsg(error)
     }
+  }
+
+  // resume options like deleting uploaded resume
+  const handleUploadedResumeOptions = (e) => {
+    e.preventDefault()
+    setShowResumeOptions(true)
   }
 
   useEffect(() => {

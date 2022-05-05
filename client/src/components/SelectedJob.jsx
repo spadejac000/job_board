@@ -22,6 +22,7 @@ const SelectedJob = () => {
     dispatch(selectJob())
   }, [dispatch])
 
+  const [resumeName, setResumeName] = useState("")
   const [nameError, setNameError] = useState("")
   const [emailError, setEmailError] = useState("")
   const [phoneError, setPhoneError] = useState("")
@@ -52,6 +53,7 @@ const SelectedJob = () => {
     setAlertMessageShow(true)
     const applicationData = new FormData();
     applicationData.append('resume', showSource)
+    applicationData.append('resumeName', resumeName)
     applicationData.append('coverLetter', coverLetter)
     applicationData.append('name', name)
     applicationData.append('email', email)
@@ -85,6 +87,7 @@ const SelectedJob = () => {
 
   const handleResumeInputChange = (e) => {
     e.preventDefault()
+    setResumeName(e.target.files[0].name)
     const resume = e.target.files[0]
     showResume(resume)
   }

@@ -168,7 +168,7 @@ router.post('/upload-application', async (req, res) => {
       return res.status(400).json({msg: 'Upload resume'})
     }
   
-    const {name, email, phone, location, jobID, userID} = req.body
+    const {name, email, phone, location, jobID, userID, resumeName} = req.body
   
     
     const resumeString = req.body.resume
@@ -177,7 +177,7 @@ router.post('/upload-application', async (req, res) => {
 
     console.log('uploaded response here boy: ', uploadedResponse)
 
-    const application = await pool.query("INSERT INTO applications (applicant_name, applicant_email, applicant_phone, applicant_location, applicant_resume_url, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;", [name, email, phone, location, uploadedResponse.secure_url, jobID, userID])
+    const application = await pool.query("INSERT INTO applications (applicant_name, applicant_email, applicant_phone, applicant_location, applicant_resume_name, applicant_resume_url, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;", [name, email, phone, location, resumeName, uploadedResponse.secure_url, jobID, userID])
 
     res.send('Application Completed')
   } catch (error) {

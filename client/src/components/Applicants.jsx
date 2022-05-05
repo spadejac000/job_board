@@ -2,12 +2,11 @@ import React, {useEffect, Suspense} from 'react'
 import {getApplicants} from '../actions/jobActions'
 import {useDispatch, useSelector} from 'react-redux'
 import {useLocation} from 'react-router-dom'
-import {Container, Card, Row, Col, ListGroup} from 'react-bootstrap';
+import {Container, Row, Col, ListGroup} from 'react-bootstrap';
 import Loader from './Loader';
 import AlertMessage from './AlertMessage';
 import {FaComments} from 'react-icons/fa'
 import '../css/applicants.css'
-import {Image} from 'cloudinary-react'
 
 const Applicants = () => {
 
@@ -57,7 +56,7 @@ const Applicants = () => {
                       href={applicant.applicant_resume_url} 
                       target="_blank"
                     >
-                      Resume Name
+                      {applicant.applicant_resume_name}
                     </a>
                   </Col>
                   <Col>

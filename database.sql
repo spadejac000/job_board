@@ -43,6 +43,7 @@ CREATE TABLE applications(
   applicant_email VARCHAR(255),
   applicant_phone VARCHAR(255),
   applicant_location VARCHAR(255),
+  applicant_resume_name VARCHAR(255) NOT NULL,
   applicant_resume_url VARCHAR(510) NOT NULL
 );
 

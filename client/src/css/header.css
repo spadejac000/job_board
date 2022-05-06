@@ -48,3 +48,10 @@
 #navbarScroll > div > a.navbar-messages-link {
   padding: 0px;
 }
+
+@media(max-width: 600px) {
+
+  .my-navbar {
+    margin-bottom: 3rem;
+  }
+}

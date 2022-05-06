@@ -13,3 +13,17 @@
 .filter-row > * {
   margin: 0rem 1rem 1rem 0rem;
 }
+
+@media(max-width: 600px) {
+  .search-row {
+    display: block;
+  }
+
+  .what-search-input-group {
+    margin-bottom: 1rem;
+  }
+
+  .where-search-input-group {
+    margin-bottom: 1rem;
+  }
+}

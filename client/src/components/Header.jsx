@@ -41,7 +41,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
     <Navbar 
         expand="lg" 
-        className={`logged-in-navbar ${location.pathname !== '/messages' ? 'mb-5' : ''}`}
+        className={`my-navbar logged-in-navbar ${location.pathname !== '/messages' ? 'mb-5' : ''}`}
       >
         <Container>
           <Navbar.Brand className="logged-in-nav-brand-logo" as={Link} to="/">Job Board</Navbar.Brand>
@@ -125,7 +125,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
       <Navbar 
         expand="lg" 
-        className={`logged-in-navbar ${location.pathname !== '/messages' ? 'mb-5' : ''}`}
+        className={`my-navbar logged-in-navbar ${location.pathname !== '/messages' ? 'mb-5' : ''}`}
       >
         <Container>
           <Navbar.Brand className="logged-in-nav-brand-logo" as={Link} to="/">Job Board</Navbar.Brand>
@@ -204,7 +204,7 @@ const Header = ({isAuthenticated, setAuth}) => {
 
     :
 
-      <Navbar expand="lg" className={location.pathname === '/' ?'mb-5 logged-out-dash-nav' : ''}>
+      <Navbar expand="lg" className={location.pathname === '/' ?'my-navbar mb-5 logged-out-dash-nav' : 'my-navbar'}>
         <Container>
           <Navbar.Brand className={location.pathname === '/register' || location.pathname === '/login' ? 'navbar-brand-logo' : 'dashboard-nav-brand-logo'} as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />

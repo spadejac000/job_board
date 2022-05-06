@@ -48,3 +48,19 @@
   margin-left: 0px;
   cursor: pointer;
 }
+
+@media(max-width: 600px) {
+
+  .register-form-container {
+    height: 100%;
+    display: block;
+  }
+
+  .register-brand-title {
+    font-size: 3rem;
+  }
+
+  .register-form {
+    margin: 3rem 0px;
+  }
+}

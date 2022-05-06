@@ -26,8 +26,8 @@ const Filters = () => {
   return (
     <Container>
       <div className="mb-5">
-        <Form onSubmit={submitHandler} className="search-row d-flex navbar-search-form">
-          <div className="d-flex input-group">
+        <Form onSubmit={submitHandler} className="search-row navbar-search-form">
+          <div className="d-flex input-group what-search-input-group">
             <InputGroup.Text>What</InputGroup.Text>
             <FormControl
             type="search"
@@ -37,7 +37,7 @@ const Filters = () => {
             onChange={event => {setWhatKeyword(event.target.value)}}
             />
           </div>
-          <div className="d-flex input-group">
+          <div className="d-flex input-group where-search-input-group">
             <InputGroup.Text>Where</InputGroup.Text>
             <FormControl
             type="search"

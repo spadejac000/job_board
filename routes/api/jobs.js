@@ -25,7 +25,7 @@ router.post('/post-job', async (req, res) => {
 // GET paginated jobs
 router.get('/', async (req, res) => {
   try {
-    const pageSize = 5;
+    const pageSize = 4;
     const page = Number(req.query.pageNumber) || 1
 
     let theJobs = await pool.query('SELECT * FROM jobs');

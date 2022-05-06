@@ -25,6 +25,7 @@ const ForgotPassword = lazy(() => import('./components/ForgotPassword'))
 const Applicants = lazy(() => import('./components/Applicants'))
 const Profile = lazy(() => import('./components/Profile'))
 const JobPostedSuccess = lazy(() => import('./components/JobPostedSuccess'))
+const SelectedJob = lazy(() => import('./components/SelectedJob'))
 
 
 const App = () => {
@@ -84,6 +85,7 @@ const App = () => {
             <Route exact path="/favorite-jobs" element={<FavoriteJobs isAuthenticated={isAuthenticated}/>}/>
             <Route exact path="/profile" element={<Profile isAuthenticated={isAuthenticated}/>}/>
             <Route exact path="/job-posted-success" element={<JobPostedSuccess isAuthenticated={isAuthenticated}/>}/>
+            <Route exact path="/selected-job" element={<SelectedJob isAuthenticated={isAuthenticated}/>}/>
             <Route path="/search/what/:whatKeyword" element={<Dashboard/>}/>
             <Route path="/search/where/:whereKeyword" element={<Dashboard/>}/>
             <Route path="/search/:whatKeyword/:whereKeyword" element={<Dashboard/>}/>

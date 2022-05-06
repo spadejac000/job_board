@@ -217,9 +217,6 @@ const Dashboard = ({isAuthenticated}) => {
               )
             }
           </Col>
-          <Col>
-            <SelectedJob/>
-          </Col> 
         </Row> 
         <Paginate pages={pages} page={page} whatKeyword={whatKeyword ? whatKeyword : ''} whereKeyword={whereKeyword ? whereKeyword : ''}/>
       </Container>

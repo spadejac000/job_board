@@ -1,28 +1,22 @@
-import {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {selectJob} from '../actions/jobActions'
-import {Card, Button, Row, Col, Modal, Form, InputGroup, FormControl} from 'react-bootstrap'
+import {useState} from 'react'
+import {useSelector} from 'react-redux'
+import {Container, Button, Modal, Form, InputGroup, FormControl} from 'react-bootstrap'
 import '../css/selected-job.css'
-import {FaTimes} from 'react-icons/fa'
+import {FaArrowLeft} from 'react-icons/fa'
 import ResumeUpload from './ResumeUpload'
 import CoverLetterUpload from './CoverLetterUpload'
 import axios from 'axios'
 import Progress from './Progress'
 import AlertMessage from './AlertMessage'
+import {Link} from 'react-router-dom'
 
 const SelectedJob = () => {
-  const dispatch = useDispatch()
 
   let userID = useSelector((state) =>
     state.user.userID
   )
   const selectedJob = useSelector((state) => state.selectedJob)
 
-  useEffect(() => {
-    dispatch(selectJob())
-  }, [dispatch])
-
-  const emptyString = "";
   const [showReturnToJobSearchPage, setShowReturnToJobSearchPage] = useState(false)
   const [resumeName, setResumeName] = useState("")
   const [nameError, setNameError] = useState("")
@@ -151,25 +145,22 @@ const SelectedJob = () => {
   }
 
   return (
-    <>
+    <Container className="my-5">
+      <Link 
+        to="/" 
+        className="btn btn-primary selected-job-back-link mb-5"
+      >
+        <FaArrowLeft className="me-1"/> Go Back
+      </Link>
       {selectedJob === null ? (null): (
-        <Card className="m-3 selected-job-card">
-          <Card.Header>
-            <Row>
-              <Col>
-                <h2>{selectedJob.job_title}</h2>
-                <h6>{selectedJob.company_name}</h6>
-                <h6>${selectedJob.salary}</h6>
-                <Button onClick={handleShow}>Apply</Button>
-              </Col>
-              <Col className="exit-selected-job-col">
-                <div onClick={() => dispatch(selectJob(null))}>
-                  <FaTimes/>
-                </div>
-              </Col>
-            </Row>
-          </Card.Header>
-          <Card.Body className="p-5">
+        <div className="selected-job-card">
+          <div className="mb-5">
+            <h2>{selectedJob.job_title}</h2>
+            <h6>{selectedJob.company_name}</h6>
+            <h6>${selectedJob.salary}</h6>
+            <Button onClick={handleShow}>Apply</Button>
+          </div>
+          <div className="">
             <h5>Job Details</h5>
             <hr/>
             <strong>Job Location</strong><p>{selectedJob.job_location}</p>
@@ -177,8 +168,8 @@ const SelectedJob = () => {
             <strong>Salary</strong><p>${selectedJob.salary}</p>
             <hr/>
             <p>{selectedJob._description}</p>
-          </Card.Body>
-        </Card>
+          </div>
+        </div>
       )}
 
         <Modal show={show} onHide={handleClose} centered>
@@ -283,7 +274,7 @@ const SelectedJob = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-    </>
+    </Container>
   )
 }
 

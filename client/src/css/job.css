@@ -1,8 +1,11 @@
 .job-card {
-  cursor: pointer;
   display: block!important;
   margin: 1rem 1rem 1rem 0;
   position: relative;
+}
+
+.job-post-title {
+  cursor: pointer;
 }
 
 .save-ban-col {

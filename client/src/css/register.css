@@ -51,16 +51,29 @@
 
 @media(max-width: 600px) {
 
+  .register-brand-container > div {
+    padding: 0rem 1rem 5rem 1rem;
+  }
+
   .register-form-container {
     height: 100%;
     display: block;
   }
 
   .register-brand-title {
-    font-size: 3rem;
+    font-size: 4rem;
   }
 
   .register-form {
-    margin: 3rem 0px;
+    margin-bottom: 3rem;
+  }
+
+  .register-form-actual-container {
+    display: block;
+    padding-top: 3rem;
+  }
+
+  .register-form {
+    padding: 0 1rem;
   }
 }

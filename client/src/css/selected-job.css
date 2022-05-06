@@ -1,3 +1,8 @@
+.selected-job-back-link {
+  display: inline-flex;
+  align-items: center;
+}
+
 .selected-job-card {
   position: sticky;
   top: 3rem;

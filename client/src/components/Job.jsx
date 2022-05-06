@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {Badge, Card, Row, Col, Button} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectJob} from '../actions/jobActions'
@@ -7,9 +7,12 @@ import {FaHeart, FaBan, FaTimes, FaArrowRight} from 'react-icons/fa'
 import {addJobToFavorites, deleteFavoriteJob} from '../actions/jobActions'
 import {motion, AnimatePresence} from 'framer-motion'
 import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 
 const Job = ({job, isAuthenticated}) => {
+
+  let navigate = useNavigate()
 
   const [showSignIn, setShowSignIn] = useState(false);
   const [viewBanCard, setViewBanCard] = useState(false)
@@ -64,6 +67,12 @@ const Job = ({job, isAuthenticated}) => {
     setShowSignIn(false)
   }
 
+  const handleClickSelectedJob = (e) => {
+    e.preventDefault()
+    dispatch(selectJob(job))
+    navigate('/selected-job')
+  }
+
   return (
     viewBanCard ?
     <AnimatePresence>
@@ -82,10 +91,18 @@ const Job = ({job, isAuthenticated}) => {
     </motion.div>
     </AnimatePresence>
     :
-    <Card className="p-4 job-card" onClick={()=> dispatch(selectJob(job))}>
+    <Card 
+      className="p-4 job-card" 
+      // onClick={()=> dispatch(selectJob(job))}
+    >
       <Row>
         <Col md={10}>
-          <h2>{job_title}</h2>
+          <h2 
+            onClick={(e) => handleClickSelectedJob(e)}
+            className="job-post-title"
+          >
+            {job_title}
+          </h2>
           <h6>{company_name}</h6>
           <h6>{city}, {_state}</h6>
           <Badge className="salary-badge" bg="primary">${salary}</Badge>

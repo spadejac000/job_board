@@ -204,7 +204,11 @@ const Header = ({isAuthenticated, setAuth}) => {
 
     :
 
-      <Navbar expand="lg" className={location.pathname === '/' ?'my-navbar mb-5 logged-out-dash-nav' : 'my-navbar'}>
+      <Navbar 
+        expand="lg" 
+        className={
+          location.pathname === '/' ? 'my-navbar mb-5 logged-out-dash-nav' : location.pathname === '/register' || location.pathname === '/login' ? 'my-navbar' : 'my-navbar mb-5'
+        }>
         <Container>
           <Navbar.Brand className={location.pathname === '/register' || location.pathname === '/login' ? 'navbar-brand-logo' : 'dashboard-nav-brand-logo'} as={Link} to="/">Job Board</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />

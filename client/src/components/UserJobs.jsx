@@ -28,8 +28,10 @@ const UserJobs = ({isAuthenticated}) => {
   const handleDeleteAllJobs = async (e) => {
     e.preventDefault()
     try {
-      dispatch(deleteAllJobs(userID))
-      dispatch(getUserJobs(userID))
+      if(window.confirm('Are you sure you want to delete all your posted jobs?')) {
+        dispatch(deleteAllJobs(userID))
+        dispatch(getUserJobs(userID))
+      }
     } catch (error) {
       console.error(error.message)
     }
@@ -47,6 +49,11 @@ const UserJobs = ({isAuthenticated}) => {
           <Loader/> :
           errorUserJobs ?
           <AlertMessage variant="danger">{errorUserJobs}</AlertMessage> : 
+          userJobs.length === 0 ? 
+          <div className="mt-5">
+            <h2>You currently have no jobs posted</h2>
+          </div>
+          :
           <div>
             <Row className="mt-5 user-jobs-header g-0">
               <Col>

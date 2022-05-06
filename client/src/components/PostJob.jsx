@@ -4,6 +4,7 @@ import '../css/post-job.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {postJob} from '../actions/jobActions'
 import Loader from './Loader';
+import { useNavigate } from 'react-router-dom';
 
 const PostJob = ({isAuthenticated}) => {
 
@@ -12,6 +13,8 @@ const PostJob = ({isAuthenticated}) => {
   let userID = useSelector((state) =>
     state.user.userID
   )
+
+  let navigate = useNavigate()
 
   const testJob = false;
 
@@ -66,6 +69,7 @@ const PostJob = ({isAuthenticated}) => {
     try {
       const body = {jobTitle, companyName, address, city, state, zip, jobLocation, jobType, salary, healthInsurance, paidTimeOff, dentalInsurance, four01K, visionInsurance, description, userID, testJob}
       dispatch(postJob(body))
+      navigate('/job-posted-success')
     } catch (error) {
       console.error(error.message)
     }

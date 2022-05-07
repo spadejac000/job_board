@@ -45,7 +45,9 @@ export const darkTheme = {
   navTabsBGColor: '#212529',
   navTabsBorder: 'none',
   navTabsColor: 'white',
-  navTabsBorderHover: '1px solid #212529'
+  navTabsBorderHover: '1px solid #212529',
+  hamburgerMenuColor: 'white',
+  hamburgerMenuImg: `url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E")`
 }
 
 export const GlobalStyles = createGlobalStyle`
@@ -199,6 +201,14 @@ export const GlobalStyles = createGlobalStyle`
 
   .message-sidebar-tabs {
     border-right: ${props => props.theme.messageSidebarBorder};
+  }
+
+  .navbar-toggler {
+    border-color: ${props => props.theme.hamburgerMenuColor}!important;
+  }
+
+  .navbar-toggler-icon {
+    background-image: ${props => props.theme.hamburgerMenuImg}!important;
   }
 
 `

@@ -93,12 +93,11 @@ const Job = ({job, isAuthenticated}) => {
     :
     <Card 
       className="p-4 job-card" 
-      // onClick={()=> dispatch(selectJob(job))}
+      onClick={(e) => handleClickSelectedJob(e)}
     >
       <Row>
         <Col md={10}>
           <h2 
-            onClick={(e) => handleClickSelectedJob(e)}
             className="job-post-title"
           >
             {job_title}

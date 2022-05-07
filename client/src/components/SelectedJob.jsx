@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import {useSelector} from 'react-redux'
-import {Container, Button, Modal, Form, InputGroup, FormControl} from 'react-bootstrap'
+import {Card, Container, Button, Modal, Form, InputGroup, FormControl} from 'react-bootstrap'
 import '../css/selected-job.css'
-import {FaArrowLeft} from 'react-icons/fa'
+import {FaArrowLeft, FaTimes, FaArrowRight} from 'react-icons/fa'
 import ResumeUpload from './ResumeUpload'
 import CoverLetterUpload from './CoverLetterUpload'
 import axios from 'axios'
@@ -10,13 +10,14 @@ import Progress from './Progress'
 import AlertMessage from './AlertMessage'
 import {Link} from 'react-router-dom'
 
-const SelectedJob = () => {
+const SelectedJob = ({isAuthenticated}) => {
 
   let userID = useSelector((state) =>
     state.user.userID
   )
   const selectedJob = useSelector((state) => state.selectedJob)
 
+  const [showSignInModal, setShowSignInModal] = useState(false)
   const [showReturnToJobSearchPage, setShowReturnToJobSearchPage] = useState(false)
   const [resumeName, setResumeName] = useState("")
   const [nameError, setNameError] = useState("")
@@ -36,7 +37,16 @@ const SelectedJob = () => {
     setShowReturnToJobSearchPage(false)
     setShow(false)
   };
-  const handleShow = () => setShow(true);
+  const handleCloseSignInModal = () => {
+    setShowSignInModal(false)
+  };
+  const handleShow = () => {
+    if(isAuthenticated) {
+      setShow(true)
+    } else {
+      setShowSignInModal(true)
+    }
+  };
   const [alertMessageShow, setAlertMessageShow] = useState(false)
   const [coverLetter, setCoverLetter] = useState('')
   const [message, setMessage] = useState('')
@@ -52,6 +62,12 @@ const SelectedJob = () => {
 
   const onChange = (e) => {
     setInputs({...inputs, [e.target.name] : e.target.value})
+  }
+
+  const handleExitShowSignIn = (e) => {
+    e.preventDefault()
+    e.stopPropagation();
+    setShowSignInModal(false)
   }
 
   const onSubmitApplication = async (e, jobID) => {
@@ -171,6 +187,30 @@ const SelectedJob = () => {
           </div>
         </div>
       )}
+
+        <>
+          {showSignInModal ? 
+            <Modal 
+              show={showSignInModal} onHide={handleCloseSignInModal} centered
+              // onClick={(e) => e.stopPropagation()}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Sign In to apply</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Button>Sign In <FaArrowRight /></Button>
+                <p>
+                  No account yet? <Link to='/register'>Create account</Link>
+                </p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseSignInModal}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          : null}
+        </>
 
         <Modal show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>

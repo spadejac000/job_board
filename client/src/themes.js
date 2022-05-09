@@ -22,6 +22,7 @@ export const darkTheme = {
   inputGroupTextBorder: 'none',
   inputColor: 'white!important',
   inputBorder: '#ffffff1a!important',
+  selectBorderColor: '#ffffff1a!important',
   dropdownMenuBGColor: 'rgb(36, 39, 41)',
   dropdownItemColor: 'white',
   dropdownNavigationBarIconContainerBGColor: '#ffffff1a',
@@ -104,11 +105,15 @@ export const GlobalStyles = createGlobalStyle`
     color: ${props => props.theme.inputColor};
   }
 
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover, 
+  select:-webkit-autofill:focus, 
+  select:-webkit-autofill:active,
   input:-webkit-autofill,
   input:-webkit-autofill:hover, 
   input:-webkit-autofill:focus, 
   input:-webkit-autofill:active{
-    -webkit-box-shadow: ${props => props.theme.webkitBoxShadow};
+    -webkit-box-shadow: ${props => props.theme.webkitBoxShadow}!important;
     -webkit-text-fill-color: ${props => props.theme.inputColor};
   }
 

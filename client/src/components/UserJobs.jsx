@@ -9,6 +9,7 @@ import {FaTimes} from 'react-icons/fa'
 import {deleteAllJobs} from '../actions/jobActions'
 import Loader from './Loader'
 import AlertMessage from './AlertMessage';
+import {getTheme} from '../actions/themeActions'
 
 const UserJobs = ({isAuthenticated}) => {
 
@@ -23,6 +24,7 @@ const UserJobs = ({isAuthenticated}) => {
 
   useEffect(() => {
     dispatch(getUserJobs(userID))
+    dispatch(getTheme(userID))
   }, [dispatch])
 
   const handleDeleteAllJobs = async (e) => {

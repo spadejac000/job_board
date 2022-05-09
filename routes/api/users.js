@@ -116,8 +116,6 @@ router.put('/:id', async (req, res) => {
 router.post('/forgot-password', async (req, res) => {
   try {
 
-    console.log('req body in forgot password: ', req.body)
-
     const email = await pool.query('SELECT * FROM users WHERE user_email = $1', [req.body.email])
     
     // if(email.rows.length !== 0) {
@@ -183,7 +181,6 @@ router.get('/get-user-resume', async (req, res) => {
 router.post('/upload-resume', async (req, res) => {
   try {
     const resumeString = req.body.data
-    console.log('upload resume: ', resumeString)
     const uploadedResponse = await cloudinary.uploader.upload(resumeString, {upload_preset: 'job_board_resumes'})
     res.json({msg: 'Resume has been saved'})
   } catch (error) {
@@ -215,6 +212,30 @@ router.post('/upload-profile-pic', async (req, res) => {
     res.json({msg: 'Profile pic has been saved'})
   } catch (error) {
     console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// get user theme
+router.get('/user-theme', async (req, res) => {
+  try {
+    const userTheme = await pool.query('SELECT user_theme FROM users WHERE user_id = $1;', [req.query.user_id])
+    console.log('user theme: ', userTheme.rows[0].user_theme)
+    res.json({userTheme: userTheme.rows[0].user_theme})
+  } catch (error) {
+    console.error(error.message)
+    res.status(500).send('Server Error')
+  }
+})
+
+// update user theme
+router.post('/user-theme', async (req, res) => {
+  try {
+    const updateUserTheme = await pool.query('UPDATE users SET user_theme = $1 WHERE user_id = $2;', [req.body.themeData, req.body.user_id])
+    const userTheme = await pool.query('SELECT user_theme FROM users WHERE user_id = $1;', [req.body.user_id])
+    res.json({userTheme: userTheme.rows[0].user_theme})
+  } catch (error) {
+    console.error('user theme update: ', error.message)
     res.status(500).send('Server Error')
   }
 })

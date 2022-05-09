@@ -41,7 +41,7 @@ const App = () => {
   }
 
   const theme = useSelector(state => 
-    state.theme
+    state.getTheme.userTheme
   )
 
   let userRole = useSelector((state) =>

@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import {selectedJobReducer, getJobsReducer, getUserJobsReducer, editJobReducer, deleteAllJobsReducer, getFavoriteJobsReducer, getApplicantsReducer} from './reducers/jobReducer';
 import {userReducer, authenticateReducer} from './reducers/userReducer';
-import {themeReducer} from './reducers/themeReducer';
+import {getThemeReducer} from './reducers/themeReducer';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
   deleteAllJobs: deleteAllJobsReducer,
   user: userReducer,
   authenticate: authenticateReducer,
-  theme: themeReducer
+  getTheme: getThemeReducer
 })
 
 const persistConfig = {

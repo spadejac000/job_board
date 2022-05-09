@@ -170,10 +170,7 @@ router.post('/upload-application', async (req, res) => {
   
     
     const resumeString = req.body.resume
-    console.log('upload application: ', resumeString)
     const uploadedResponse = await cloudinary.uploader.upload(resumeString, {upload_preset: 'job_board_resumes'})
-
-    console.log('uploaded response here boy: ', uploadedResponse)
 
     const application = await pool.query("INSERT INTO applications (applicant_name, applicant_email, applicant_phone, applicant_location, applicant_resume_name, applicant_resume_url, job_id, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;", [name, email, phone, location, resumeName, uploadedResponse.secure_url, jobID, userID])
 

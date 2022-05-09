@@ -1,6 +1,6 @@
 import {THEME_REQUEST, THEME_SUCCESS, THEME_FAIL} from '../constants/themeConstants'
 
-export const themeReducer = (state = localStorage.getItem('theme'), action) => {
+export const getThemeReducer = (state = {userTheme: 'light'}, action) => {
   switch(action.type) {
     case THEME_REQUEST:
       return state

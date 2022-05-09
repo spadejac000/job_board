@@ -10,7 +10,7 @@ CREATE TABLE users(
   user_password VARCHAR(255) NOT NULL,
   user_role VARCHAR(255) NOT NULL,
   user_phone VARCHAR(255),
-  user_theme VARCHAR(64) DEFAULT 'light'
+  user_theme VARCHAR(64) DEFAULT 'light' NOT NULL
 );
 
 CREATE TABLE jobs(

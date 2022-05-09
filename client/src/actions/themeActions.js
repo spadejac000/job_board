@@ -9,6 +9,8 @@ export const getTheme = (user_id) => async (dispatch) => {
       user_id: user_id
     }}).then(res => res.data)
 
+    console.log('theme actions user theme: ', data)
+
     dispatch({
       type: THEME_SUCCESS, 
       payload: data

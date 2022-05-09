@@ -6,7 +6,8 @@ import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ThemeProvider} from 'styled-components'
 import {lightTheme, darkTheme, GlobalStyles} from './themes.js'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
+import {getTheme} from './actions/themeActions'
 import './App.css'
 import Loader from './components/Loader';
 const Header = lazy(() => import('./components/Header'))
@@ -30,6 +31,12 @@ const SelectedJob = lazy(() => import('./components/SelectedJob'))
 
 const App = () => {
 
+  const dispatch = useDispatch();
+
+  let userID = useSelector((state) =>
+    state.user.userID
+  )
+
   const location = useLocation()
 
   toast.configure()
@@ -43,6 +50,8 @@ const App = () => {
   const theme = useSelector(state => 
     state.getTheme.userTheme
   )
+
+  console.log('theme in app js: ', theme)
 
   let userRole = useSelector((state) =>
     state.user.userRole
@@ -63,12 +72,14 @@ const App = () => {
   }
 
   useEffect(() => {
+    console.log('app component rendered')
     isAuth()
-  }, [isAuthenticated])
+    dispatch(getTheme(userID))
+  }, [isAuthenticated, theme, userID])
 
   return (
     <div className={location.pathname === '/login' ? "app-root" : location.pathname === '/register' ? 'app-root' : ""}>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme === 'light' || theme === undefined ? lightTheme : darkTheme}>
         <GlobalStyles/>
         <Suspense fallback={<Loader/>}>
           <Header isAuthenticated={isAuthenticated} setAuth={setAuth}/>

@@ -7,7 +7,7 @@ export const getThemeReducer = (state = {userTheme: 'light'}, action) => {
     case THEME_SUCCESS:
       return action.payload
     case THEME_FAIL:
-      return {error: action.payload}
+      return {get_theme_reducer_error: action.payload}
     default:
       return state;
   }

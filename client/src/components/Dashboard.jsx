@@ -3,7 +3,6 @@ import { Container, Row, Col, Dropdown, Button } from 'react-bootstrap';
 import '../css/dashboard.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {getJobs} from '../actions/jobActions'
-import {getTheme} from '../actions/themeActions'
 import {useParams} from 'react-router-dom'
 import {FaTimes} from 'react-icons/fa'
 import Loader from './Loader';
@@ -27,12 +26,7 @@ const Dashboard = ({isAuthenticated}) => {
   const [jobLocationFilterBtnText, setJobLocationFilterBtnText] = useState('')
   const [jobLocationFilter, setJobLocationFilter] = useState('')
 
-  let userID = useSelector((state) =>
-    state.user.userID
-  )
-
   useEffect(() => {
-    dispatch(getTheme(userID))
     dispatch(getJobs(whatKeyword, whereKeyword, sort, dateFilter, jobLocationFilter, pageNumber))
   }, [dispatch, whatKeyword, whereKeyword, sort, dateFilter, jobLocationFilter, pageNumber])
 

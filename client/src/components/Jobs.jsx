@@ -6,9 +6,8 @@ function Jobs({jobs, isAuthenticated}) {
     <Row>
       {jobs === null || jobs.jobs === undefined ? (<h2>There are no jobs currently available</h2>) : 
         jobs.jobs.map((job) => (
-          <div className="col-lg-6 col-md-12">
+          <div className="col-lg-6 col-md-12" key={job.job_id}>
             <Job 
-              key={job.job_id} 
               job={job}
               isAuthenticated={isAuthenticated}
             />

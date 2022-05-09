@@ -9,9 +9,14 @@ import Loader from './Loader';
 const Login = ({setAuth}) => {
 
   const [rememberUser, setRememberUser] = useState(localStorage.getItem('rememberUser') === 'true' ? true : false)
-  const [inputs, setInputs] = useState({
-    email: localStorage.getItem('email'),
-    password: localStorage.getItem('password')
+  // const [inputs, setInputs] = useState({
+  //   email: localStorage.getItem('email'),
+  //   password: localStorage.getItem('password')
+  // })
+
+    const [inputs, setInputs] = useState({
+    email: '',
+    password: ''
   })
 
   const [passwordType, setPasswordType] = useState('password')

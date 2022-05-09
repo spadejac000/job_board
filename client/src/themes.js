@@ -6,7 +6,8 @@ export const lightTheme = {
   loginRegisterBackgroundColor: 'white',
   navbarBrandLogoColor: 'white',
   loggedInNavBorder: '1px solid #e9ecef',
-  loggedInNavIconBGColor: '#e4e6eb'
+  loggedInNavIconBGColor: '#e4e6eb',
+  linksColor: 'rgba(0,0,0,.55)'
 }
 
 export const darkTheme = {

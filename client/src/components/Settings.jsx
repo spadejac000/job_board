@@ -20,14 +20,12 @@ const Settings = ({setAuth, isAuthenticated}) => {
   )
 
   const [userTheme, setUserTheme] = useState(theme)
-  console.log('theme: ', userTheme)
   const [themeToggleChecked, setThemeToggleChecked] = useState(userTheme === 'light' ? false : userTheme === 'dark' ? true : false)
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    console.log('settings component rendered', userTheme, themeToggleChecked)
     dispatch(getTheme(userID))
   }, [theme])
 

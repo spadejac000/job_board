@@ -220,8 +220,6 @@ router.post('/upload-profile-pic', async (req, res) => {
 router.get('/user-theme', async (req, res) => {
   try {
     const userTheme = await pool.query('SELECT user_theme FROM users WHERE user_id = $1;', [req.query.user_id])
-    console.log('user id for theme: ', req.query.user_id)
-    console.log('user theme: ', userTheme.rows[0].user_theme)
     res.json({userTheme: userTheme.rows[0].user_theme})
   } catch (error) {
     console.error(error.message)

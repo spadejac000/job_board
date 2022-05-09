@@ -51,8 +51,6 @@ const App = () => {
     state.getTheme.userTheme
   )
 
-  console.log('theme in app js: ', theme)
-
   let userRole = useSelector((state) =>
     state.user.userRole
   )
@@ -72,7 +70,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log('app component rendered')
+    ('app component rendered')
     isAuth()
     dispatch(getTheme(userID))
   }, [isAuthenticated, theme, userID])

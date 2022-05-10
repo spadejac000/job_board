@@ -41,8 +41,6 @@ const Job = ({job, isAuthenticated}) => {
         setHeartRed(localStorage.getItem(`heart-red-${job_id}`))
         dispatch(deleteFavoriteJob(userID, jobID))
       } else if(heartRed === 'false') {
-        localStorage.setItem(`heart-red-${job_id}`, true)
-        setHeartRed(localStorage.getItem(`heart-red-${job_id}`))
         dispatch(addJobToFavorites(jobID, userID))
       } else {
       }
@@ -108,14 +106,14 @@ const Job = ({job, isAuthenticated}) => {
           <p>Posted {datePostedInDays === 0 ? 'today' : datePostedInDays === 1 ? 'yesterday' : `${datePostedInDays} days ago`}</p>
           {test_job === true ? <h3><Badge>Test Job!</Badge></h3> : null}
         </Col>
-        <Col md={2} className="save-ban-col">
-          {/* <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>
+        {/* <Col md={2} className="save-ban-col">
+          <div onClick={(e) => handleAddJobToFavorites(e, job_id)}>
             <FaHeart className={heartRed === 'true' ? 'heart-job-red' : ''}/>
           </div>
           <div onClick={(e) => handleBanJob(e)}>
             <FaBan/>
-          </div> */}
-        </Col>
+          </div>
+        </Col> */}
       </Row>
       <>
         {showSignIn ? 

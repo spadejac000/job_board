@@ -3,6 +3,11 @@
   align-items: center;
 }
 
+.user-jobs-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .user-jobs-header {
   background: #0d6efd;
   padding: 2rem 0rem;
@@ -61,4 +66,16 @@
 
 .user-job-type-container > h6 {
   margin: 0rem 1rem 0rem 0rem;
+}
+
+@media(max-width: 600px) {
+
+  .user-jobs-header-container {
+    display: block;
+  }
+
+  .user-jobs-header {
+    display: none;
+  }
+
 }

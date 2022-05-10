@@ -44,21 +44,21 @@ const UserJob = ({job}) => {
   return (
     <div>
       <div key={job.job_id} className="">
-        <Row className="user-job-row g-0">
+        <Row className="user-job-row g-0 row-cols-md-6 row-cols-sm-1">
           <Col>
-            <p className="user-job-data">{job.job_title}</p>
+            <p className="user-job-data user-job-data-job-title">{job.job_title}</p>
           </Col>
           <Col>
-            <p className="user-job-data">{job.company_name}</p>
+            <p className="user-job-data user-job-data-company-name">{job.company_name}</p>
           </Col>
           <Col>
-            <p className="user-job-data">{job.job_location}</p>
+            <p className="user-job-data user-job-data-location">{job.job_location}</p>
           </Col>
           <Col>
-            <p className="user-job-data">{job.job_type}</p>
+            <p className="user-job-data user-job-data-job-type">{job.job_type}</p>
           </Col>
           <Col>
-            <p className="user-job-data">{job.city} {job._state}</p>
+            <p className="user-job-data user-job-data-city">{job.city} {job._state}</p>
           </Col>
           <Col>
             <div className="user-job-actions-container user-job-data">

@@ -116,7 +116,7 @@ router.post('/favorites', async (req, res) => {
     const {jobID, userID} = req.body
 
     // check first to see if job is already in favorites list
-    const job = await pool.query("SELECT * FROM favorite_jobs WHERE job_id = $1;", [jobID])
+    const job = await pool.query("SELECT favorite_jobs FROM users WHERE user_id = $1;", [userID, jobID])
     if(job.rows.length > 0) {
       res.send('favorite job already exists')
     } else {

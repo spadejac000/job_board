@@ -63,3 +63,12 @@ html {
 	display: flex;
 	align-items: center;
 }
+
+@media(max-width: 600px) {
+
+  .theme-mode-container {
+		max-width: 100%;
+		margin: 1rem 0;
+	}
+
+}

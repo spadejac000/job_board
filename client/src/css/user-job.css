@@ -6,3 +6,13 @@
   margin-bottom: 0px;
   padding: 0px 1rem;
 }
+
+@media(max-width: 600px) {
+
+  .user-job-data-location,
+  .user-job-data-job-type,
+  .user-job-data-city {
+    display: none;
+  }
+
+}

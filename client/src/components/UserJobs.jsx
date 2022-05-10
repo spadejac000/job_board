@@ -40,7 +40,7 @@ const UserJobs = ({isAuthenticated}) => {
   return (
     isAuthenticated ? 
     <Container>
-      <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div className="user-jobs-header-container">
         <h2>Your Posted Jobs</h2>
         <Button className={`delete-all-job-btn ${userJobs && userJobs.length === 0 ? " disabled " : ""}`} variant="danger" onClick={handleDeleteAllJobs}><FaTimes/> Delete all jobs</Button>
       </div>

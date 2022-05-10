@@ -192,13 +192,12 @@ const SelectedJob = ({isAuthenticated}) => {
           {showSignInModal ? 
             <Modal 
               show={showSignInModal} onHide={handleCloseSignInModal} centered
-              // onClick={(e) => e.stopPropagation()}
             >
               <Modal.Header closeButton>
                 <Modal.Title>Sign In to apply</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Button>Sign In <FaArrowRight /></Button>
+                <Link to="/login" className="btn btn-primary">Sign In <FaArrowRight /></Link>
                 <p>
                   No account yet? <Link to='/register'>Create account</Link>
                 </p>

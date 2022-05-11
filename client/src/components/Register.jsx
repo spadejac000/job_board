@@ -225,7 +225,7 @@ const Register = ({setAuth}) => {
             <Card className="p-2 mb-3">
               <Form.Check
                 inline
-                label="Employeer"
+                label="Employer"
                 name="group1"
                 type="radio"
                 id={`inline-radio-1`}
